@@ -13,7 +13,7 @@
 <body>
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Shopping App</a>
+        <a class="navbar-brand fs-4" href="#">Shopping App</a>
         <div>
           <ul class="nav text-light  justify-content-end">
               <li class="nav-item">
