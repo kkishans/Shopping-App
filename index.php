@@ -68,14 +68,41 @@
             ?>
       </select>
     </div>
+    <div class="col-xl-3"></div>
+    <div class=" col-md-3 col-sm-6 p-3 col-xl-3 text-center">
+        <input type="submit" value="Filter" name="filter" class="btn btn-success px-4">
+    </div>
   </form>
     </div>   
 </div>
 <div class="items row col-11 m-auto mt-2 mb-5">
   <?php 
     include './db/db.php';
-    $query = "select * from product_details";
 
+    if (isset($_POST['filter'])) {
+      $category = $_POST['category'];
+      $brand = $_POST['brand'];
+  
+      $query = "select * from product_details " . 
+        (($category != 0 || $brand != 0) ? 
+          " where " . (
+                        ($brand != 0) ? 
+                        "b_id = $brand " : ""
+                      ) . 
+                      (
+                        ($category != 0 && $brand != 0) ? 
+                        " and " : ""
+                      ) . 
+                      (
+                        ($category != 0) ?  
+                        " c_id = $category" : ""
+                      ) 
+        : "") ;
+     }
+     else{
+      $query = "select * from product_details";
+     }
+    
     $result = mysqli_query($conn,$query);
 
     if (mysqli_num_rows($result) > 0) {
@@ -84,7 +111,7 @@
   ?>
   
   <div class=" col-xl-3 col-sm-11 col-md-6 col-xl-3 mt-3"> 
-    <div class="card p-1" style="height: 20rem;">
+    <div class="card p-2" style="height: 20rem;">
       <img src="<?= "img/". $r['p_img']  ?>" class="card-img-top" height="200px" alt="Product Image" style="object-fit: contain;">
       <div class="card-body ">
         <div class="d-flex justify-content-between">
@@ -111,6 +138,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
+
+<!-- Filter Product by brand and category -->
+
 
 <!-- 
 
