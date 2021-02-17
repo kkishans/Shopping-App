@@ -7,18 +7,31 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Shopping App</title>
   </head>
 <body>
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Shopping App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID"
-            aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarID">
+        <div>
+          <ul class="nav text-light  justify-content-end">
+              <li class="nav-item">
+                  <a class="nav-link link-light " href="#">All Products</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link  link-light" href="#">Services</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link  link-light" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link  link-light" href="#">Contact Us</a>
+              </li>
+          </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
             </div>
@@ -26,14 +39,14 @@
     </div>
   </nav>
 
-<div class="row col-11 mt-4 py-3 m-auto border-1 border">
+<div class="row col-11 mt-4 py-3 m-auto border-1 border rounded">
     <div class="col-xl-5 col-md-5 col-sm-10 col-xm-11">
         <h1 class="text-center my-3"> Our Collection</h1>
     </div>
     <div class="col-xl-7 col-md-7 col-sm-10 col-xm-11">
     <form action="#" method="post"  class="row">
     <div class="col-xl-3 col-md-3 col-sm-5 ">
-      <label class="form-label">Category</label>
+      <label class="form-label">Category :</label>
         <select class="form-select" name="category" >
           <option value="0">All</option>
           <?php 
@@ -68,9 +81,20 @@
             ?>
       </select>
     </div>
-    <div class="col-xl-3"></div>
-    <div class=" col-md-3 col-sm-6 p-3 col-xl-3 text-center">
-        <input type="submit" value="Filter" name="filter" class="btn btn-success px-4">
+   
+    <div class=" col-md-2 col-sm-6 p-3 col-xl-2 text-center mt-3 ">
+        <input type="submit" value="Filter" name="filter" class="btn btn-outline-success px-4">
+    </div>
+    <div class=" col-md-3 col-sm-12 p-3 col-xl-4 text-center mt-3">
+    <div class="input-group">
+      <div class="form-outline d-flex">
+        <input type="search" id="form1" class="form-control" placeholder="Search.."/>
+        <button type="submit" name="search" class="btn btn-outline-success px-4">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </div>
+      
+    </div>
     </div>
   </form>
     </div>   
@@ -140,49 +164,3 @@
 </html>
 
 <!-- Filter Product by brand and category -->
-
-
-<!-- 
-
-
-  <div class="col-xl-5 col-md-5 col-sm-10 col-xm-11">
-    <form action="#" method="post"  class="d-flex justify-content-between">
-    <div class="col-3 d-flex justify-content-between">
-      <label for="exampleFormControlInput1" class="form-label">Category</label>
-        <select class="form-select" name="category" >
-          <option value="0">All</option>
-          <?php 
-            include './db/db.php';
-            $query = "select * from category";
-
-            $result = mysqli_query($conn,$query);
-            
-            if (mysqli_num_rows($result) > 0) {
-                while($r = mysqli_fetch_assoc($result)){
-                    echo "<option value='". $r["c_id"]."'> ".$r["c_title"]."</option>";
-                }
-            }
-            ?>
-        </select> 
-    </div>
-    <div class="col-3  d-flex justify-content-between">
-      <label for="exampleFormControlInput1" class="form-label">Brand :</label>
-      <select class="form-select" name="brand" >
-        <option value="0">All</option>
-        <?php 
-            include '../db/db.php';
-            $query = "select * from brands";
-
-            $result = mysqli_query($conn,$query);
-            
-            if (mysqli_num_rows($result) > 0) {
-                while($r = mysqli_fetch_assoc($result)){
-                    echo "<option value='". $r["b_id"]."'> ".$r["b_name"]."</option>";
-                }
-            }
-            ?>
-      </select>
-    </div>
-  </form>
-  </div>
- -->
