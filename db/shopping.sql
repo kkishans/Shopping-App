@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2021 at 06:25 PM
+-- Generation Time: Feb 17, 2021 at 07:03 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -85,7 +85,8 @@ INSERT INTO `product_details` (`p_id`, `p_name`, `description`, `p_img`, `price`
 (7, 'Smart watch', 'Smart watch', 'IMG_20210214_133608.jpg', 20000, 2, 1, 3),
 (8, 'Desktop Monitor', 'Wide monitor', 'u_10181535.jpg', 15000, 12, 1, 3),
 (9, 'Laptop 2', 'none', 'img1.jpg', 100000, 1, 1, 4),
-(10, 'Tablet', 'none', 'MINIDDHQIBFYW-medium.jpg', 120000, 5, 1, 3);
+(10, 'Tablet', 'none', 'MINIDDHQIBFYW-medium.jpg', 120000, 5, 1, 3),
+(11, 'Lenovo ideapad 3', 'Performence Beast', 'lenovo_ideapad_3.png', 70000, 2, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -107,7 +108,9 @@ ALTER TABLE `category`
 -- Indexes for table `product_details`
 --
 ALTER TABLE `product_details`
-  ADD PRIMARY KEY (`p_id`);
+  ADD PRIMARY KEY (`p_id`),
+  ADD KEY `c_id` (`c_id`,`b_id`),
+  ADD KEY `b_id` (`b_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -129,7 +132,18 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `product_details`
 --
 ALTER TABLE `product_details`
-  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `product_details`
+--
+ALTER TABLE `product_details`
+  ADD CONSTRAINT `product_details_ibfk_1` FOREIGN KEY (`b_id`) REFERENCES `brands` (`b_id`),
+  ADD CONSTRAINT `product_details_ibfk_2` FOREIGN KEY (`c_id`) REFERENCES `category` (`c_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
