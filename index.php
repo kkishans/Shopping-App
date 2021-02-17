@@ -88,7 +88,7 @@
     <div class=" col-md-3 col-sm-12 p-3 col-xl-4 text-center mt-3">
     <div class="input-group">
       <div class="form-outline d-flex">
-        <input type="search" id="form1" class="form-control" placeholder="Search.."/>
+        <input type="search" id="search" class="form-control" placeholder="Search.." list="searchResult"/>
         <button type="submit" name="search" class="btn btn-outline-success px-4">
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>
@@ -99,6 +99,7 @@
   </form>
     </div>   
 </div>
+
 <div class="items row col-11 m-auto mt-2 mb-5">
   <?php 
     include './db/db.php';
