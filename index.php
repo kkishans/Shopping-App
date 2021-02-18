@@ -11,6 +11,13 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Shopping App</title>
+    <style>
+      .noResult{
+        font-size:5vh;
+        font-family: Courier, Monaco, monospace;
+      }
+        
+    </style>
   </head>
 <body>
   <nav class="navbar navbar-dark bg-dark">
@@ -169,22 +176,21 @@
       <?php 
           }
         }
+        else{
+      ?>
+        <div class="row justify-content-md-center mt-4">
+          <div class="col-md-6">
+            <img src="img/no_result.jpg" class="card-img-top" height="200px" alt="No result Image" style="object-fit: contain;">
+            <div class="card-body text-center noResult">
+              No Result Found
+            </div>
+          </div>
+        </div>
+      <?php
+        }
       ?>
   </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
-
-<!-- search Product by product name -->
-<script>
-  $(function () {
-
-     // autocomplete for state  
-      $( "#searchKey" ).autocomplete({  
-            source: 'searchResults.php',     
-            autoFocus: true,   
-      });          
-           
-  });
-</script>
