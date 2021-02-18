@@ -139,7 +139,7 @@
      
      if(isset($_POST['btnSearch'])){
         $search = $_POST['searchKey'];
-        $query = "select * from product_details where p_name = '$search'";
+        $query = "select * from product_details where LOWER(p_name) = '".strtolower($search)."'";
      }
      
      
