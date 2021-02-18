@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Shopping App</title>
   </head>
 <body>
@@ -83,13 +85,13 @@
     </div>
    
     <div class=" col-md-2 col-sm-6 p-3 col-xl-2 text-center mt-3 ">
-        <input type="submit" value="Filter" name="filter" class="btn btn-outline-success px-4">
+        <button type="submit"  name="filter" class="btn btn-outline-success px-4">Filter</button>
     </div>
     <div class=" col-md-3 col-sm-12 p-3 col-xl-4 text-center mt-3">
     <div class="input-group">
       <div class="form-outline d-flex">
-        <input type="search" id="search" class="form-control" placeholder="Search.." list="searchResult"/>
-        <button type="submit" name="search" class="btn btn-outline-success px-4">
+        <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.." list="searchResult"/>
+        <button type="submit" name="btnSearch" class="btn btn-outline-success px-4">
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>
       </div>
@@ -103,6 +105,8 @@
 <div class="items row col-11 m-auto mt-2 mb-5">
   <?php 
     include './db/db.php';
+
+    $query = "select * from product_details";
 
     if (isset($_POST['filter'])) {
       $category = $_POST['category'];
@@ -124,9 +128,14 @@
                       ) 
         : "") ;
      }
-     else{
-      $query = "select * from product_details";
+     
+     
+     if(isset($_POST['btnSearch'])){
+        $search = $_POST['searchKey'];
+        $query = "select * from product_details where p_name = '$search'";
      }
+     
+     
     
     $result = mysqli_query($conn,$query);
 
@@ -155,8 +164,8 @@
     </div>
   </div>
       <?php 
+          }
         }
-      }
       ?>
   </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" ></script>
@@ -164,4 +173,15 @@
   </body>
 </html>
 
-<!-- Filter Product by brand and category -->
+<!-- search Product by product name -->
+<script>
+  $(function () {
+
+     // autocomplete for state  
+      $( "#searchKey" ).autocomplete({  
+            source: 'searchResults.php',     
+            autoFocus: true,   
+      });          
+           
+  });
+</script>
