@@ -145,8 +145,8 @@
      }
      
      
-     if(isset($_POST['btnSearch'])){
-        $search = $_POST['searchKey'];
+     if(isset($_GET['btnSearch'])){
+        $search = $_GET['searchKey'];
         $query = "select * from product_details where LOWER(p_name) = '".strtolower($search)."'";
      }
      
@@ -195,6 +195,19 @@
         }
       ?>
   </div>
+  <datalist id="searchResult">
+      <?php
+        $query = "select * from product_details";
+        $result = mysqli_query($conn,$query);
+
+        if (mysqli_num_rows($result) > 0) {
+            while($r = mysqli_fetch_assoc($result)){
+              echo "<option value='". $r["p_name"]."' >";
+            }
+        }
+
+      ?>
+  </datalist>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
   </body>
