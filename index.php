@@ -30,6 +30,9 @@
               <li class="nav-item">
                   <a class="nav-link  link-light" href="#">Contact Us</a>
               </li>
+              <li class="nav-item">
+                  <a class="btn btn-outline-info" href="./admin/home.php">I'm Seller</a>
+              </li>
           </ul>
         </div>
 
