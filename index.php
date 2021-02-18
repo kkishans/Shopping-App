@@ -61,7 +61,7 @@
         <h1 class="text-center my-3"> Our Collection</h1>
     </div>
     <div class="col-xl-7 col-md-7 col-sm-10 col-xm-11">
-    <form action="#" method="post"  class="row">
+    <form action="#"  class="row">
     <div class="col-xl-3 col-md-3 col-sm-5 ">
       <label class="form-label">Category :</label>
         <select class="form-select" name="category" >
@@ -71,10 +71,11 @@
             $query = "select * from category";
 
             $result = mysqli_query($conn,$query);
-            
+            $c_id = isset($_GET["category"]) ? $_GET["category"] : 0; 
             if (mysqli_num_rows($result) > 0) {
                 while($r = mysqli_fetch_assoc($result)){
-                    echo "<option value='". $r["c_id"]."'> ".$r["c_title"]."</option>";
+                  $s = ($c_id == $r["c_id"]) ? "selected" : "";
+                    echo "<option value='". $r["c_id"]."' $s > ".$r["c_title"]."</option>";
                 }
             }
             ?>
@@ -89,10 +90,11 @@
             $query = "select * from brands";
 
             $result = mysqli_query($conn,$query);
-            
+            $b_id = isset($_GET["brand"]) ? $_GET["brand"] : 0; 
             if (mysqli_num_rows($result) > 0) {
                 while($r = mysqli_fetch_assoc($result)){
-                    echo "<option value='". $r["b_id"]."'> ".$r["b_name"]."</option>";
+                  $s = ($b_id == $r["b_id"]) ? "selected" : "";
+                    echo "<option value='". $r["b_id"]."' $s > ".$r["b_name"]."</option>";
                 }
             }
             ?>
@@ -121,9 +123,9 @@
 
     $query = "select * from product_details";
 
-    if (isset($_POST['filter'])) {
-      $category = $_POST['category'];
-      $brand = $_POST['brand'];
+    if (isset($_GET['filter'])) {
+      $category = $_GET['category'];
+      $brand = $_GET['brand'];
   
       $query = "select * from product_details " . 
         (($category != 0 || $brand != 0) ? 
