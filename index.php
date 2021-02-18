@@ -37,6 +37,9 @@
               <li class="nav-item">
                   <a class="nav-link  link-light" href="#">Contact Us</a>
               </li>
+              <li class="nav-item">
+                  <a class="btn btn-outline-info" href="./admin/home.php">I'm Seller</a>
+              </li>
           </ul>
         </div>
 
@@ -48,7 +51,7 @@
     </div>
   </nav>
 
-<div class="row col-11 mt-4 py-3 m-auto border-1 border rounded">
+<div class="row col-11 py-3 m-auto border-0 border rounded">
     <div class="col-xl-5 col-md-5 col-sm-10 col-xm-11">
         <h1 class="text-center my-3"> Our Collection</h1>
     </div>
@@ -108,7 +111,7 @@
   </form>
     </div>   
 </div>
-
+<hr>
 <div class="items row col-11 m-auto mt-2 mb-5">
   <?php 
     include './db/db.php';
