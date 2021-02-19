@@ -53,7 +53,7 @@
     <div class=" col-md-3 col-sm-12 p-3 col-xl-4 text-center mt-3">
 
       <div class="form-outline d-flex">
-        <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.." list="searchResult"/>
+        <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.." list="searchResult" autocomplete="off"/>
         <button type="submit" name="btnSearch" class="btn btn-outline-success px-4">
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>      
