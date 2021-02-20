@@ -1,5 +1,9 @@
 <?php   include 'top.php';
-        include '../db/db.php';
+        
+
+        if (!isset($_SESSION['aname'])) {
+            header("Location: login.php");
+        }
  ?>
 
 

@@ -1,5 +1,7 @@
 <?php
  include '../env.php';
+ include '../db/db.php';
+ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,25 +15,59 @@
     <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <title><?= $app_name ?> | Admin</title>
+    <style>
+        .login-box{
+            border-radius:30px;
+            box-shadow: 5px 5px 10px 1px grey;
+        }
+        .error{
+            color: red;
+
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand fs-4" href="./home.php">Admin</a>
+        <a class="navbar-brand fs-4 p-1" href="./home.php">Admin</a>
+
+        <?php
+            if (isset($_SESSION['aname'])) {
+        ?>
+
         <ul class="nav text-light  justify-content-end">
-            <li class="nav-item">
+            <li class="nav-item p-1 ">
                 <a class="nav-link link-light " href="./product.php">Add Product</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item p-1 ">
                 <a class="nav-link  link-light" href="./category.php">Categories</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item p-1 ">
                 <a class="nav-link  link-light" href="./brand.php">Brands</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item p-1 ">
                   <a class="btn btn-outline-info" href="../">View Site</a>
             </li>
+            <li class="nav-item p-1 ">
+                <a class="btn btn-outline-danger" name="logout" href="logout.php">Logout</a>
+            </li>
         </ul>
+
+        <?php
+            }else{
+        ?>
+
+        <ul class="nav text-light  justify-content-end">
+            <li class="nav-item">
+                <a class="btn btn-outline-info" href="../">View Site</a>
+            </li> 
+        </ul>
+        <?php
+            }
+        ?>
+
+        
+        
         
     </div>
 </nav>

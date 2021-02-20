@@ -1,4 +1,10 @@
-<?php include 'top.php' ?>
+<?php 
+    include 'top.php';
+    
+    if (!isset($_SESSION['aname'])) {
+        header("Location: login.php");
+    }
+?>
 <div>
     <h1 class="text-center my-3"> All Products</h1>
 </div>
