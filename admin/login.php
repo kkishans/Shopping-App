@@ -29,12 +29,52 @@
                 </div>
             </div>
         </form>
+
+        <div class="row justify-content-end">
+                <button type="button" class="btn col-md-4 btn-light" data-toggle="modal" data-target="#resetPassword">
+                    Forgot Password?
+                </button>
+                <div class="col-md-1 col-sm-1 m-1"></div>    
+        </div>
     </div>
 </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="resetPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Reset Password</h5>
+        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="font-size:20px">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form action="" method="post">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 m-3">
+                        <input type="text" name="resetEmail" class="form-control col-md-6" placeholder="Email" required autofocus>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button type="submit" name="sendOtp" class="btn btn-primary">Send OTP</button>
+                    </div>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <?php
     
+    use PHPMailer\PHPMailer\PHPMailer; 
+    use PHPMailer\PHPMailer\Exception; 
+      
+    require '../vendor/autoload.php'; 
+
     if(isset($_POST['login'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -49,5 +89,52 @@
             header("Location: home.php");
         }
     }
+
+    if (isset($_POST['sendOtp'])) {
+
+        $to = $_POST['resetEmail'] ;
+
+        $query = "select * from admin_details where email = '$to'";
+        $result = mysqli_query($conn,$query);
+
+        if (mysqli_num_rows($result) > 0 ) {
+            $otp = rand(1000,9999);
+            $mail = new PHPMailer(true); 
+            $fromName = "From";
+            $from = "from@gmail.com";
+            $password = "password";
+            
+            try { 
+                $mail->SMTPDebug = 0;                                        
+                $mail->isSMTP();                                             
+                $mail->Host       = 'smtp.gmail.com;';                     
+                $mail->SMTPAuth   = true;                              
+                $mail->Username   = $from;                  
+                $mail->Password   = $password;                                                       
+                $mail->Port       = 587;   
+            
+                $mail->setFrom($from, $fromName);            
+                $mail->addAddress($to); 
+                
+                $mail->isHTML(true);                                   
+                $mail->Subject = 'Reset Password'; 
+                $mail->Body    = "Your reset password OTP is <b>$otp</b> <br> OTP is expire within 5 minutes"; 
+                $mail->send(); 
+                
+                setcookie("otp" , $otp , time()+(60 * 5));
+                header("Location: reset_password.php");
+            } catch (Exception $e) { 
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; 
+            } 
+        }
+        else{
+            echo "<h3 style='text-align:center'>No such email found...</h3>";
+        }
+    }
 ?>
+
+
 <?php include 'bottom.php' ?>
+
+
+
