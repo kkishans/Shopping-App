@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2021 at 07:03 PM
+-- Generation Time: Feb 20, 2021 at 12:46 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `shopping`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_details`
+--
+
+CREATE TABLE `admin_details` (
+  `aid` int(10) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin_details`
+--
+
+INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `password`) VALUES
+(1, 'Nikunj', 'Thakor', 'nikunj@gmail.com', '1234');
 
 -- --------------------------------------------------------
 
@@ -86,11 +107,18 @@ INSERT INTO `product_details` (`p_id`, `p_name`, `description`, `p_img`, `price`
 (8, 'Desktop Monitor', 'Wide monitor', 'u_10181535.jpg', 15000, 12, 1, 3),
 (9, 'Laptop 2', 'none', 'img1.jpg', 100000, 1, 1, 4),
 (10, 'Tablet', 'none', 'MINIDDHQIBFYW-medium.jpg', 120000, 5, 1, 3),
-(11, 'Lenovo ideapad 3', 'Performence Beast', 'lenovo_ideapad_3.png', 70000, 2, 1, 1);
+(11, 'Lenovo ideapad 3', 'Performence Beast', 'lenovo_ideapad_3.png', 70000, 2, 1, 1),
+(12, 'Lenovo legion', 'Performence Beast', 'legion.png', 65000, 1, 1, 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_details`
+--
+ALTER TABLE `admin_details`
+  ADD PRIMARY KEY (`aid`);
 
 --
 -- Indexes for table `brands`
@@ -117,6 +145,12 @@ ALTER TABLE `product_details`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_details`
+--
+ALTER TABLE `admin_details`
+  MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
@@ -132,7 +166,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `product_details`
 --
 ALTER TABLE `product_details`
-  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
