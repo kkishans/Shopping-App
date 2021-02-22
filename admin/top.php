@@ -40,13 +40,13 @@
                 <a class="nav-link link-light " href="./product.php">Add Product</a>
             </li>
             <li class="nav-item p-1 ">
-                <a class="nav-link  link-light" href="./category.php">Categories</a>
+                <a class="nav-link  link-light" href="./category.php" target="_blank">Categories</a>
             </li>
             <li class="nav-item p-1 ">
                 <a class="nav-link  link-light" href="./brand.php">Brands</a>
             </li>
             <li class="nav-item p-1 ">
-                  <a class="btn btn-outline-info" href="../">View Site</a>
+                  <a class="btn btn-outline-info"  href="../index.php" target="_blank">View Site</a>
             </li>
             <li class="nav-item p-1 ">
                 <a class="btn btn-outline-danger" name="logout" href="logout.php">Logout</a>
