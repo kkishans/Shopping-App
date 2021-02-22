@@ -79,7 +79,7 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         
-        $query = "select * from admin_details where email = '$email' and password = '$password'";
+        $query = "select * from admin_details where email = '$email' and password = '".md5($password)."'";
 
         $res = mysqli_query($conn,$query);
 
@@ -100,9 +100,9 @@
         if (mysqli_num_rows($result) > 0 ) {
             $otp = rand(1000,9999);
             $mail = new PHPMailer(true); 
-            $fromName = "From";
+            $fromName = "user name";
             $from = "from@gmail.com";
-            $password = "password";
+            $password = "from";
             
             try { 
                 $mail->SMTPDebug = 0;                                        
@@ -121,6 +121,7 @@
                 $mail->Body    = "Your reset password OTP is <b>$otp</b> <br> OTP is expire within 5 minutes"; 
                 $mail->send(); 
                 
+                setcookie("email",$to,time()+(60*5));
                 setcookie("otp" , $otp , time()+(60 * 5));
                 header("Location: reset_password.php");
             } catch (Exception $e) { 
