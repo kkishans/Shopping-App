@@ -20,7 +20,13 @@
         font-size:5vh;
         font-family: Courier, Monaco, monospace;
       }
-        
+      .card-l{
+            text-decoration: none;
+            color:black;
+        }
+      a button{
+        color:white;
+      }
     </style>
   </head>
 <body>
