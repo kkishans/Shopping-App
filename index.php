@@ -13,7 +13,6 @@
         <select class="form-select" name="category" >
           <option value="0">All</option>
           <?php 
-            include './db/db.php';
             $query = "select * from category";
 
             $result = mysqli_query($conn,$query);

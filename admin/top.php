@@ -15,17 +15,7 @@
     <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <title><?= $app_name ?> | Admin</title>
-    <style>
-        .login-box{
-            border-radius:30px;
-            box-shadow: 5px 5px 10px 1px grey;
-        }
-        .error{
-            color: red;
-
-        }
-     
-    </style>
+   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">

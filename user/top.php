@@ -1,5 +1,5 @@
 <?php
-  include 'env.php';
+  include '../env.php';
   session_start();
 ?>
 <!doctype html>
@@ -23,7 +23,7 @@
     <div class="container-fluid d-flex align-items-center">
        <div>
           <img src="./favicon.png" style="object-fit: contain;height: 50px;width: 50px;">
-          <a class="navbar-brand fs-3 pt-2" href="./index.php"><?= $app_name ?></a>
+          <a class="navbar-brand fs-3 pt-2" href="../index.php"><?= $app_name ?></a>
        </div>
         <div>
           <ul class="nav text-light  justify-content-end">
@@ -43,13 +43,13 @@
                   if (isset($_SESSION['useremail'] )) {
               ?>
               <li class="nav-item p-1 ">
-                  <a class="btn btn-outline-danger" name="logout" href="./user/logout.php">Logout</a>
+                  <a class="btn btn-outline-danger" name="logout" href="./logout.php">Logout</a>
               </li>
               <?php 
                   }else{
               ?>
                 <li class="nav-item p-1 ">
-                  <a class="btn btn-outline-info"  href="./user/userLogin.php" >Log in</a>
+                  <a class="btn btn-outline-info"  href="./userLogin.php" >Log in</a>
                 </li>
               <?php  } ?>
           </ul>

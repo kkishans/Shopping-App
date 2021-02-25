@@ -1,0 +1,16 @@
+.login-box{
+    border-radius:30px;
+    box-shadow: 5px 5px 10px 1px grey;
+}
+.error{
+    color: red;
+
+}
+.noResult{
+    font-size:5vh;
+    font-family: Courier, Monaco, monospace;
+  }
+  .card-l{
+        text-decoration: none;
+        color:black;
+    }

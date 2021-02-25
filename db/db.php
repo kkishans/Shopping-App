@@ -1,5 +1,4 @@
 <?php
-
     $host="localhost";
     $user = "root";
     $pass="";
@@ -11,5 +10,4 @@
         echo "<script>alert('Eroor while connecting to databse.')</script>";
         return;
     }
-
 ?>
