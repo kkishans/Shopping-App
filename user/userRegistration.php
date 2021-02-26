@@ -24,7 +24,7 @@
                 </div>
                 <div class="row col-md-10 m-3">
                    <div>
-                     <input type="text" name="email" class="form-control col-md-6" placeholder="Email" required >
+                     <input type="email" name="email" class="form-control col-md-6" placeholder="Email" required >
                    </div>
                 </div>
                 <div class="row col-md-10 m-3">
