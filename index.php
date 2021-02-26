@@ -119,7 +119,7 @@
         <div class="d-flex justify-content-between mt-2">
           <p class="card-title"><?= $r['description'] ?></p>
           <div class="cost-button"> 
-            <a class="btn btn-primary" href="#" role="button">Add To Cart</a>
+            <a class="btn btn-primary" href="./add_to_cart.php?id=<?= $r['p_id']  ?>" role="button">Add To Cart</a>
           </div>                  
         </div>
       </div></a>
