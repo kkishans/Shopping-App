@@ -5,7 +5,7 @@
     include "./db/db.php";
     session_start();
 
-    if (isset($_SESSION['useremail'])) {
+    if (isset($_SESSION['useremail']))  {
         $query = "SELECT * FROM product_details where p_id = {$_GET['id']}";
         $res = mysqli_query($conn,$query);
         $data = mysqli_fetch_assoc($res);
@@ -43,5 +43,7 @@
             $_SESSION['cart'] = $item;
         }
         header("location:index.php");
+    }else{
+        header("location: user/userLogin.php");
     }
 ?>

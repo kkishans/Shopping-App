@@ -1,9 +1,22 @@
 <?php
+    include '../db/db.php';
     include './top.php';
-    
+    error_reporting(E_ERROR | E_PARSE);
     if (!isset($_SESSION['useremail'] )) {
         echo "<script> window.location ='./userLogin.php' </script>";
     }
+?>
+
+<?php 
+    $query = "SELECT o_id FROM order_details  ORDER BY o_id DESC LIMIT 1";
+    $res = mysqli_query($conn,$query);
+    $r = mysqli_fetch_assoc($res);
+    $o_id = (int)$r['o_id'] + 1;
+    $query = "SELECT u_id, address FROM users  WHERE  email = '".$_SESSION['useremail']."'" ;
+    $res = mysqli_query($conn,$query);
+    $r = mysqli_fetch_assoc($res);
+    $u_id = (int)$r['u_id'];
+    $address = $r['address'];
 ?>
 <div class="container-fluid mt-3">
     <hr>
@@ -30,7 +43,7 @@
     <hr>
     
     <?php
-            if (isset($_SESSION['cart'])) {
+        if (isset($_SESSION['cart'])) {
     ?>
 
     <div class="mt-4">
@@ -76,7 +89,11 @@
                 </div>
         </div>
     </div>
-
+    <div class="justify-content-center d-flex">
+    <form action="" method="post">
+        <button type="submit" name="order" class="btn btn-outline-primary my-5 m-auto fs-4">Order Now</button>
+    </form>
+    </div>
     <?php
         }
     ?>
@@ -85,5 +102,23 @@
 <?php
     if (isset($_POST['remove'])) {
         unset($_SESSION['cart']);
+    }
+
+    if (isset($_POST['order'])) {
+       $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
+        VALUES( $o_id,$u_id,$total,'$address')";
+        foreach($_SESSION['cart'] as $k => $v){
+            $query = "INSERT into ordered_products(p_id,o_id) VALUES(".$v['id'].",$o_id)";
+            mysqli_query($conn,$query);
+        }
+        if (mysqli_query($conn,$ordered_query)) {
+            echo "<script>alert('Product Ordered.')</script>";
+            unset($_SESSION['cart']);
+            header("location: ./cart.php");
+        }else{
+            echo "<script>alert('Error while taking your order try again.')</script>";
+            echo mysqli_error($conn);
+        }
+        
     }
 ?>
