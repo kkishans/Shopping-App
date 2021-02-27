@@ -74,20 +74,20 @@
     use PHPMailer\PHPMailer\Exception; 
       
     require '../vendor/autoload.php'; 
-
     if(isset($_POST['login'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
         
         $query = "select * from admin_details where email = '$email' and password = '".md5($password)."'";
-
+        
         $res = mysqli_query($conn,$query);
-
+        echo "$email and $password and ". mysqli_num_rows($res);
         if( mysqli_num_rows($res) > 0 ){
             $r = mysqli_fetch_assoc($res);
             $_SESSION['aname'] = $r['fname'];
             header("Location: home.php");
         }
+        else echo 'error';
     }
 
     if (isset($_POST['sendOtp'])) {

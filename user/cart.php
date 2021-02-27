@@ -27,7 +27,7 @@
             <h3>Your Cart</h3>
         </div>
         <?php
-            if (isset($_SESSION['cart'])) {
+            if (isset($_COOKIE['cart'])) {
         ?>
             <div class="col-md-3 text-end me-4">
             <form action="" method="post">
@@ -43,7 +43,7 @@
     <hr>
     
     <?php
-        if (isset($_SESSION['cart'])) {
+        if (isset($_COOKIE['cart'])) {
     ?>
 
     <div class="mt-4">
@@ -62,8 +62,9 @@
                         <tbody>
                         <?php 
                             $total = 0;
-                            if(isset($_SESSION['cart'])){
-                                foreach($_SESSION['cart'] as $k => $v){
+                            $cart = json_decode($_COOKIE['cart'],true);
+                            if(isset($_COOKIE['cart'])){
+                                foreach( $cart as $k => $v){
                                     $totalPerProduct = $v['price'] * $v['qty'];
                                     $total += $totalPerProduct;
 
@@ -101,7 +102,7 @@
 
 <?php
     if (isset($_POST['remove'])) {
-        unset($_SESSION['cart']);
+        setcookie("cart","",-3600);
     }
 
     if (isset($_POST['order'])) {
