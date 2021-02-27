@@ -59,7 +59,7 @@ if(isset($_POST['login'])){
     if( mysqli_num_rows($res) > 0 ){
         $r = mysqli_fetch_assoc($res);
         $_SESSION['useremail'] = $r['email'];
-        header("Location: dashboard.php");
+        header("Location: cart.php");
     }else{
         echo "<script>alert('Invalid username and Password.')</script>";
     }
