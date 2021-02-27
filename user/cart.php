@@ -30,8 +30,8 @@
             if (isset($_COOKIE['cart'])) {
         ?>
             <div class="col-md-3 text-end me-4">
-            <form action="" method="post">
-                <input type="submit" class="btn btn-outline-danger" value="Remove all" name="remove">
+            <form  method="post">
+                <input type="submit" class="btn btn-outline-danger" value="Remove all" name="clear">
             </form>
         </div>
         <?php
@@ -101,8 +101,11 @@
 </div>
 
 <?php
-    if (isset($_POST['remove'])) {
-        setcookie("cart","",-3600);
+    if (isset($_POST['clear'])) {
+        
+            ///echo "button clicked";
+            setcookie("cart","",time()-3600,"../");
+            header("location: dashboard.php");
     }
 
     if (isset($_POST['order'])) {

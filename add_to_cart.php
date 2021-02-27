@@ -38,16 +38,16 @@
                 }
                
             } 
-            setcookie("cart",json_encode($cart),time()+360);
+            setcookie("cart",json_encode($cart),time()+3600,"/");
             if ($flag == 0) {
                 //$_SESSION['cart'] = array_merge($_SESSION["cart"],$item);
                 $cart = array_merge($cart,$item);
-                setcookie("cart",json_encode($cart),time()+360);
+                setcookie("cart",json_encode($cart),time()+3600,"/");
             }
         }
         else{
             //$_SESSION['cart'] = $item;
-            setcookie("cart",json_encode($item),time()+360);
+            setcookie("cart",json_encode($item),time()+3600,"/");
         }
         header("location:index.php");
         //print_r($cart);
