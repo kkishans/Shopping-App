@@ -96,7 +96,14 @@
     </form>
     </div>
     <?php
-        }
+        }else{
+    ?>
+    <div class="col-4 m-auto" >
+            <img src="../img/emptyCart" alt="Cart is empty" height="300px" srcset="">   
+            <h4 class="text-center">Your Cart is Empty!!!</h4> 
+    </div>
+    <?php 
+    }
     ?>
 </div>
 
