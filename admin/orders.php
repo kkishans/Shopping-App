@@ -47,7 +47,7 @@
                 <?php if($r['status'] == "Not Delivered") {   ?>
                 <th><a href="./delete.php?productDelivered=<?= $r['o_id'] ?>&productId=<?= $r['p_id'] ?>" class="btn btn-success">Not Delivered</a></th>
                 <?php  }else{ ?>
-                    <th><a href="#" class="btn btn-disable">Delivered</a></th>
+                    <th><a href="#" class="btn disable">Delivered</a></th>
                 <?php  } ?>
             </tr>
             <?php 

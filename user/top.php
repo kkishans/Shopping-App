@@ -28,7 +28,7 @@
         <div>
           <ul class="nav text-light  justify-content-end">
               <li class="nav-item">
-                  <a class="nav-link link-light " href="#">All Products</a>
+                  <a class="nav-link link-light " href="../index.php">All Products</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link  link-light" href="#">Services</a>

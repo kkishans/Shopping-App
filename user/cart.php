@@ -108,13 +108,13 @@
     if (isset($_POST['order'])) {
        $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
         VALUES( $o_id,$u_id,$total,'$address')";
-        foreach($_SESSION['cart'] as $k => $v){
+        foreach( $cart as $k => $v){
             $query = "INSERT into ordered_products(p_id,o_id) VALUES(".$v['id'].",$o_id)";
             mysqli_query($conn,$query);
         }
         if (mysqli_query($conn,$ordered_query)) {
             echo "<script>alert('Product Ordered.')</script>";
-            unset($_SESSION['cart']);
+            setcookie("cart","",-3600);
             header("location: ./cart.php");
         }else{
             echo "<script>alert('Error while taking your order try again.')</script>";
