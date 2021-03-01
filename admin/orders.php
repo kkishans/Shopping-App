@@ -19,7 +19,7 @@
                 <th>Product Name</th>
                 <th>Order At</th>
                 <th>Delivery address </th>
-                <th>Satus</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
