@@ -31,7 +31,7 @@
                 <a class="nav-link link-light " href="./product.php">Add Product</a>
             </li>
             <li class="nav-item p-1 ">
-                <a class="nav-link  link-light" href="../category.php" target="_blank">Categories</a>
+                <a class="nav-link  link-light" href="./category.php" target="_blank">Categories</a>
             </li>
             <li class="nav-item p-1 ">
                 <a class="nav-link  link-light" href="./brand.php">Brands</a>
