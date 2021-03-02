@@ -57,7 +57,7 @@
           </div>    
           
           <div class="col-6"> 
-            <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $r['p_id']  ?>" role="button">Add To Cart</a>
+            <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $id  ?>" role="button">Add To Cart</a>
           </div> 
         </div>
     </div>
