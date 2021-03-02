@@ -86,9 +86,9 @@
         include '../db/db.php';        
         $insert_query = "INSERT INTO category(c_title) values('$ctitle')";
         
-        $update_query = "UPDATE category SET c_title = '$ctitle' WHERE c_id = $id ";
-       
         if (isset($_GET['update'])) {
+        $update_query = "UPDATE category SET c_title = '$ctitle' WHERE c_id = $id ";
+
             if (mysqli_query($conn,$update_query)) {
                 echo "<script>alert('Category Update.')</script>";
                 header("Location: category.php");

@@ -55,6 +55,10 @@
             <label class="form-label col-3 fs-5">Stock: </label>
             <label class="form-label fs-4 col-8"><?= $stock ?></label>
           </div>    
+          
+          <div class="col-6"> 
+            <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $r['p_id']  ?>" role="button">Add To Cart</a>
+          </div> 
         </div>
     </div>
 </div>
