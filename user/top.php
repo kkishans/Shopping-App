@@ -37,7 +37,7 @@
                   <a class="nav-link  link-light" href="#">About Us</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link  link-light" href="contactus.php">Contact Us</a>
+                  <a class="nav-link  link-light" href="../contactus.php">Contact Us</a>
               </li>
               <?php 
                   if (isset($_SESSION['useremail'] )) {
