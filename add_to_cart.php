@@ -1,4 +1,4 @@
-<?php
+ <?php
     /*
         TODO: check user logined or note...  
     */
@@ -12,9 +12,11 @@
         $useremail = $_SESSION['useremail'];
 
         $cart =  json_decode( $_COOKIE['cart'],true );
-    
+        
+        //$usercart = array();
+
         $item = array(
-                array(
+            array(
                 "id" => $_GET['id'],
                 "p_name" => $data['p_name'],
                 "p_img" => $data['p_img'],
@@ -36,22 +38,24 @@
                     $flag = 1;
                     break;
                 }
-               
-            } 
-            setcookie("cart",json_encode($cart),time()+3600,"/");
+            }
+            setcookie("cart",json_encode($cart));
             if ($flag == 0) {
                 //$_SESSION['cart'] = array_merge($_SESSION["cart"],$item);
                 $cart = array_merge($cart,$item);
-                setcookie("cart",json_encode($cart),time()+3600,"/");
+                setcookie("cart",json_encode($cart));
             }
         }
         else{
             //$_SESSION['cart'] = $item;
-            setcookie("cart",json_encode($item),time()+3600,"/");
+            //$usercart = $item; 
+            setcookie("cart",json_encode($item));
         }
         header("location:index.php");
         //print_r($cart);
     }else{
         header("location: user/userLogin.php");
     }
-?>
+?> 
+
+

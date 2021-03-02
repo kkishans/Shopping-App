@@ -111,8 +111,7 @@
     if (isset($_POST['clear'])) {
         
             ///echo "button clicked";
-            setcookie("cart","",time()-3600,"../");
-            header("location: dashboard.php");
+            setcookie("cart","",time()-3600);
     }
 
     if (isset($_POST['order'])) {
