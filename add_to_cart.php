@@ -13,7 +13,7 @@
 
         $cart =  json_decode( $_COOKIE['cart'],true );
         
-        //$usercart = array();
+        $usercart = array();
 
         $item = array(
             array(
@@ -25,31 +25,39 @@
             )
         );
     
-    
-    
         //check is product already in cart or not...
         if (isset($_COOKIE["cart"])) {
             $flag = 0;
-            foreach ( $cart as $k => $v ){
-                if ( $cart[$k]['id'] == $_GET['id'] ) {
-                    if($cart[$k]["qty"] >= 0) {
-                        $cart[$k]["qty"] += 1;
+            if (array_key_exists($useremail,$cart)) {
+
+                foreach ( $cart[$useremail] as $k => $v ){
+                    if ( $cart[$useremail][$k]['id'] == $_GET['id'] ) {
+                        if($cart[$useremail][$k]["qty"] >= 0) {
+                            $cart[$useremail][$k]["qty"] += 1;
+                        }
+                        $flag = 1;
+                        break;
                     }
-                    $flag = 1;
-                    break;
                 }
+                setcookie("cart",json_encode($cart),time()+3600*24*365);
+                if ($flag == 0) {
+                    //$_SESSION['cart'] = array_merge($_SESSION["cart"],$item);
+                    $usercart = array_merge($cart[$useremail],$item);
+                    $cart[$useremail] = $usercart;  
+                    setcookie("cart",json_encode($cart),time()+3600*24*365);
+                }
+                
             }
-            setcookie("cart",json_encode($cart));
-            if ($flag == 0) {
-                //$_SESSION['cart'] = array_merge($_SESSION["cart"],$item);
-                $cart = array_merge($cart,$item);
-                setcookie("cart",json_encode($cart));
+            else{
+                $cart[$useremail] = $item;
+                setcookie("cart",json_encode($cart),time()+3600*24*365);
             }
+            
         }
         else{
             //$_SESSION['cart'] = $item;
-            //$usercart = $item; 
-            setcookie("cart",json_encode($item));
+            $cart[$useremail] = $item; 
+            setcookie("cart",json_encode($cart),time()+3600*24*365);
         }
         header("location:index.php");
         //print_r($cart);
