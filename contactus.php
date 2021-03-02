@@ -25,7 +25,7 @@
             <form action="#" method="post"> 
             <div class="mb-3">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Enter your input">
+                <input type="text" class="form-control" name="name" placeholder="Enter your name">
             </div>
             <div class="mb-3">
                 <label class="form-label">E-mail</label>
