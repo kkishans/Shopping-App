@@ -5,6 +5,8 @@
     if (!isset($_SESSION['useremail'] )) {
         echo "<script> window.location ='./userLogin.php' </script>";
     }
+
+    $useremail = $_SESSION['useremail'];
 ?>
 
 <?php 
@@ -12,7 +14,7 @@
     $res = mysqli_query($conn,$query);
     $r = mysqli_fetch_assoc($res);
     $o_id = (int)$r['o_id'] + 1;
-    $query = "SELECT u_id, address FROM users  WHERE  email = '".$_SESSION['useremail']."'" ;
+    $query = "SELECT u_id, address FROM users  WHERE  email = '".$useremail."'" ;
     $res = mysqli_query($conn,$query);
     $r = mysqli_fetch_assoc($res);
     $u_id = (int)$r['u_id'];
@@ -64,7 +66,7 @@
                             $total = 0;
                             $cart = json_decode($_COOKIE['cart'],true);
                             if(isset($_COOKIE['cart'])){
-                                foreach( $cart as $k => $v){
+                                foreach( $cart[$useremail] as $k => $v){
                                     $totalPerProduct = $v['price'] * $v['qty'];
                                     $total += $totalPerProduct;
 
