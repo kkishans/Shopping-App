@@ -13,16 +13,19 @@
         <select class="form-select" name="category" >
           <option value="0">All</option>
           <?php 
+            include './db/db.php';
             $query = "select * from category";
 
             $result = mysqli_query($conn,$query);
             $c_id = isset($_GET["category"]) ? $_GET["category"] : 0; 
             if (mysqli_num_rows($result) > 0) {
                 while($r = mysqli_fetch_assoc($result)){
+                  print_r($r);
                   $s = ($c_id == $r["c_id"]) ? "selected" : "";
                     echo "<option value='". $r["c_id"]."' $s > ".$r["c_title"]."</option>";
                 }
             }
+            else echo "0 record in category";
             ?>
         </select> 
     </div>
@@ -31,7 +34,7 @@
       <select class="form-select" name="brand" >
         <option value="0">All</option>
         <?php 
-            include '../db/db.php';
+            //include '../db/db.php';
             $query = "select * from brands";
 
             $result = mysqli_query($conn,$query);
@@ -52,7 +55,7 @@
     <div class=" col-md-3 col-sm-12 p-3 col-xl-4 text-center mt-3">
 
       <div class="form-outline d-flex">
-        <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.." list="searchResult" autocomplete="off"/>
+        <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.." list="searchResult" />
         <button type="submit" name="btnSearch" class="btn btn-outline-success px-4">
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>      
@@ -64,7 +67,7 @@
 <hr>
 <div class="items row col-11 m-auto mt-2 mb-5">
   <?php 
-    include './db/db.php';
+    //include './db/db.php';
 
     $query = "select * from product_details";
 

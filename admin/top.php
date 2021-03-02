@@ -31,7 +31,11 @@
                 <a class="nav-link link-light " href="./product.php">Add Product</a>
             </li>
             <li class="nav-item p-1 ">
+<<<<<<< HEAD
                 <a class="nav-link  link-light" href="./category.php" target="_blank">Categories</a>
+=======
+                <a class="nav-link  link-light" href="./category.php">Categories</a>
+>>>>>>> b8b3c8546dfc97e500bffe65919a0e087aa91123
             </li>
             <li class="nav-item p-1 ">
                 <a class="nav-link  link-light" href="./brand.php">Brands</a>

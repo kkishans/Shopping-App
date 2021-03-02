@@ -10,6 +10,7 @@
 <?php 
  $label = "Add New";
     $ctitle = "";
+    global $id;
     if (isset($_GET['update'])) {
         $label = "Update";
         $id = $_GET['update'];
@@ -85,13 +86,12 @@
         include '../db/db.php';        
         $insert_query = "INSERT INTO category(c_title) values('$ctitle')";
         
-       // echo $update_query;
         if (isset($_GET['update'])) {
         $update_query = "UPDATE category SET c_title = '$ctitle' WHERE c_id = $id ";
 
             if (mysqli_query($conn,$update_query)) {
                 echo "<script>alert('Category Update.')</script>";
-                header("location:category.php");
+                header("Location: category.php");
              }else{
                  echo mysqli_error($conn);
              }
