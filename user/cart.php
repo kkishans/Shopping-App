@@ -45,7 +45,7 @@
     <hr>
     
     <?php
-        if (isset($_COOKIE['cart'])) {
+        
     ?>
 
     <div class="mt-4">
@@ -64,9 +64,14 @@
                         <tbody>
                         <?php 
                             $total = 0;
-                            $cart = json_decode($_COOKIE['cart'],true);
-                            if(isset($_COOKIE['cart'])){
-                                foreach( $cart[$useremail] as $k => $v){
+                            if(isset($_SESSION['useremail'])){
+                            $sql = "SELECT id,p_name,qty,p_img,price from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
+                            
+                            $res = mysqli_query($conn,$sql);
+                            if (mysqli_num_rows($res) > 0) {
+                            
+                            
+                                while( $v = mysqli_fetch_assoc($res)){
                                     $totalPerProduct = $v['price'] * $v['qty'];
                                     $total += $totalPerProduct;
 
@@ -76,12 +81,22 @@
                                 <th><?= $v['p_name'] ?></th>
                                 <th><?= $v['price'] ?></th>
                                 <th><?= $v['qty'] ?></th> 
-                                <th><a href="./remove_product.php?index=<?= $k ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
+                                <th><a href="./remove_product.php?index=<?= $v['id'] ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
                             </tr>
                             <?php 
 
                                 }
                             }
+                            else{
+                            ?>
+                                <div class="col-4 m-auto" >
+                                        <img src="../img/emptyCart" alt="Cart is empty" height="300px" srcset="">   
+                                        <h4 class="text-center">Your Cart is Empty!!!</h4> 
+                                </div>
+                            <?php 
+                            }
+                        }
+                        
                             
                             ?>
                         </tbody>
@@ -98,14 +113,14 @@
     </form>
     </div>
     <?php
-        }else{
+        
     ?>
-    <div class="col-4 m-auto" >
+    <!-- <div class="col-4 m-auto" >
             <img src="../img/emptyCart" alt="Cart is empty" height="300px" srcset="">   
             <h4 class="text-center">Your Cart is Empty!!!</h4> 
-    </div>
+    </div> -->
     <?php 
-    }
+    
     ?>
 </div>
   
@@ -164,9 +179,9 @@
 
 <?php
     if (isset($_POST['clear'])) {
-        
-            ///echo "button clicked";
-            setcookie("cart","",time()-3600);
+        $sql = "DELETE from cart_details where u_id = $u_id and is_in_cart = 'y'";
+        $res = mysqli_query($conn,$sql);
+           
     }
 
     if (isset($_POST['order'])) {

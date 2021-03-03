@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2021 at 07:45 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.15
+-- Generation Time: Mar 03, 2021 at 03:39 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,16 +32,18 @@ CREATE TABLE `admin_details` (
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `pass` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin_details`
 --
 
-INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `pass`) VALUES
-(1, 'Nikunj', 'Thakor', 'nikunj@gmail.com', ' 1234'),
-(2, 'Kishan', 'Khant', 'kishan@mail.com', ' 1234');
+INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `password`) VALUES
+(3, 'test', 'test', 'test@mail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(4, 'Nikunj', 'Thakor', 'nikunj@mail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(5, 'Kishan', 'Khant', 'kishan@mail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(6, 'nn', 'nn', 'nn@mail.com', '123');
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,29 @@ CREATE TABLE `brands` (
 INSERT INTO `brands` (`b_id`, `b_name`) VALUES
 (1, 'Lenevo'),
 (3, 'Apple'),
-(4, 'Dell');
+(4, 'Dell'),
+(8, 'Acer');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_details`
+--
+
+CREATE TABLE `cart_details` (
+  `id` int(10) NOT NULL,
+  `p_id` int(10) NOT NULL,
+  `u_id` int(10) NOT NULL,
+  `qty` int(10) NOT NULL,
+  `is_in_cart` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart_details`
+--
+
+INSERT INTO `cart_details` (`id`, `p_id`, `u_id`, `qty`, `is_in_cart`) VALUES
+(9, 7, 9, 2, 'y');
 
 -- --------------------------------------------------------
 
@@ -79,8 +103,10 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`c_id`, `c_title`) VALUES
-(1, 'Electronics '),
-(3, 'Music & Video Player');
+(1, 'Electronics'),
+(3, 'Music & Video Player'),
+(4, 'Laptop'),
+(6, 'TV');
 
 -- --------------------------------------------------------
 
@@ -100,11 +126,17 @@ CREATE TABLE `ordered_products` (
 --
 
 INSERT INTO `ordered_products` (`id`, `o_id`, `p_id`, `status`) VALUES
-(1, 1, 8, 'Not Delivered'),
+(1, 1, 8, 'Delivered'),
 (2, 1, 7, 'Not Delivered'),
-(3, 2, 10, 'Not Delivered'),
+(3, 2, 10, 'Delivered'),
 (4, 3, 7, 'Not Delivered'),
-(5, 4, 12, 'Not Delivered');
+(5, 4, 12, 'Not Delivered'),
+(6, 7, 7, 'Not Delivered'),
+(7, 8, 7, 'Not Delivered'),
+(8, 8, 11, 'Not Delivered'),
+(9, 9, 7, 'Not Delivered'),
+(10, 9, 9, 'Not Delivered'),
+(11, 9, 12, 'Not Delivered');
 
 -- --------------------------------------------------------
 
@@ -128,7 +160,13 @@ INSERT INTO `order_details` (`o_id`, `u_id`, `total_amount`, `shipping_address`,
 (1, 6, 35000, 'Bharuch', '2021-02-26 17:36:26'),
 (2, 6, 120000, 'Bharuch', '2021-02-26 17:38:56'),
 (3, 6, 20000, 'Bharuch', '2021-02-26 17:40:19'),
-(4, 6, 65000, 'Bharuch', '2021-02-26 18:43:27');
+(4, 6, 65000, 'Bharuch', '2021-02-26 18:43:27'),
+(5, 7, 35000, 'Bharuch', '2021-02-27 07:12:39'),
+(6, 7, 35000, 'Bharuch', '2021-02-27 07:13:19'),
+(7, 7, 20000, 'Bharuch', '2021-02-27 12:04:53'),
+(8, 7, 90000, 'Bharuch', '2021-02-27 12:05:19'),
+(9, 7, 225000, 'Bharuch', '2021-02-27 13:58:21'),
+(10, 7, 15000, 'Bharuch', '2021-03-03 13:01:57');
 
 -- --------------------------------------------------------
 
@@ -180,7 +218,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_id`, `f_name`, `l_name`, `email`, `phone`, `address`, `pass`) VALUES
-(6, 'Kishan', 'Khant', 'kishan@mail.com', '07096897145', 'Bharuch', '81dc9bdb52d04dc20036dbd8313ed055');
+(6, 'Kishan', 'Khant', 'kishan@mail.com', '07096897145', 'Bharuch', '81dc9bdb52d04dc20036dbd8313ed055'),
+(7, 'Nikunj', 'Thakor', 'nikunj@mail.com', '9876543210', 'Bharuch', '202cb962ac59075b964b07152d234b70'),
+(8, 'Test', 'test', 'test1@gmail.com', '9865327410', 'bharuch', '202cb962ac59075b964b07152d234b70'),
+(9, 'kk', 'kk', 'kk@mail.com', '7894561230', 'bharuch', '202cb962ac59075b964b07152d234b70');
 
 --
 -- Indexes for dumped tables
@@ -197,6 +238,13 @@ ALTER TABLE `admin_details`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`b_id`);
+
+--
+-- Indexes for table `cart_details`
+--
+ALTER TABLE `cart_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `p_id` (`p_id`,`u_id`);
 
 --
 -- Indexes for table `category`
@@ -228,7 +276,8 @@ ALTER TABLE `product_details`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`u_id`);
+  ADD PRIMARY KEY (`u_id`),
+  ADD UNIQUE KEY `email` (`email`) USING HASH;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -238,31 +287,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_details`
 --
 ALTER TABLE `admin_details`
-  MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `b_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `b_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `cart_details`
+--
+ALTER TABLE `cart_details`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ordered_products`
 --
 ALTER TABLE `ordered_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `o_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `o_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product_details`
@@ -274,7 +329,7 @@ ALTER TABLE `product_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

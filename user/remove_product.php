@@ -1,10 +1,14 @@
 <?php
+    include "../db/db.php"; 
     session_start();
-    if (isset($_SESSION['useremail'] ) && isset($_COOKIE['cart'])) {
+    if (isset($_SESSION['useremail'] )) {
         $k = $_GET['index'];
-        //unset($_SESSION['cart'][$k]);
-        //setcookie("cart","", time()-3600);
-        //print_r($_SESSION['cart']);
-        header("location:cart.php");
+        
+        $query = "DELETE from cart_details where id = $k";
+        $res = mysqli_query($conn,$query);
+
+        if ($res) {
+            header("location:cart.php");
+        }
     }
 ?>
