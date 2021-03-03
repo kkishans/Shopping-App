@@ -1,68 +1,43 @@
  <?php
-    /*
-        TODO: check user logined or note...  
-    */
+    
     include "./db/db.php";
     session_start();
 
     if (isset($_SESSION['useremail']))  {
-        $query = "SELECT * FROM product_details where p_id = {$_GET['id']}";
-        $res = mysqli_query($conn,$query);
-        $data = mysqli_fetch_assoc($res);
-        $useremail = $_SESSION['useremail'];
-
-        $cart =  json_decode( $_COOKIE['cart'],true );
+        $p_id = $_GET['id'];
         
-        $usercart = array();
+        //get user id from the session...
+        $query = "SELECT u_id FROM users where email = '". $_SESSION['useremail'] ."'";
+        $res = mysqli_query($conn,$query);
+        $r = mysqli_fetch_assoc($res);
+        $u_id = $r['u_id'];
+        $is_in_cart = "y"; 
 
-        $item = array(
-            array(
-                "id" => $_GET['id'],
-                "p_name" => $data['p_name'],
-                "p_img" => $data['p_img'],
-                "price" => $data['price'],
-                "qty" => 1
-            )
-        );
-    
-        //check is product already in cart or not...
-        if (isset($_COOKIE["cart"])) {
-            $flag = 0;
-            if (array_key_exists($useremail,$cart)) {
+        $sql = "SELECT * from cart_details where p_id = $p_id and u_id = $u_id and is_in_cart = '$is_in_cart'";
+        $res = mysqli_query($conn,$sql);
 
-                foreach ( $cart[$useremail] as $k => $v ){
-                    if ( $cart[$useremail][$k]['id'] == $_GET['id'] ) {
-                        if($cart[$useremail][$k]["qty"] >= 0) {
-                            $cart[$useremail][$k]["qty"] += 1;
-                        }
-                        $flag = 1;
-                        break;
-                    }
-                }
-                setcookie("cart",json_encode($cart),time()+3600*24*365);
-                if ($flag == 0) {
-                    //$_SESSION['cart'] = array_merge($_SESSION["cart"],$item);
-                    $usercart = array_merge($cart[$useremail],$item);
-                    $cart[$useremail] = $usercart;  
-                    setcookie("cart",json_encode($cart),time()+3600*24*365);
-                }
-                
+        $r = mysqli_fetch_assoc($res);
+        
+        if(mysqli_num_rows($res) > 0){
+            $query = "UPDATE cart_details SET qty = qty + 1 where u_id = $u_id and p_id = $p_id";
+            $res = mysqli_query($conn,$query);
+
+            if ($res) {
+                echo "<script>alert('Item quantity Incresed by 1...')</script>";
+                header("Location: index.php");
             }
-            else{
-                $cart[$useremail] = $item;
-                setcookie("cart",json_encode($cart),time()+3600*24*365);
-            }
-            
         }
         else{
-            //$_SESSION['cart'] = $item;
-            $cart[$useremail] = $item; 
-            setcookie("cart",json_encode($cart),time()+3600*24*365);
+            $query = "INSERT into cart_details(p_id,u_id,qty,is_in_cart) values($p_id,$u_id,1,'$is_in_cart')";
+            $res = mysqli_query($conn,$query);
+
+            if ($res) {
+                echo "<script>alert('Item added in cart')</script>";
+                header("Location: index.php");
+            }
         }
-        header("location:index.php");
-        //print_r($cart);
-    }else{
-        header("location: user/userLogin.php");
+         
+
     }
 ?> 
 
