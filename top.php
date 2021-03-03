@@ -39,12 +39,13 @@
               <li class="nav-item">
                   <a class="nav-link  link-light" href="contactus.php">Contact Us</a>
               </li>
-              <?php 
-                  if (isset($_SESSION['useremail'] )) {
-              ?>
+              
               <li class="nav-item p-1 ">
                   <a class="" name="cart" href="./user/cart.php"><i class="fa fa-shopping-cart nav-link" style="color:white;font-size:20px" aria-hidden="true"></i></a>
               </li>
+              <?php 
+                  if (isset($_SESSION['useremail'] )) {
+              ?>
               <li class="nav-item p-1 ">
                   <a class="btn btn-outline-danger" name="logout" href="./user/logout.php">Logout</a>
               </li>

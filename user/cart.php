@@ -2,9 +2,9 @@
     include '../db/db.php';
     include './top.php';
     error_reporting(E_ERROR | E_PARSE);
-    if (!isset($_SESSION['useremail'] )) {
-        echo "<script> window.location ='./userLogin.php' </script>";
-    }
+    // if (!isset($_SESSION['useremail'] )) {
+    //     echo "<script> window.location ='./userLogin.php' </script>";
+    // }
 
     $useremail = $_SESSION['useremail'];
 ?>
@@ -29,7 +29,7 @@
             <h3>Your Cart</h3>
         </div>
         <?php
-            if (isset($_COOKIE['cart'])) {
+            
         ?>
             <div class="col-md-3 text-end me-4">
             <form  method="post">
@@ -37,7 +37,7 @@
             </form>
         </div>
         <?php
-            }
+            
         ?>
         
         
@@ -96,9 +96,31 @@
                             <?php 
                             }
                         }
-                        
+                        else{
+
+                            $total = 0;
+                            if(isset($_SESSION['cart'])){
+                                foreach($_SESSION['cart'] as $k => $v){
+                                    $totalPerProduct = $v['price'] * $v['qty'];
+                                    $total += $totalPerProduct;
+
+                        ?>
+                            <tr>
+                                <td><img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
+                                <th><?= $v['p_name'] ?></th>
+                                <th><?= $v['price'] ?></th>
+                                <th><?= $v['qty'] ?></th> 
+                                <th><a href="./remove_product.php?index=<?= $k ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
+                            </tr>
+                            <?php 
+
+                                }
+                            }
                             
-                            ?>
+                        }
+                        ?>
+
+                            
                         </tbody>
                     </table>
                     <div class="mt-3">
@@ -185,19 +207,26 @@
     }
 
     if (isset($_POST['order'])) {
-       $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
-        VALUES( $o_id,$u_id,$total,'$address')";
-        foreach( $cart as $k => $v){
-            $query = "INSERT into ordered_products(p_id,o_id) VALUES(".$v['id'].",$o_id)";
-            mysqli_query($conn,$query);
+
+        if (isset($_SESSION['useremail'])) {
+            $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
+            VALUES( $o_id,$u_id,$total,'$address')";
+            foreach( $cart as $k => $v){
+                $query = "INSERT into ordered_products(p_id,o_id) VALUES(".$v['id'].",$o_id)";
+                mysqli_query($conn,$query);
+            }
+            if (mysqli_query($conn,$ordered_query)) {
+                echo "<script>alert('Product Ordered.')</script>";
+                setcookie("cart","",-3600);
+                header("location: ./cart.php");
+            }else{
+                echo "<script>alert('Error while taking your order try again.')</script>";
+                echo mysqli_error($conn);
+            }
         }
-        if (mysqli_query($conn,$ordered_query)) {
-            echo "<script>alert('Product Ordered.')</script>";
-            setcookie("cart","",-3600);
-            header("location: ./cart.php");
-        }else{
-            echo "<script>alert('Error while taking your order try again.')</script>";
-            echo mysqli_error($conn);
+        else{
+            
+            echo "<script> window.location ='./userLogin.php' </script>";
         }
         
     }

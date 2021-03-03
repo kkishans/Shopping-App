@@ -59,6 +59,28 @@ if(isset($_POST['login'])){
     if( mysqli_num_rows($res) > 0 ){
         $r = mysqli_fetch_assoc($res);
         $_SESSION['useremail'] = $r['email'];
+
+         //get user id from the session...
+         $query = "SELECT u_id FROM users where email = '". $_SESSION['useremail'] ."'";
+         $res = mysqli_query($conn,$query);
+         $r = mysqli_fetch_assoc($res);
+         $u_id = $r['u_id'];
+
+        //session data adding in user cart...
+
+        if (isset($_SESSION['cart'])) {
+            foreach($_SESSION['cart'] as $k => $v){
+                $query = "INSERT into cart_details(p_id,u_id,qty,is_in_cart) values('". $v['id'] ."' ,$u_id,1,'y')";
+                $res = mysqli_query($conn,$query);
+
+                if ($res) {
+                    echo "<script>alert('Item added in cart')</script>";
+                    header("Location: index.php");
+                }
+            }
+            session_unset($_SESSION['cart']);
+        }
+
         header("Location: cart.php");
     }else{
         echo "<script>alert('Invalid username and Password.')</script>";
