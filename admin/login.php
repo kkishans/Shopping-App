@@ -4,6 +4,14 @@
     if(isset($_SESSION['aname'])) {
         header("Location: home.php");
     }
+
+    //First time setup for admin...
+    $query = "SELECT * from admin_details";
+    $res = mysqli_query($conn,$query);
+
+    if(mysqli_num_rows($res) == 0){
+        header("location: admin_setup.php");
+    }
 ?>
 
 <div>
@@ -84,7 +92,7 @@
         
         // echo $query;
         $res = mysqli_query($conn,$query);
-        //echo "$email and $password and " .mysqli_num_rows($res)." and ".md5($password);
+        echo "$email and $password and " .mysqli_num_rows($res)." and ".md5($password);
         if( mysqli_num_rows($res) > 0 ){
             $r = mysqli_fetch_assoc($res);
             $_SESSION['aname'] = $r['fname'];
