@@ -1,6 +1,18 @@
 <?php
   include '../env.php';
+  include '../db/db.php';
   session_start();
+
+  if (isset($_SESSION['useremail'])) {
+    $query = "select count(1) FROM cart_details as C, users as U where C.u_id = U.u_id and email = '". $_SESSION['useremail']."'";
+    $result = mysqli_query($conn,$query);
+    $row = mysqli_fetch_array($result);
+    $total_cart_items = $row[0];
+    echo mysqli_error($conn);
+  }else{
+    $total_cart_items = 0;
+  }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -44,6 +56,14 @@
               ?>
               <li class="nav-item p-1 ">
                   <a class="" name="cart" href="./cart.php"><i class="fa fa-shopping-cart nav-link" style="color:white;font-size:20px" aria-hidden="true"></i></a>
+                 <?php
+                  if ($total_cart_items > 0 ) {
+                    echo " <div class='cart-badge'>
+                            <p>$total_cart_items</p>
+                          </div>";
+                  }
+                 
+                 ?>
               </li>
               <li class="nav-item p-1 ">
                   <a class="btn btn-outline-danger" name="logout" href="./logout.php">Logout</a>
