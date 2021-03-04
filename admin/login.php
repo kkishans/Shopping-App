@@ -80,10 +80,9 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         
-
         $query = "select * from admin_details where email = '$email' and password = '". md5($password) ."'" ;
         
-
+        // echo $query;
         $res = mysqli_query($conn,$query);
         //echo "$email and $password and " .mysqli_num_rows($res)." and ".md5($password);
         if( mysqli_num_rows($res) > 0 ){
