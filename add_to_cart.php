@@ -1,6 +1,7 @@
  <?php
     
     include "./db/db.php";
+    
     session_start();
 
     if (isset($_SESSION['useremail']))  {
@@ -23,8 +24,12 @@
             $res = mysqli_query($conn,$query);
 
             if ($res) {
-                echo "<script>alert('Item quantity Incresed by 1...')</script>";
-                header("Location: index.php");
+                echo "<script>
+                    window.location ='./index.php'
+
+                    alert('Item added in cart')
+                </script>";
+                
             }
         }
         else{
@@ -32,8 +37,10 @@
             $res = mysqli_query($conn,$query);
 
             if ($res) {
-                echo "<script>alert('Item added in cart')</script>";
-                header("Location: index.php");
+                echo "<script>
+                    window.location = './index.php'
+                    alert('Item added in cart')
+                </script>";
             }
         }
     }
@@ -71,7 +78,8 @@
         else{
             $_SESSION['cart'] = $item;
         }
-        header("location:index.php");
+        //echo "<script>alert("")</script>";
+        //header("location:index.php");
     }
     
 ?> 
