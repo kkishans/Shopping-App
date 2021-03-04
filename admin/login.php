@@ -81,7 +81,7 @@
         $password = $_POST['password'];
         
 
-        $query = "select * from admin_details where email = '$email' and pass = '". $password ."'" ;
+        $query = "select * from admin_details where email = '$email' and password = '". md5($password) ."'" ;
         
 
         $res = mysqli_query($conn,$query);
