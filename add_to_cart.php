@@ -36,8 +36,6 @@
                 header("Location: index.php");
             }
         }
-         
-
     }
     else{
         $query = "SELECT * FROM product_details where p_id = {$_GET['id']}";
@@ -53,9 +51,6 @@
                 "qty" => 1
             )
         );
-    
-    
-    
         //check is product already in cart or not...
         if (isset($_SESSION["cart"])) {
             $flag = 0;
