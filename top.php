@@ -41,7 +41,9 @@
               </li>
               
               <li class="nav-item p-1 ">
-                  <a class="" name="cart" href="./user/cart.php"><i class="fa fa-shopping-cart nav-link" style="color:white;font-size:20px" aria-hidden="true"></i></a>
+                  <a class="" name="cart" href="./user/cart.php"><i class="fa fa-shopping-cart nav-link" style="color:white;font-size:20px" aria-hidden="true"></i><span class="badge badge-light primary" id="cart-item" style="position:absolute;top:20px;right:110px;background:blue;border-radius:50px;font-size:7px;">1</span>
+                </a>
+
               </li>
               <?php 
                   if (isset($_SESSION['useremail'] )) {
