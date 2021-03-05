@@ -24,11 +24,7 @@
             $res = mysqli_query($conn,$query);
 
             if ($res) {
-                echo "<script>
-                    window.location ='./index.php'
-
-                    alert('Item added in cart')
-                </script>";
+                echo "<script>window.location = './index.php'</script>";
                 
             }
         }
@@ -37,10 +33,7 @@
             $res = mysqli_query($conn,$query);
 
             if ($res) {
-                echo "<script>
-                    window.location = './index.php'
-                    alert('Item added in cart')
-                </script>";
+                echo "<script>window.location = './index.php'</script>";
             }
         }
     }
@@ -79,11 +72,8 @@
             $_SESSION['cart'] = $item;
         }
         //echo "<script>alert("")</script>";
-        //header("location:index.php");
-        echo "<script>
-                    window.location = './index.php'
-                    alert('Item added in cart')
-                </script>";
+        header("location:index.php");
+        
     }
     
 ?> 
