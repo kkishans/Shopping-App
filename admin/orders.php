@@ -4,6 +4,21 @@
     if (!isset($_SESSION['aname'])) {
         header("Location: login.php");
     }
+
+    if (isset($_GET['pageno'])) {
+        $pageno = $_GET['pageno'];
+    } else {
+        $pageno = 1;
+    }
+
+    $no_of_records_per_page = 6;
+    $offset = ($pageno-1) * $no_of_records_per_page; 
+
+    $total_pages_sql = "SELECT COUNT(*) FROM ordered_products";
+    $result = mysqli_query($conn,$total_pages_sql);
+    $total_rows = mysqli_fetch_array($result)[0];
+    $total_pages = ceil($total_rows / $no_of_records_per_page);
+
  ?>
 <div>
     <h1 class="text-center my-3"> All Orders</h1>
@@ -18,13 +33,13 @@
                 <th>User Name</th>
                 <th>Product Name</th>
                 <th>Order At</th>
-                <th>Delivery address </th>
+                
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
         <?php 
-         $query = "SELECT * FROM ordered_products";
+         $query = "SELECT * FROM ordered_products LIMIT $offset, $no_of_records_per_page";
          $res = mysqli_query($conn,$query);
           if (mysqli_num_rows($res) > 0) {
              while($r = mysqli_fetch_assoc($res)){
@@ -43,7 +58,7 @@
                 <th><?= $u['f_name']." ".$u['l_name'] ?> </th>
                 <th><?= $p['p_name'] ?></th>
                 <th><?= $o['ordered_at'] ?></th>
-                <th><?= $o['shipping_address'] ?></th>
+                
                 <?php if($r['status'] == "Not Delivered") {   ?>
                 <th><a href="./delete.php?productDelivered=<?= $r['o_id'] ?>&productId=<?= $r['p_id'] ?>" class="btn btn-success">Not Delivered</a></th>
                 <?php  }else{ ?>
@@ -62,6 +77,18 @@
             ?>
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-around">
+        
+        <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
+        <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>"   tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+        <a class="page-link " href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" >Next</a>
+        </li>
+    </ul>
+</nav>
+
   </div>
 </div>
 
