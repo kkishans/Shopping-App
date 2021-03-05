@@ -45,39 +45,13 @@ error_reporting(0);
             <div class="mb-3 row">
                <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Category</label>
-                    <select class="form-select" name="category" >
-                    <?php 
-                        include '../db/db.php';
-                        $query = "select * from category";
-
-                        $result = mysqli_query($conn,$query);
-                        
-                        if (mysqli_num_rows($result) > 0) {
-                            while($r = mysqli_fetch_assoc($result)){
-                                $s = ($c_id == $r["c_id"]) ? "selected" : "";
-                                echo "<option value='". $r["c_id"]."' $s > ".$r["c_title"]."</option>";
-                            }
-                        }
-                        ?>
-                    </select>
+                    <input type="text" class="form-control" name="category" list="categories">
+                    
                </div>
                <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Brand :</label>
-                    <select class="form-select" name="brand" >
-                    <?php 
-                        include '../db/db.php';
-                        $query = "select * from brands";
-
-                        $result = mysqli_query($conn,$query);
-                        
-                        if (mysqli_num_rows($result) > 0) {
-                            while($r = mysqli_fetch_assoc($result)){
-                                $s = ($b_id == $r["b_id"]) ? "selected" : "";
-                                echo "<option value='". $r["b_id"]."' $s > ".$r["b_name"]."</option>";
-                            }
-                        }
-                        ?>
-                    </select>
+                    <input type="text" class="form-control" name="brands" list="brands">
+                    
                 </div>
             </div>
             <div class="mb-3 row">
@@ -125,9 +99,42 @@ error_reporting(0);
         $pname = $_POST['pname'];
         $price = $_POST['price'];
         $stock = $_POST['stock'];
-        $category = $_POST['category'];
-        $brand = $_POST['brand'];
+        global $brand,$category;
         $desc = $_POST['description'];
+
+        //get category id..
+        $query = "SELECT * from category where c_title = '".$_POST['category']."'";
+        $res = mysqli_query($conn,$query);
+
+        if (mysqli_num_rows($res) == 0) {
+            $query = "INSERT into category(c_title) values('".$_POST['category']."')";
+            $res = mysqli_query($conn,$query);
+        }
+        $query = "SELECT * from category where c_title ='".$_POST['category']."'";
+        $res = mysqli_query($conn,$query);
+        $r = mysqli_fetch_assoc($res);
+        $category =(int) $r['c_id'];
+            
+                
+
+        //get brand id...
+        $query = "SELECT * from brands  where b_name = '".$_POST['brands']."'";
+        $res = mysqli_query($conn,$query);
+
+        if (mysqli_num_rows($res) == 0) {
+            $query = "INSERT into brands(b_name) values('".$_POST['brands']."')";
+            $res = mysqli_query($conn,$query);
+        }
+        
+        $query = "SELECT * from brands where b_name = '".$_POST['brands']."'";
+        $res = mysqli_query($conn,$query);
+        $r = mysqli_fetch_assoc($res);
+        $brand =(int)$r['b_id'];
+          
+        
+
+
+
         if (isset($_GET['update'])) {
             $file = $_FILES['new_file'];
         }else{
@@ -174,4 +181,34 @@ error_reporting(0);
         }
     }
 ?>
+<datalist id="categories" >
+                    <?php 
+                        include '../db/db.php';
+                        $query = "select * from category";
+
+                        $result = mysqli_query($conn,$query);
+                        
+                        if (mysqli_num_rows($result) > 0) {
+                            while($r = mysqli_fetch_assoc($result)){
+                                //$s = ($c_id == $r["c_id"]) ? "selected" : "";
+                                echo "<option value='". $r["c_title"]."' /> ";
+                            }
+                        }
+                        ?>
+</datalist>
+<datalist id="brands" >
+                    <?php 
+                        include '../db/db.php';
+                        $query = "select * from brands";
+
+                        $result = mysqli_query($conn,$query);
+                        
+                        if (mysqli_num_rows($result) > 0) {
+                            while($r = mysqli_fetch_assoc($result)){
+                                //$s = ($b_id == $r["b_id"]) ? "selected" : "";
+                                echo "<option value='". $r["b_name"]."' /> ";
+                            }
+                        }
+                        ?>
+                    </datalist>
 <?php include 'bottom.php' ?>

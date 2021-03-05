@@ -25,7 +25,7 @@
     
 <div class=" d-flex align-items-center m-auto card border-0 my-3">
     <div class="card col-sm-11 col-sm-11 col-md-5 col-xl-5 col-9 ">
-        <form action="#" class="p-3 row" enctype="multipart/form-data" method="POST" >
+        <form action="" class="p-3 row" enctype="multipart/form-data" method="POST" >
             <div class="col-8 ">
                 <input type="text" class="form-control" name="bname" placeholder="Brand name" value ="<?= $bname ?>"required>
             </div>
@@ -87,18 +87,21 @@
 
             if (mysqli_query($conn,$update_query)) {
                 echo "<script>alert('Brand Update.')</script>";
-                header("location:brand.php");
+                header("Location: ./brand.php");
+
              }else{
                  echo mysqli_error($conn);
              }
         }else{
             if (mysqli_query($conn,$insert_query)) {
                 echo "<script>alert('Brand Added.')</script>";
-                header("location:brand.php");
+                header("Location: ./brand.php");
              }else{
                  echo mysqli_error($conn);
              }
         }
+        //header("location:brand.php");
+
     }
 ?>
 
