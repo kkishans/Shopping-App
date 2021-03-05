@@ -73,7 +73,8 @@ if(isset($_POST['submit'])){
 
     if( mysqli_query($conn,$query) ){
         $_SESSION['username'] = $fname;
-       echo "<script> window.location ='./dashboard.php' </script>";
+        $_SESSION['useremail'] = $email;
+       echo "<script> window.location ='./cart.php' </script>";
     }else{
         echo "<script>alert('Something went wrong. Data Not inseted. Try again.')</script>";
 
