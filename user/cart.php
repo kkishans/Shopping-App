@@ -65,7 +65,7 @@
                         <?php 
                             $total = 0;
                             if(isset($_SESSION['useremail'])){
-                            $sql = "SELECT id,p_name,qty,p_img,price from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
+                            $sql = "SELECT P.p_id,id,p_name,qty,p_img,price from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
                             
                             $res = mysqli_query($conn,$sql);
                             if (mysqli_num_rows($res) > 0) {
@@ -76,13 +76,18 @@
                                     $total += $totalPerProduct;
 
                         ?>
-                            <tr>
+
+                            <tr onclick="window.location=' ../product.php?id=<?= $v['p_id']  ?>'" style="cursor:pointer">
+                            
+                                
                                 <td><img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
                                 <th><?= $v['p_name'] ?></th>
                                 <th><?= $v['price'] ?></th>
                                 <th><?= $v['qty'] ?></th> 
                                 <th><a href="./remove_product.php?index=<?= $v['id'] ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
+                                
                             </tr>
+                           
                             <?php 
 
                                 }
@@ -105,7 +110,7 @@
                                     $total += $totalPerProduct;
 
                         ?>
-                            <tr>
+                            <tr onclick="window.location=' ../product.php?id=<?= $v['id']  ?>'" style="cursor:pointer">
                                 <td><img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
                                 <th><?= $v['p_name'] ?></th>
                                 <th><?= $v['price'] ?></th>
@@ -179,11 +184,14 @@
                 $p = mysqli_fetch_assoc($res3);
         ?>
             <tr>
+                
                 <th><?= $p['p_name'] ?></th>
                 <th><?= $r['ordered_at'] ?></th>
                 <th><?= $r['shipping_address'] ?></th>
                 <th><?= $r2['status']?></th>
+                
             </tr>
+        
             <?php 
                 }
              }
@@ -216,9 +224,26 @@
                 mysqli_query($conn,$query);
             }
             if (mysqli_query($conn,$ordered_query)) {
-                echo "<script>alert('Product Ordered.')</script>";
-                setcookie("cart","",-3600);
-                header("location: ./cart.php");
+                $query = "UPDATE cart_details SET is_in_cart = 'n' where u_id = $u_id and is_in_cart = 'y'";
+                $res = mysqli_query($conn,$query);
+                
+                echo '<script>
+                    
+                    swal({
+                        title: "Order placed!",
+                        text: "Product will delivere soon",
+                        icon: "success",
+                       
+                        
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                            window.location = "./cart.php";
+                        } 
+                      });
+                </script>';
+                //setcookie("cart","",-3600);
+                //header("location: ./cart.php");
             }else{
                 echo "<script>alert('Error while taking your order try again.')</script>";
                 echo mysqli_error($conn);
