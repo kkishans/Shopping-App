@@ -124,6 +124,7 @@
             <p class="card-title"><?= $r['description'] ?></p>
          </div>
           <div class="col-6"> 
+            <!-- <input type="number" class="form-control" name="qty" value="1"> -->
             <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $r['p_id']  ?>" role="button">Add To Cart</a>
           </div>                  
         </div>
