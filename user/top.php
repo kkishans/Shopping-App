@@ -4,7 +4,7 @@
   session_start();
 
   if (isset($_SESSION['useremail'])) {
-    $query = "select count(1) FROM cart_details as C, users as U where C.u_id = U.u_id and email = '". $_SESSION['useremail']."'";
+    $query = "SELECT count(1) FROM cart_details as C, users as U where C.u_id = U.u_id and email = '". $_SESSION['useremail']."' and is_in_cart = 'y'";
     $result = mysqli_query($conn,$query);
     $row = mysqli_fetch_array($result);
     $total_cart_items = $row[0];
@@ -28,6 +28,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <title><?= $app_name ?></title>
   </head>
 <body>

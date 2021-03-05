@@ -4,7 +4,7 @@
 
   include './db/db.php';
   if (isset($_SESSION['useremail'])) {
-    $query = "select count(1) FROM cart_details as C, users as U where C.u_id = U.u_id and email = '". $_SESSION['useremail']."'";
+    $query = "select count(1) FROM cart_details as C, users as U where C.u_id = U.u_id and email = '". $_SESSION['useremail']."' and is_in_cart='y'";
     $result = mysqli_query($conn,$query);
     $row = mysqli_fetch_array($result);
     $total_cart_items = $row[0];
