@@ -80,6 +80,10 @@
         }
         //echo "<script>alert("")</script>";
         //header("location:index.php");
+        echo "<script>
+                    window.location = './index.php'
+                    alert('Item added in cart')
+                </script>";
     }
     
 ?> 
