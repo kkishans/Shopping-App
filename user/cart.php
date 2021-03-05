@@ -219,9 +219,17 @@
         if (isset($_SESSION['useremail'])) {
             $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
             VALUES( $o_id,$u_id,$total,'$address')";
-            foreach( $cart as $k => $v){
-                $query = "INSERT into ordered_products(p_id,o_id) VALUES(".$v['id'].",$o_id)";
-                mysqli_query($conn,$query);
+            echo mysqli_error($conn);
+            $sql = "SELECT P.p_id,id from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
+                            
+            $res = mysqli_query($conn,$sql);
+            if (mysqli_num_rows($res) > 0) {
+
+                while($r = mysqli_fetch_assoc($res)){
+                    $query = "INSERT into ordered_products(p_id,o_id) VALUES(".$r['p_id'].",$o_id)";
+                    mysqli_query($conn,$query);
+                    echo mysqli_error($conn);
+                }
             }
             if (mysqli_query($conn,$ordered_query)) {
                 $query = "UPDATE cart_details SET is_in_cart = 'n' where u_id = $u_id and is_in_cart = 'y'";
@@ -233,8 +241,6 @@
                         title: "Order placed!",
                         text: "Product will delivere soon",
                         icon: "success",
-                       
-                        
                       })
                       .then((willDelete) => {
                         if (willDelete) {
