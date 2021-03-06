@@ -24,26 +24,30 @@
         <div class="card col-md-6 col-xl-6 col-sm -11">
         <div class="slideshow-container">
           <?php
-          
+          $k = 1;
             for ($i=0; $i < 5; $i++) { 
              // $s = ($i == 0) ? "" : "hidden" ;
               if($img[$i] == null || $img == ''){
                 continue;
               }
+              $k++;
                 ?>
                 <div class="showslide">
                   <img src="<?= "img/". $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?=$i+1?>">
+                  <div class="arrow-buttons">
+                  <a class="left" onclick="displaySlides(<?=$k+1?>)">&#10094;</a>
+                  <a class="right" onclick="displaySlides(<?=$k-2?>)">&#10095;</a>
+                  </div>
                 </div>
                 <?php
             }
           ?>
-          <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
+          
           </div>
           <br>
           <div style="text-align:center">
           <?php
-          $k = 0;
+          $k = 1;
           for ($i=0; $i < 5; $i++) { 
            // $s = ($i == 0) ? "" : "hidden" ;
             if($img[$i] == null || $img == ''){
@@ -100,7 +104,7 @@
     </div>
 </div>
 <script type="text/javascript">  
-  var slide_index = 0;  
+  var slide_index = 1;  
   displaySlides(slide_index);  
   function nextSlide(n) {  
       displaySlides(slide_index += n);  
@@ -109,13 +113,15 @@
       displaySlides(slide_index = n);  
   }  
   function displaySlides(n) { 
+    console.log('i is'+n);
       var i;  
       var slides =  document.getElementsByClassName("showslide"); 
-     // if (n > slides.length) { slide_index = 1 }  
-     // if (n < 1) { slide_index = slides.length }  
+     if (n > slides.length) { slide_index = 1 }  
+     else if (n < 1) { slide_index = slides.length }  
+     else slide_index = n
       for (i = 0; i < slides.length; i++) {  
           slides[i].style.display = "none";  
       }  
-      slides[n].style.display = "block";  
+      slides[slide_index - 1].style.display = "block";  
   }  
 </script>  
