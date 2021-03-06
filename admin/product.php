@@ -102,19 +102,25 @@ error_reporting(0);
         global $brand,$category;
         $desc = $_POST['description'];
 
-        //get category id..
-        $query = "SELECT * from category where c_title = '".$_POST['category']."'";
-        $res = mysqli_query($conn,$query);
-
-        if (mysqli_num_rows($res) == 0) {
-            $query = "INSERT into category(c_title) values('".$_POST['category']."')";
+        if (!isset($_POST['category'])) {
+            $category = 'none';
+            $query = "INSERT into category(c_title) values('$category')";
             $res = mysqli_query($conn,$query);
         }
-        $query = "SELECT * from category where c_title ='".$_POST['category']."'";
-        $res = mysqli_query($conn,$query);
-        $r = mysqli_fetch_assoc($res);
-        $category =(int) $r['c_id'];
-            
+        else{
+            //get category id..
+            $query = "SELECT * from category where c_title = '".$_POST['category']."'";
+            $res = mysqli_query($conn,$query);
+
+            if (mysqli_num_rows($res) == 0) {
+                $query = "INSERT into category(c_title) values('".$_POST['category']."')";
+                $res = mysqli_query($conn,$query);
+            }
+            $query = "SELECT * from category where c_title ='".$_POST['category']."'";
+            $res = mysqli_query($conn,$query);
+            $r = mysqli_fetch_assoc($res);
+            $category =(int) $r['c_id'];
+        }
                 
 
         //get brand id...
