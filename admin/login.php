@@ -90,15 +90,16 @@
         
         $query = "select * from admin_details where email = '$email' and password = '". md5($password) ."'" ;
         
-        // echo $query;
+       
         $res = mysqli_query($conn,$query);
-        echo "$email and $password and " .mysqli_num_rows($res)." and ".md5($password);
         if( mysqli_num_rows($res) > 0 ){
             $r = mysqli_fetch_assoc($res);
             $_SESSION['aname'] = $r['fname'];
             header("Location: home.php");
         }
-        else echo 'error';
+        else{
+            echo "<script>alert('Invalid username and Password.')</script>";
+        }
     }
 
     if (isset($_POST['sendOtp'])) {
