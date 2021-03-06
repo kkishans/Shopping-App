@@ -89,9 +89,23 @@
                         }
                     }
                     else{
-
+                
                         $total = 0;
                         if(isset($_SESSION['cart'])){
+                ?>
+                         <table class="table table-striped text-center" >
+                    <thead>
+                        <tr>
+                            <th>Review</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                <?php
+                
                             foreach($_SESSION['cart'] as $k => $v){
                                 $totalPerProduct = $v['price'] * $v['qty'];
                                 $total += $totalPerProduct;
@@ -107,6 +121,13 @@
                         <?php 
 
                             }
+                        }else{
+                            ?>
+                            <div class="col-4 m-auto" >
+                                    <img src="../img/emptyCart" alt="Cart is empty" height="300px" srcset="">   
+                                    <h4 class="text-center">Your Cart is Empty!!!</h4> 
+                            </div>
+                        <?php 
                         }
                         
                     }
@@ -130,6 +151,8 @@
         </div>
     </div>
     <?php
+    // echo "Result : ". (mysqli_num_rows($res) > 0 || isset($_SESSION['cart']) );
+    //print_r($_SESSION);
         if(mysqli_num_rows($res) > 0 || isset($_SESSION['cart']) ){
             ?>
             <div class="justify-content-center d-flex">
@@ -141,17 +164,7 @@
         }
     
     ?>
-   
-    <?php
-        
-    ?>
-    <!-- <div class="col-4 m-auto" >
-            <img src="../img/emptyCart" alt="Cart is empty" height="300px" srcset="">   
-            <h4 class="text-center">Your Cart is Empty!!!</h4> 
-    </div> -->
-    <?php 
     
-    ?>
 </div>
   
 <div class="card col-md-10 col-xl-10 col-sm-11 m-auto mt-5" >

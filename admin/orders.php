@@ -32,7 +32,7 @@
             if (isset($_POST['filterdate'])) {
                $date = $_POST['filterdate'];
             }else{
-                $date = date('d-m-Y');
+                $date = date('Y-m-d');
              }
         ?>
             <input type="date"  id="datepicker"  name="filterdate" class="form-control col-md-6" value="<?= date('Y-m-d')?>">
