@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2021 at 08:11 AM
+-- Generation Time: Mar 06, 2021 at 12:35 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -103,6 +103,28 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`c_id`, `c_title`) VALUES
 (7, 'Laptop');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_us`
+--
+
+CREATE TABLE `contact_us` (
+  `contact_id` int(10) PRIMARY KEY,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contact_us`
+--
+
+INSERT INTO `contact_us` (`contact_id`, `name`, `email`, `message`) VALUES
+(1, 'THAKOR NIKUNJ NARESHBHAI', 'thakornikunj152@gmail.com', 'hello'),
+(2, 'test', 'test@mail.com', '111'),
+(3, 'Kishan', 'kishan7575t@gmail.com', 'Hello admin');
 
 -- --------------------------------------------------------
 
@@ -229,6 +251,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`c_id`);
 
 --
+-- Indexes for table `contact_us`
+--
+ALTER TABLE `contact_us`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
 -- Indexes for table `ordered_products`
 --
 ALTER TABLE `ordered_products`
@@ -284,6 +312,12 @@ ALTER TABLE `cart_details`
 --
 ALTER TABLE `category`
   MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `contact_us`
+--
+ALTER TABLE `contact_us`
+  MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ordered_products`

@@ -43,6 +43,9 @@
                 <a class="nav-link  link-light" href="./orders.php">Orders</a>
             </li>
             <li class="nav-item p-1 ">
+                <a class="nav-link  link-light" href="./mail.php">View Mails</a>
+            </li>
+            <li class="nav-item p-1 ">
                   <a class="btn btn-outline-info"  href="../index.php" target="_blank">View Site</a>
             </li>
             <li class="nav-item p-1 ">
