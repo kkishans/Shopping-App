@@ -145,6 +145,11 @@
 
         $res = mysqli_query($conn,$alter);
 
+        $alter = "ALTER TABLE `product_details`
+        ADD  `product_optional_image_1` varchar(255) DEFAULT NULL, ADD  `product_optional_image_2` varchar(255) DEFAULT NULL,  ADD  `product_optional_image_3` varchar(255) DEFAULT NULL, ADD  `product_optional_image_4` varchar(255) DEFAULT NULL";
+
+        $res = mysqli_query($conn,$alter);
+
         $alter = "ALTER TABLE `cart_details`
         ADD CONSTRAINT `cart_details_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`),
         ADD CONSTRAINT `cart_details_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `product_details` (`p_id`);";

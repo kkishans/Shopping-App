@@ -11,11 +11,50 @@
   $c_id = $r['c_id'];
   $b_id = $r['b_id'];
   $desc = $r['description'];
+  $img = 
+  array($r['p_img'],
+        $r['product_optional_image_1'],
+        $r['product_optional_image_2'],
+        $r['product_optional_image_3'],
+        $r['product_optional_image_4']
+      );
 ?>
 <div class="container mt-5">
     <div class="row">
         <div class="card col-md-6 col-xl-6 col-sm -11">
-            <img src="<?= "img/". $r['p_img']  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;">
+        <div class="slideshow-container">
+          <?php
+          
+            for ($i=0; $i < 5; $i++) { 
+             // $s = ($i == 0) ? "" : "hidden" ;
+              if($img[$i] == null || $img == ''){
+                continue;
+              }
+                ?>
+                <div class="showslide">
+                  <img src="<?= "img/". $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?=$i+1?>">
+                </div>
+                <?php
+            }
+          ?>
+          <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
+          </div>
+          <br>
+          <div style="text-align:center">
+          <?php
+          $k = 0;
+          for ($i=0; $i < 5; $i++) { 
+           // $s = ($i == 0) ? "" : "hidden" ;
+            if($img[$i] == null || $img == ''){
+              continue;
+            }
+              ?>
+            <span class="dot" onclick="displaySlides(<?=$k++?>)"></span>
+            <?php
+            } ?>            
+          </div>
+           
         </div>
         <div class="col-md-6 col-xl-6 col-sm -11 p-5">
           <div class="row">
@@ -60,3 +99,23 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">  
+  var slide_index = 0;  
+  displaySlides(slide_index);  
+  function nextSlide(n) {  
+      displaySlides(slide_index += n);  
+  }  
+  function currentSlide(n) {  
+      displaySlides(slide_index = n);  
+  }  
+  function displaySlides(n) { 
+      var i;  
+      var slides =  document.getElementsByClassName("showslide"); 
+     // if (n > slides.length) { slide_index = 1 }  
+     // if (n < 1) { slide_index = slides.length }  
+      for (i = 0; i < slides.length; i++) {  
+          slides[i].style.display = "none";  
+      }  
+      slides[n].style.display = "block";  
+  }  
+</script>  

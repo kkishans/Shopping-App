@@ -128,11 +128,9 @@
                                     <h4 class="text-center">Your Cart is Empty!!!</h4> 
                             </div>
                         <?php 
-                        }
-                        
+                        }  
                     }
                     ?>
-
                         
                     </tbody>
                 </table>
