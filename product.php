@@ -24,7 +24,7 @@
         <div class="card col-md-6 col-xl-6 col-sm -11">
         <div class="slideshow-container">
           <?php
-          $k = 1;
+          $k = 0;
             for ($i=0; $i < 5; $i++) { 
              // $s = ($i == 0) ? "" : "hidden" ;
               if($img[$i] == null || $img == ''){
@@ -35,8 +35,8 @@
                 <div class="showslide">
                   <img src="<?= "img/". $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?=$i+1?>">
                   <div class="arrow-buttons">
-                  <a class="left" onclick="displaySlides(<?=$k+1?>)">&#10094;</a>
-                  <a class="right" onclick="displaySlides(<?=$k-2?>)">&#10095;</a>
+                  <a class="left" onclick="displaySlides(<?=$k-1?>)">&#10094;</a>
+                  <a class="right" onclick="displaySlides(<?=$k+1?>)">&#10095;</a>
                   </div>
                 </div>
                 <?php
