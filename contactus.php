@@ -33,7 +33,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Your message</label>
-                <textarea type="text" name="address" cols="3" class="form-control col-md-6" placeholder="Type your message here..." required ></textarea>
+                <textarea type="text" name="message" cols="3" class="form-control col-md-6" placeholder="Type your message here..." required ></textarea>
             </div>
             <div class="mb-3">
                 <input type="submit" value="Send Message" class="w-100 btn btn-success" name="submit">
@@ -42,3 +42,19 @@
         </div>
    </div>
 </div>
+
+<?php
+    if (isset($_POST['submit'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $message = $_POST['message'];
+
+        $query = "INSERT into contact_us (`name`,`email`,`message`) values('$name','$email','$message')";
+        $res = mysqli_query($conn,$query);
+
+        if ($res) {
+            echo "<script>swal('Message recieved','We will respond you soon via mail','success')</script>";
+        }
+    }
+
+?>

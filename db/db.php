@@ -87,7 +87,18 @@
         `pass` text NOT NULL
       )";
 
+    
+
     $res = mysqli_query($conn,$create_users);
+
+    $create_contact_us = "CREATE TABLE `contact_us` (
+      `contact_id` int(10) PRIMARY KEY,
+      `name` varchar(255) NOT NULL,
+      `email` varchar(255) NOT NULL,
+      `message` varchar(255) NOT NULL
+    )";
+
+    $res = mysqli_query($conn,$create_contact_us);
 
     //Relationship between tables
 
@@ -121,6 +132,12 @@
         $alter = "ALTER TABLE `users`
         MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;";
         $res = mysqli_query($conn,$alter);
+
+
+        $alter ="ALTER TABLE `contact_us`
+        MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;";
+        $res = mysqli_query($conn,$alter);
+        
         
         $alter = "ALTER TABLE `product_details`
         ADD CONSTRAINT `product_details_ibfk_1` FOREIGN KEY (`b_id`) REFERENCES `brands` (`b_id`),
