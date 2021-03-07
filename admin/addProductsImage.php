@@ -25,7 +25,7 @@
     <h1 class="text-center my-3"><?= $label ?> Product Images</h1>
 </div>
     <div class=" d-flex align-items-center m-auto card border-0 my-3">
-        <div class="card col-sm-11 col-sm-11 col-md-5 col-xl-5   col-9">
+        <div class="card col-sm-11 col-md-10 col-xl-5   col-9">
             <form action="#" class="p-3 " enctype="multipart/form-data" method="POST" >
             <?php 
                 if (isset($_GET['update'])){
@@ -55,20 +55,20 @@
             <div class="my-3">
             
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-xl-6 col-md-6 col-sm-11 my-3">
                         <input class="form-control" type="file" name="o_image_1" id="formFile" accept="image/*">
                     </div>
-                    <div class="col-6">
+                    <div class="col-xl-6 col-md-6 col-sm-11 my-3">
                         <input class="form-control" type="file" name="o_image_2" id="formFile" accept="image/*">
                     </div>                    
                 </div>
             </div>
             <div class="my-3">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-xl-6 col-md-6 col-sm-11 my-3">
                             <input class="form-control" type="file" name="o_image_3" id="formFile" accept="image/*">
                     </div>
-                    <div class="col-6">
+                    <div class="col-xl-6 col-md-6 col-sm-11 my-3">
                         <input class="form-control" type="file" name="o_image_4" id="formFile" accept="image/*">
                     </div>                    
                 </div>
@@ -83,9 +83,12 @@
 
     if (isset($_POST['addImage'])) {
          $img1 = $img2 = $img3 = $img4 = null; 
-         $main_file = $u_file; 
+         $main_file = $u_file;
+          
         if (!isset($_GET['update'])) {
             $main_file = checkimage($_FILES['main_file'],$u_file);
+        }else{
+            $main_file = checkimage($_FILES['new_main_file'],$u_file);
         }
         if ($_FILES['o_image_1']['name'] != null) {
             $img1 = checkimage($_FILES['o_image_1'],null);  
@@ -105,7 +108,7 @@
         //echo $update_query;
         
         if (mysqli_query($conn,$update_query)) {
-            echo "<script>alert('Images Saved.')</script>";
+            echo "<script>window.location ='./'</script>";
         }else{
             echo mysqli_error($conn);
         }

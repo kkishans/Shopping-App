@@ -124,11 +124,9 @@ error_reporting(0);
         $brand =(int)$r['b_id'];
           
        
-        $insert_query = "INSERT INTO product_details(p_id,p_name,description,price,stock,c_id,b_id,p_img) values($p_id,'$pname','$desc',$price,$stock,$category,$brand,'none')";
+        $insert_query = "INSERT INTO product_details(p_id,p_name,description,price,stock,c_id,b_id,p_img) values($p_id,'$pname','$desc',$price,$stock,$category,$brand,'dummy.png')";
         
         $update_query = "UPDATE product_details SET p_name = '$pname', description = '$desc',price = $price, stock = $stock,c_id = $category , b_id= $brand  where p_id = $id";
-
-        echo $insert_query ."<br><br>" . $update_query;
   
         if (isset($_GET['update'])) {
             if (mysqli_query($conn,$update_query)) {
