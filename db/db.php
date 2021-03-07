@@ -17,7 +17,7 @@
         
     }
 
-/*    $create_admin_details = "CREATE TABLE IF NOT EXISTS `admin_details` (
+    $create_admin_details = "CREATE TABLE IF NOT EXISTS `admin_details` (
         `aid` int(10) primary key,
         `fname` varchar(255) NOT NULL,
         `lname` varchar(255) NOT NULL,
@@ -174,7 +174,7 @@
     $query = "SELECT count(*) from category";
     $res = mysqli_query($conn,$query);
     if (mysqli_num_rows($res) == 0) {  $query = "INSERT into category(c_title) values('none')";$res = mysqli_query($conn,$query); }
-  */  
+  
 
 
 ?>
