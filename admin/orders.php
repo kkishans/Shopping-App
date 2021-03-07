@@ -11,7 +11,10 @@
         $pageno = 1;
     }
 
-    $no_of_records_per_page = 6;
+    $no_of_records_per_page = 5;
+    if (isset($_COOKIE['RecPerPageOrder'])) {
+        $no_of_records_per_page = $_COOKIE['RecPerPageOrder'];
+    }
     $offset = ($pageno-1) * $no_of_records_per_page; 
 
     $total_pages_sql = "SELECT COUNT(*) FROM ordered_products";
@@ -20,6 +23,17 @@
     $total_pages = ceil($total_rows / $no_of_records_per_page);
 
  ?>
+
+<?php
+    
+    if (isset($_POST['applyRecPerPage'])) {
+        $p = $_POST['recPerPage'];
+        setcookie("RecPerPageOrder","$p",time()+3600*24*365);
+        echo "<script>window.location = './orders.php'</script>";
+    }
+
+?>
+
 <div>
     <h1 class="text-center my-3"> All Orders</h1>
 </div>
@@ -61,7 +75,7 @@
         <tbody>
         <?php 
          
-         $order_query = "SELECT O.o_id o_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date'";
+         $order_query = "SELECT O.o_id o_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' LIMIT $offset, $no_of_records_per_page";
             //  echo $order_query;
             //  return
          $res = mysqli_query($conn,$order_query);
@@ -88,7 +102,7 @@
                     <tr><p' align='center'> No Data Found On This Date</p></tr>
                 ";
             }    
-            echo mysqli_error($conn)   ;     
+            echo mysqli_error($conn);     
             ?>
         </tbody>
     </table>
@@ -97,6 +111,12 @@
         
         <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
         <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>"   tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item">
+            <form action="" method="post">
+                <input type="number" name="recPerPage" class="from-control txt"  value="<?= $no_of_records_per_page ?>">
+                <input type="submit" class="btn btn-light" value="Apply" name="applyRecPerPage">
+            </form>
         </li>
         <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
         <a class="page-link " href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" >Next</a>
