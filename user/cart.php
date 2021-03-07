@@ -128,8 +128,22 @@
                             <td><img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
                             <th><?= $v['p_name'] ?></th>
                             <th><?= $v['price'] ?></th>
-                            <th> <?= $v['qty'] ?> </th> 
-                            <th><a href="./remove_product.php?index=<?= $k ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
+                            <!-- <th> <?= $v['qty'] ?> </th>  -->
+                            <th>
+                                <form method="post" style="display:inline">
+                                    <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
+                                    <input type="hidden" name="pid" value="<?=$v['id']?>"/>
+                                    <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="-"/>
+                                </form>
+                                    <?= $v['qty'] ?>
+                                <form method="post" style="display:inline">
+                                    <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
+                                    <input type="hidden" name="pid" value="<?=$v['id']?>"/>
+                                    <input type="submit" class="btn btn-sm btn-outline-primary ms-2" name="increse" value="+"/>
+                                </form>
+                            
+                            </th> 
+                            <th><a href="./remove_product.php?index=<?= $v['id'] ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
                         </tr>
                         <?php 
 
@@ -239,10 +253,23 @@
     if (isset($_POST['decrease'])) {
         $p_id = $_POST['pid'];
         $qty = $_POST['qty'];
+
         if ($qty > 1) {
-            $query = "UPDATE cart_details SET qty = qty-1 where u_id = $u_id and p_id = $p_id and is_in_cart = 'y'";
-            $res = mysqli_query($conn,$query);
-            echo "<script> window.location ='./cart.php' </script>";
+            if (isset($_SESSION['useremail'])) {
+                $query = "UPDATE cart_details SET qty = qty-1 where u_id = $u_id and p_id = $p_id and is_in_cart = 'y'";
+                $res = mysqli_query($conn,$query);
+                echo "<script> window.location ='./cart.php' </script>";
+            }
+            else if(isset($_SESSION['cart'])){
+                foreach ( $_SESSION['cart'] as $k => $v ){
+                    if ($v['id'] == $p_id) {
+                        $_SESSION['cart'][$k]['qty'] = $v['qty'] - 1;
+                        break;
+                    }
+                 }
+                 echo "<script> window.location ='./cart.php' </script>"; 
+            }
+            
         }else echo "<script>swal('Alert','Quatity must be grater than 0','info')</script>"; 
         
     }
@@ -250,19 +277,36 @@
     if (isset($_POST['increse'])) {
         $p_id = $_POST['pid'];
         $qty = $_POST['qty'];
-       
+        
+        if (isset($_SESSION['useremail'])) {
             $query = "UPDATE cart_details SET qty = qty+1 where u_id = $u_id and p_id = $p_id and is_in_cart = 'y'";
             $res = mysqli_query($conn,$query);
             echo "<script> window.location ='./cart.php' </script>";
-        
+        }
+        else if(isset($_SESSION['cart'])){
+            foreach ( $_SESSION['cart'] as $k => $v ){
+                if ($v['id'] == $p_id) {
+                    $_SESSION['cart'][$k]['qty'] = $v['qty'] + 1;
+                    break;
+                }
+             }
+             echo "<script> window.location ='./cart.php' </script>"; 
+        }
     }
 
 ?>
 
 <?php
     if (isset($_POST['clear'])) {
-        $sql = "DELETE from cart_details where u_id = $u_id and is_in_cart = 'y'";
-        $res = mysqli_query($conn,$sql);
+        if (isset($_SESSION['useremail'])) {
+            $sql = "DELETE from cart_details where u_id = $u_id and is_in_cart = 'y'";
+            $res = mysqli_query($conn,$sql);
+        }
+        else  {
+            unset($_SESSION['cart']);
+            echo "<script> window.location ='./cart.php' </script>";
+        }
+        
         
     }
 

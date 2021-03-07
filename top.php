@@ -8,7 +8,13 @@
     $result = mysqli_query($conn,$query);
     $row = mysqli_fetch_array($result);
     $total_cart_items = $row[0];
-  }else{
+  }else if (isset($_SESSION["cart"])) {
+    $total_cart_items = 0;
+    foreach ( $_SESSION['cart'] as $k => $v ){
+       $total_cart_items++;
+    } 
+  }
+  else {
     $total_cart_items = 0;
   }
 
