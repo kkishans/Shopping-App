@@ -25,17 +25,17 @@
 </div>
 
 <div class="align-items-center text-center card border-0">
-<form action="#" method="post">
+<form action="./orders.php" method="get">
 <div class="d-flex just-content-center row">
         <div class="col-md-6 col-xl-6 col-sm-3 m-3">
         <?php
-            if (isset($_POST['filterdate'])) {
-               $date = $_POST['filterdate'];
+            if (isset($_GET['filterdate'])) {
+               $date = $_GET['filterdate'];
             }else{
                 $date = date('Y-m-d');
              }
         ?>
-            <input type="date"  id="datepicker"  name="filterdate" class="form-control col-md-6" value="<?= date('Y-m-d')?>">
+            <input type="date"  id="datepicker"  name="filterdate" class="form-control col-md-6" value="<?= $date?>">
 
         </div>
         <div class="col-md-5 col-xl-3 col-sm-3 m-3">
@@ -62,6 +62,8 @@
         <?php 
          
          $order_query = "SELECT O.o_id o_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date'";
+            //  echo $order_query;
+            //  return
          $res = mysqli_query($conn,$order_query);
           if (mysqli_num_rows($res) > 0) {
              while($r = mysqli_fetch_assoc($res)){           
