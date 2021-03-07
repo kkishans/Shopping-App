@@ -1,5 +1,19 @@
 <?php 
   include './top.php';
+
+  if (isset($_GET['pageno'])) {
+    $pageno = $_GET['pageno'];
+  } else {
+      $pageno = 1;
+  }
+
+  $no_of_records_per_page = 10;
+  $offset = ($pageno-1) * $no_of_records_per_page; 
+
+  $total_pages_sql = "SELECT COUNT(*) FROM product_details";
+  $result = mysqli_query($conn,$total_pages_sql);
+  $total_rows = mysqli_fetch_array($result)[0];
+  $total_pages = ceil($total_rows / $no_of_records_per_page);
 ?>
 
 <div class="row col-11 py-3 m-auto border-0 border rounded">
@@ -69,7 +83,7 @@
   <?php 
     //include './db/db.php';
 
-    $query = "select * from product_details";
+    $query = "select * from product_details LIMIT $offset, $no_of_records_per_page";
 
     if (isset($_GET['filter'])) {
       $category = $_GET['category'];
@@ -89,19 +103,21 @@
                         ($category != 0) ?  
                         " c_id = $category" : ""
                       ) 
-        : "") ;
+        : "")."LIMIT $offset, $no_of_records_per_page" ;
      }
      
      
      if(isset($_GET['btnSearch'])){
         $search = $_GET['searchKey'];
-        $query = "select * from product_details where LOWER(p_name) = '".strtolower($search)."'";
+        $query = "select * from product_details where LOWER(p_name) like '%".strtolower($search)."%' LIMIT $offset, $no_of_records_per_page";
      }
      
      
     
     $result = mysqli_query($conn,$query);
-
+    
+    $count_of_data =  mysqli_num_rows($result);
+    
     if (mysqli_num_rows($result) > 0) {
         while($r = mysqli_fetch_assoc($result)){
 
@@ -149,7 +165,29 @@
       <?php
         }
       ?>
+
+
+
   </div>
+  <?php
+    if ($count_of_data < $total_rows ) {
+    
+    
+  ?>
+  <nav aria-label="Page navigation example mt-5">
+    <ul class="pagination justify-content-around">
+        
+        <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
+        <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>"   tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+        <a class="page-link " href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" >Next</a>
+        </li>
+    </ul>
+</nav>
+<?php
+  }
+?>
   <datalist id="searchResult">
       <?php
         $query = "select * from product_details";

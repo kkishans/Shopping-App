@@ -86,3 +86,12 @@
     .left:hover, .right:hover {  
         background-color: rgba(115, 115, 115, 0.8);  
     }  
+
+
+.txt{
+  width:30%;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid gray;
+  text-align: center;
+}
