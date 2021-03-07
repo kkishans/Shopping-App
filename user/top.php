@@ -9,6 +9,12 @@
     $row = mysqli_fetch_array($result);
     $total_cart_items = $row[0];
     echo mysqli_error($conn);
+  }
+  else if (isset($_SESSION["cart"])) {
+    $total_cart_items = 0;
+    foreach ( $_SESSION['cart'] as $k => $v ){
+       $total_cart_items++;
+    } 
   }else{
     $total_cart_items = 0;
   }
@@ -53,9 +59,6 @@
               <li class="nav-item">
                   <a class="nav-link  link-light" href="../contactus.php">Contact Us</a>
               </li>
-              <?php 
-                  if (isset($_SESSION['useremail'] )) {
-              ?>
               <li class="nav-item p-1 ">
                   <a class="" name="cart" href="./cart.php"><i class="fa fa-shopping-cart nav-link" style="color:white;font-size:20px" aria-hidden="true"></i></a>
                  <?php
@@ -67,6 +70,10 @@
                  
                  ?>
               </li>
+              <?php 
+                  if (isset($_SESSION['useremail'] )) {
+              ?>
+              
               <li class="nav-item p-1 ">
                   <a class="btn btn-outline-danger" name="logout" href="./logout.php">Logout</a>
               </li>

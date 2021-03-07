@@ -11,4 +11,12 @@
             header("location:cart.php");
         }
     }
+    else if (isset($_SESSION['cart'])) {
+        foreach ( $_SESSION['cart'] as $k => $v ){
+            if ($v['id'] == $_GET['index']) {
+                unset($_SESSION['cart'][$k]);
+                header("location:cart.php");
+            }
+         } 
+    }
 ?>
