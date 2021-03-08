@@ -25,6 +25,7 @@ error_reporting(0);
         $c_id = $r['c_id'];
         $b_id = $r['b_id'];
         $desc = $r['description'];
+        $keywords = $r['keywords'];
     }
 ?>
 
@@ -44,6 +45,10 @@ error_reporting(0);
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Description</label>
                 <input type="text" class="form-control" name="description" placeholder="ex. Lenevo ideaPad" value ="<?= $desc ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Keywords</label>
+                <input type="text" class="form-control" name="keywords" placeholder="ex. Lenevo, ideaPad" value ="<?= $keywords ?>" required>
             </div>
             <div class="mb-3 row">
                <div class="col-6">
@@ -83,6 +88,15 @@ error_reporting(0);
         $stock = $_POST['stock'];
         global $brand,$category;
         $desc = $_POST['description'];
+
+        
+        $keywords = $_POST['keywords'];
+
+        //get keywords from product name
+        $keyOfProduct = explode(" ",$pname); 
+        foreach($keyOfProduct as $val){
+            $keywords .= ", $val";
+        }
 
         if (!isset($_POST['category'])) {
             $category = 'none';
@@ -124,9 +138,9 @@ error_reporting(0);
         $brand =(int)$r['b_id'];
           
        
-        $insert_query = "INSERT INTO product_details(p_id,p_name,description,price,stock,c_id,b_id,p_img) values($p_id,'$pname','$desc',$price,$stock,$category,$brand,'dummy.png')";
+        $insert_query = "INSERT INTO product_details(p_id,p_name,description,keywords,price,stock,c_id,b_id,p_img) values($p_id,'$pname','$desc','$keywords',$price,$stock,$category,$brand,'dummy.png')";
         
-        $update_query = "UPDATE product_details SET p_name = '$pname', description = '$desc',price = $price, stock = $stock,c_id = $category , b_id= $brand  where p_id = $id";
+        $update_query = "UPDATE product_details SET p_name = '$pname', description = '$desc', keywords = '$keywords',price = $price, stock = $stock,c_id = $category , b_id= $brand  where p_id = $id";
   
         if (isset($_GET['update'])) {
             if (mysqli_query($conn,$update_query)) {
