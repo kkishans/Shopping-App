@@ -48,7 +48,7 @@
         <tbody>
         <?php 
           include '../db/db.php';
-          $query = "select * from brands";
+          $query = "SELECT count(*),b_name,b.b_id from product_details as p, brands as b where p.b_id = b.b_id group by b_name";
 
           $result = mysqli_query($conn,$query);
 
@@ -57,7 +57,7 @@
 
         ?>
             <tr>
-                <th><?= $r['b_name'] ?></th>
+                <th><?= $r['b_name'] ?> ( <?= $r['count(*)']?> )</th>
                 <th><a href="./brand.php?update=<?= $r['b_id'] ?>" class="btn btn-outline-success"> Update</a></th>
                 <th><a href="./delete.php?deleteBrand=<?= $r['b_id'] ?>" class="btn btn-outline-danger">X</a></th>
             </tr>

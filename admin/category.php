@@ -21,7 +21,13 @@
     }
 ?>
 
-
+<?php
+    // $countquery = "SELECT count(*),c_title,c.c_id from product_details as p, category as c where p.c_id = c.c_id group by c_title";
+    // $countRes = mysqli_query($conn,$countquery);
+    // while($r = mysqli_fetch_assoc($countRes)){
+    //     echo $r['c_title'] ."->".$r['count(*)'] ."->".$r['c_id'];
+    // }
+?>
 
 <div>
     <h1 class="text-center my-3"><?= $label ?> Category</h1>
@@ -52,7 +58,7 @@
         <tbody>
         <?php 
           include '../db/db.php';
-          $query = "select * from category";
+          $query = "SELECT count(*),c_title,c.c_id from product_details as p, category as c where p.c_id = c.c_id group by c_title";
 
           $result = mysqli_query($conn,$query);
 
@@ -61,7 +67,7 @@
 
         ?>
             <tr>
-                <th><?= $r['c_title'] ?></th>
+                <th><?= $r['c_title'] ?> ( <?= $r['count(*)']?> )</th>
                 <th><a href="./category.php?update=<?= $r['c_id'] ?>" class="btn btn-outline-success"> Update</a></th>
                 <th><a href="./delete.php?deleteCategory=<?= $r['c_id'] ?>" class="btn btn-outline-danger">X</a></th>
             </tr>
