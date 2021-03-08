@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2021 at 12:35 PM
+-- Generation Time: Mar 08, 2021 at 03:38 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -40,7 +40,7 @@ CREATE TABLE `admin_details` (
 --
 
 INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `password`) VALUES
-(9, 'Nikunj', 'Thakor', 'thakornikunj152@gmail.com', '202cb962ac59075b964b07152d234b70');
+(9, 'Pooja', 'Elec', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -58,8 +58,8 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`b_id`, `b_name`) VALUES
-(9, 'Acer'),
-(10, 'Lenovo');
+(9, 'Lenovo'),
+(10, 'Apple');
 
 -- --------------------------------------------------------
 
@@ -74,17 +74,6 @@ CREATE TABLE `cart_details` (
   `qty` int(10) NOT NULL,
   `is_in_cart` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart_details`
---
-
-INSERT INTO `cart_details` (`id`, `p_id`, `u_id`, `qty`, `is_in_cart`) VALUES
-(11, 13, 10, 1, 'n'),
-(12, 13, 10, 1, 'n'),
-(13, 13, 10, 1, 'n'),
-(14, 13, 10, 1, 'n'),
-(15, 13, 10, 1, 'n');
 
 -- --------------------------------------------------------
 
@@ -102,7 +91,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`c_id`, `c_title`) VALUES
-(7, 'Laptop');
+(7, 'Laptop'),
+(8, 'Desktop');
 
 -- --------------------------------------------------------
 
@@ -111,20 +101,11 @@ INSERT INTO `category` (`c_id`, `c_title`) VALUES
 --
 
 CREATE TABLE `contact_us` (
-  `contact_id` int(10) PRIMARY KEY,
+  `contact_id` int(10) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `contact_us`
---
-
-INSERT INTO `contact_us` (`contact_id`, `name`, `email`, `message`) VALUES
-(1, 'THAKOR NIKUNJ NARESHBHAI', 'thakornikunj152@gmail.com', 'hello'),
-(2, 'test', 'test@mail.com', '111'),
-(3, 'Kishan', 'kishan7575t@gmail.com', 'Hello admin');
 
 -- --------------------------------------------------------
 
@@ -138,14 +119,6 @@ CREATE TABLE `ordered_products` (
   `p_id` int(8) NOT NULL,
   `status` text NOT NULL DEFAULT 'Not Delivered'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ordered_products`
---
-
-INSERT INTO `ordered_products` (`id`, `o_id`, `p_id`, `status`) VALUES
-(12, 5, 13, 'Not Delivered'),
-(13, 6, 13, 'Not Delivered');
 
 -- --------------------------------------------------------
 
@@ -161,18 +134,6 @@ CREATE TABLE `order_details` (
   `ordered_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `order_details`
---
-
-INSERT INTO `order_details` (`o_id`, `u_id`, `total_amount`, `shipping_address`, `ordered_at`) VALUES
-(1, 10, 12000, 'BHaruch', '2021-03-06 07:01:05'),
-(2, 10, 0, 'BHaruch', '2021-03-06 07:01:11'),
-(3, 10, 12000, 'BHaruch', '2021-03-06 07:01:45'),
-(4, 10, 12000, 'BHaruch', '2021-03-06 07:04:52'),
-(5, 10, 12000, 'BHaruch', '2021-03-06 07:08:09'),
-(6, 10, 12000, 'BHaruch', '2021-03-06 07:08:53');
-
 -- --------------------------------------------------------
 
 --
@@ -187,15 +148,24 @@ CREATE TABLE `product_details` (
   `price` double NOT NULL,
   `stock` int(30) NOT NULL,
   `c_id` int(11) NOT NULL,
-  `b_id` int(11) NOT NULL
+  `b_id` int(11) NOT NULL,
+  `keywords` varchar(10000) NOT NULL,
+  `product_optional_image_1` varchar(255) DEFAULT NULL,
+  `product_optional_image_2` varchar(255) DEFAULT NULL,
+  `product_optional_image_3` varchar(255) DEFAULT NULL,
+  `product_optional_image_4` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product_details`
 --
 
-INSERT INTO `product_details` (`p_id`, `p_name`, `description`, `p_img`, `price`, `stock`, `c_id`, `b_id`) VALUES
-(13, 'Lenovo ideapad 3', 'Performence Beast', 'lenovo_ideapad_3.png', 12000, 1, 7, 10);
+INSERT INTO `product_details` (`p_id`, `p_name`, `description`, `p_img`, `price`, `stock`, `c_id`, `b_id`, `keywords`, `product_optional_image_1`, `product_optional_image_2`, `product_optional_image_3`, `product_optional_image_4`) VALUES
+(1, 'Lenovo ideapad 532', 'Fast slim powerful', 'lenovo_ideapad_3.png', 23000, 1, 7, 9, '4gb graphics, Lenovo, ideapad, 532', 'IMG_20210214_133608.jpg', 'img1.jpg', 'photo.webp', 'u_10181535.jpg'),
+(2, 'Apple desktop', 'Performence Beast', 'u_10181535.jpg', 123, 11, 8, 10, '', '', '', '', ''),
+(3, 'Lenovo legion', 'sa', 'MINIDDHQIBFYW-medium.jpg', 123, 1, 7, 9, '', '', '', '', ''),
+(4, 'Lenovo ideapad 3', 'HDR', 'img1.jpg', 12, 1, 7, 9, '', '', '', '', ''),
+(5, 'Lenovo ideapad 3', 'Performence Beast', 'photo.webp', 12345, 12, 7, 9, 'performence, beast, slim, 512gb Ram, , Lenovo, ideapad, 3', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -212,13 +182,6 @@ CREATE TABLE `users` (
   `address` text NOT NULL,
   `pass` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`u_id`, `f_name`, `l_name`, `email`, `phone`, `address`, `pass`) VALUES
-(10, 'Nikunj', 'Thakor', 'thakornikunj152@gmail.com', '8980112582', 'BHaruch', '202cb962ac59075b964b07152d234b70');
 
 --
 -- Indexes for dumped tables
@@ -261,7 +224,6 @@ ALTER TABLE `contact_us`
 --
 ALTER TABLE `ordered_products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `ordered_products_ibfk_1` (`o_id`),
   ADD KEY `ordered_products_ibfk_2` (`p_id`);
 
 --
@@ -305,13 +267,13 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `contact_us`
@@ -323,7 +285,7 @@ ALTER TABLE `contact_us`
 -- AUTO_INCREMENT for table `ordered_products`
 --
 ALTER TABLE `ordered_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_details`
@@ -335,13 +297,13 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT for table `product_details`
 --
 ALTER TABLE `product_details`
-  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

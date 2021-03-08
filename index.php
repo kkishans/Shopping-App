@@ -109,9 +109,8 @@
      
      if(isset($_GET['btnSearch'])){
         $search = $_GET['searchKey'];
-        $query = "SELECT * from product_details as p,category as c, brands as b where c.c_id = p.c_id and b.b_id = p.b_id  and ( LOWER(p_name) like '%".strtolower($search)."%' or LOWER(c_title) like '%".strtolower($search)."%' or LOWER(b_name) like '%".strtolower($search)."%' )  LIMIT $offset, $no_of_records_per_page";
-        
-
+        /*$query = "SELECT * from product_details as p,category as c, brands as b where c.c_id = p.c_id and b.b_id = p.b_id  and ( LOWER(p_name) like '%".strtolower($search)."%' or LOWER(c_title) like '%".strtolower($search)."%' or LOWER(b_name) like '%".strtolower($search)."%' or LOWER(`description`) like '%".strtolower($search)."%' )  LIMIT $offset, $no_of_records_per_page";*/
+        $query = "SELECT * from product_details where LOWER(`keywords`) like '%".strtolower($search)."%' LIMIT $offset, $no_of_records_per_page";
      }
      
 
