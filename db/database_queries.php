@@ -104,39 +104,39 @@
     //Relationship between tables
 
     $alter = "ALTER TABLE `admin_details`
-    MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;";
+    MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT;";
     $res = mysqli_query($conn,$alter);
     $alter = "ALTER TABLE `brands`
-        MODIFY `b_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;";
+        MODIFY `b_id` int(10) NOT NULL AUTO_INCREMENT";
     
         $res = mysqli_query($conn,$alter);
         $alter = "ALTER TABLE `cart_details`
-        MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;";
+        MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;";
     
         $res = mysqli_query($conn,$alter);
         $alter = "ALTER TABLE `category`
-        MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;";
+        MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT";
     
         $res = mysqli_query($conn,$alter);
         $alter = "ALTER TABLE `ordered_products`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;";
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
     
         $res = mysqli_query($conn,$alter);
         $alter = "ALTER TABLE `order_details`
-        MODIFY `o_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;";
+        MODIFY `o_id` int(8) NOT NULL AUTO_INCREMENT;";
     
         $res = mysqli_query($conn,$alter);
         $alter = "ALTER TABLE `product_details`
-        MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;";
+        MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT;";
     
         $res = mysqli_query($conn,$alter);
         $alter = "ALTER TABLE `users`
-        MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;";
+        MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT;";
         $res = mysqli_query($conn,$alter);
 
 
         $alter ="ALTER TABLE `contact_us`
-        MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;";
+        MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT;";
         $res = mysqli_query($conn,$alter);
         
         
@@ -172,10 +172,10 @@
     }
 
 
-    $query = "SELECT count(*) from category";
+    $query = "INSERT into category(c_title) values('none')";
     $res = mysqli_query($conn,$query);
-    if (mysqli_num_rows($res) == 0) {  $query = "INSERT into category(c_title) values('none')";$res = mysqli_query($conn,$query); }
-  
+    $query = "INSERT into brands(b_name) values('Generic')";
+    $res = mysqli_query($conn,$query);
 
 
 ?>

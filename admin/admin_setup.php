@@ -1,5 +1,5 @@
 <?php 
-  include '../db/db.php';
+  include '../db/database_queries.php';
   include './top.php';
 
 //   First time setup for admin...
