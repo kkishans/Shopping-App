@@ -81,7 +81,7 @@
 <hr>
 <div class="items row col-11 m-auto mt-2 mb-5">
   <?php 
-    //include './db/db.php';
+    include './db/db.php';
 
     $query = "select * from product_details LIMIT $offset, $no_of_records_per_page";
 
@@ -109,11 +109,12 @@
      
      if(isset($_GET['btnSearch'])){
         $search = $_GET['searchKey'];
-        $query = "select * from product_details where LOWER(p_name) like '%".strtolower($search)."%' LIMIT $offset, $no_of_records_per_page";
+        $query = "SELECT * from product_details as p,category as c, brands as b where c.c_id = p.c_id and b.b_id = p.b_id  and ( LOWER(p_name) like '%".strtolower($search)."%' or LOWER(c_title) like '%".strtolower($search)."%' or LOWER(b_name) like '%".strtolower($search)."%' )  LIMIT $offset, $no_of_records_per_page";
+        
+
      }
      
-     
-    
+
     $result = mysqli_query($conn,$query);
     
     $count_of_data =  mysqli_num_rows($result);
