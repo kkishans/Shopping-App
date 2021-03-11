@@ -88,7 +88,9 @@
         if (!isset($_GET['update'])) {
             $main_file = checkimage($_FILES['main_file'],$u_file);
         }else{
-            $main_file = checkimage($_FILES['new_main_file'],$u_file);
+            if ($_FILES['new_main_file']['name'] != null) {
+                $main_file = checkimage($_FILES['new_main_file'],$u_file);
+            }
         }
         if ($_FILES['o_image_1']['name'] != null) {
             $img1 = checkimage($_FILES['o_image_1'],null);  
