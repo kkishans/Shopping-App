@@ -107,14 +107,14 @@ if(isset($_POST['submit'])){
         }
     }
     
-    include '../src/VerifyEmail.class.php';
-    include '../src/testEmail.php';
+    // include '../src/VerifyEmail.class.php';
+    // include '../src/testEmail.php';
     
    
-    if(!checkMail($email)){
-        echo "<script>alert('E-mail does not not exist. please check you email address.')</script>";
-        return;
-    }
+    // if(!checkMail($email)){
+    //     echo "<script>alert('E-mail does not not exist. please check you email address.')</script>";
+    //     return;
+    // }
 
     $pass = md5($_POST['password']);
     $query = "INSERT INTO admin_details(fname,lname,email,`password`) VALUES('$fname','$lname','$email','$pass')";
