@@ -112,9 +112,7 @@ require '../vendor/autoload.php';
 
    
             $mail = new PHPMailer(true); 
-            $fromName = "user name";
-            $from = "from@gmail.com";
-            $password = "from";
+           
             
             try { 
                 $mail->SMTPDebug = 0;                                        

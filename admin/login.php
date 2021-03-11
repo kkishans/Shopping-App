@@ -112,9 +112,7 @@
         if (mysqli_num_rows($result) > 0 ) {
             $otp = rand(1000,9999);
             $mail = new PHPMailer(true); 
-            $fromName = "user name";
-            $from = "from@gmail.com";
-            $password = "from";
+            
             
             try { 
                 $mail->SMTPDebug = 0;                                        

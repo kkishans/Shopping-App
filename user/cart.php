@@ -345,9 +345,9 @@
                     } 
                   });
             </script>';
-              
-                //setcookie("cart","",-3600);
-                //header("location: ./cart.php");
+                $msg =  'Your Ordered Id is O-0 '.$o_id.' .<br> Product will deliver soon. <br> A Confirmation E-mail will send to you';
+                  
+                sendMail($_SESSION['useremail'],$o_id,$msg);
             }else{
                 echo "<script>alert('Error while taking your order try again.')</script>";
                 echo mysqli_error($conn);
@@ -359,4 +359,42 @@
         }
         
     }
+?>
+
+<!-- Mail message function -->
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer; 
+use PHPMailer\PHPMailer\Exception;
+
+    function sendMail($to,$oid,$msg){
+        
+    
+        require '../vendor/autoload.php';
+            $mail = new PHPMailer(true); 
+            
+            
+            try { 
+                $mail->SMTPDebug = 0;                                        
+                $mail->isSMTP();                                             
+                $mail->Host       = 'smtp.gmail.com;';                     
+                $mail->SMTPAuth   = true;                              
+                $mail->Username   = $from;                  
+                $mail->Password   = $password;                                                       
+                $mail->Port       = 587;   
+            
+                $mail->setFrom($from, $fromName);            
+                $mail->addAddress($to);
+                $mail->isHTML(true);                                   
+                $mail->Subject = 'Pooja Electronics'; 
+                $mail->Body    = $msg; 
+                $mail->send(); 
+                
+                
+            } catch (Exception $e) { 
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; 
+            } 
+        
+    }
+   
 ?>
