@@ -40,10 +40,10 @@
 <div class="align-items-center text-center card border-0">
     <form action="#" method="post">
         <div class="d-flex just-content-center row">
-            <div class=" col-md-2 col-sm-3  col-xl-3 mt-3 ">
+            <div class=" col-md-3 col-sm-3  col-xl-4 mt-3 ">
                 <label class="form-label">Category :</label>
             </div>
-            <div class=" col-md-5 col-sm-5  col-xl-5 mt-3 ">           
+            <div class=" col-md-5 col-sm-5  col-xl-4 mt-3 ">           
                
                 <select class="form-select" name="category" >
                 <option value="0">All</option>
@@ -124,7 +124,7 @@
         </li>
         <li class="page-item">
             <form action="" method="post">
-                <input type="number" name="recPerPage" class="from-control txt"  value="<?= $no_of_records_per_page ?>">
+                <input type="number" min="1" name="recPerPage" class="from-control txt"  value="<?= $no_of_records_per_page ?>">
                 <input type="submit" class="btn btn-light" value="Apply" name="applyRecPerPage">
             </form>
         </li>

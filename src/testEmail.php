@@ -3,7 +3,7 @@
 {
 
     // Include library file
-    require_once './VerifyEmail.class.php'; 
+    // require_once './VerifyEmail.class.php'; 
     // Initialize library class
     $mail = new VerifyEmail();
 
@@ -11,7 +11,7 @@
     $mail->setStreamTimeoutWait(10);
 
     // Set debug output mode
-    $mail->Debug= false; 
+    $mail->Debug= true; 
     $mail->Debugoutput= 'html'; 
 
     // Set email address for SMTP request
@@ -23,11 +23,11 @@
     // Check if email is valid and exist
     $b = verifyEmail::validate($email) && $mail->check($email);
     if($b){ 
-        echo 'Email &lt;'.$email.'&gt; is exist!'; 
-        // return true;
+        // echo 'Email &lt;'.$email.'&gt; is exist!'; 
+        return true;
     }else{ 
-        echo 'Email &lt;'.$email.'&gt; is not valid and not exist!'; 
-        // return false;
+        // echo 'Email &lt;'.$email.'&gt; is not valid and not exist!'; 
+        return false;
     } 
     return false;
 }
