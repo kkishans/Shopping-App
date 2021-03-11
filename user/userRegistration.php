@@ -130,7 +130,7 @@ if(isset($_POST['submit'])) {
     // include '../src/VerifyEmail.class.php';
     // include '../src/testEmail.php';
     
-   
+
     // if(!checkMail($email)){
     //     echo "<script>alert('E-mail does not not exist. please check you email address.')</script>";
     //     return;

@@ -7,6 +7,7 @@
     // error_reporting(0);
     $label = "Add";
     $u_file = "";
+    $img1 = $img2 = $img3 = $img4 = null; 
     if (isset($_GET['update'])) {
         $label = "Update";
         $id = $_GET['update'];
@@ -14,6 +15,10 @@
         $result = mysqli_query($conn, $query);
         $r = mysqli_fetch_assoc($result);
         $u_file = $r['p_img'];
+        $img1 = $r['product_optional_image_1'];
+        $img2 = $r['product_optional_image_2'];
+        $img3 = $r['product_optional_image_3'];
+        $img4 = $r['product_optional_image_4'];
     }else if(isset($_GET['add'])){
         $id = $_GET['add'];
     }
@@ -82,25 +87,27 @@
 <?php 
 
     if (isset($_POST['addImage'])) {
-         $img1 = $img2 = $img3 = $img4 = null; 
+       
          $main_file = $u_file;
           
         if (!isset($_GET['update'])) {
             $main_file = checkimage($_FILES['main_file'],$u_file);
         }else{
-            $main_file = checkimage($_FILES['new_main_file'],$u_file);
+            if ($_FILES['new_main_file']['name'] != null) {
+                $main_file = checkimage($_FILES['new_main_file'],$u_file);
+            }
         }
         if ($_FILES['o_image_1']['name'] != null) {
-            $img1 = checkimage($_FILES['o_image_1'],null);  
+            $img1 = checkimage($_FILES['o_image_1'],$img1);  
         }
         if ($_FILES['o_image_2']['name'] != null) {
-            $img2 = checkimage($_FILES['o_image_2'],null);  
+            $img2 = checkimage($_FILES['o_image_2'],$img2);  
         }
         if ($_FILES['o_image_3']['name'] != null) {
-            $img3 = checkimage($_FILES['o_image_3'],null); 
+            $img3 = checkimage($_FILES['o_image_3'],$img3); 
         }
         if ($_FILES['o_image_4']['name'] != null) {
-            $img4 = checkimage($_FILES['o_image_4'],null);
+            $img4 = checkimage($_FILES['o_image_4'],$img4);
         }
 
         $update_query = "UPDATE product_details SET p_img = '$main_file', product_optional_image_1 = '$img1', product_optional_image_2 = '$img2' ,product_optional_image_3 ='$img3', product_optional_image_4 = '$img4'  where p_id = $id";

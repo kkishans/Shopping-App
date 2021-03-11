@@ -11,7 +11,7 @@
     $mail->setStreamTimeoutWait(10);
 
     // Set debug output mode
-    $mail->Debug= false; 
+    $mail->Debug= true; 
     $mail->Debugoutput= 'html'; 
 
     // Set email address for SMTP request
@@ -31,6 +31,8 @@
     } 
     return false;
 }
+
+
 
 
 ?>

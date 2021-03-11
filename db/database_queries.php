@@ -147,7 +147,7 @@
         $res = mysqli_query($conn,$alter);
 
         $alter = "ALTER TABLE `product_details`
-        ADD  `product_optional_image_1` varchar(255) DEFAULT NULL, ADD  `product_optional_image_2` varchar(255) DEFAULT NULL,  ADD  `product_optional_image_3` varchar(255) DEFAULT NULL, ADD  `product_optional_image_4` varchar(255) DEFAULT NULL";
+        ADD  `product_optional_image_1` varchar(255) DEFAULT NULL, ADD  `product_optional_image_2` varchar(255) DEFAULT NULL,  ADD  `product_optional_image_3` varchar(255) DEFAULT NULL, ADD  `product_optional_image_4` varchar(255) DEFAULT NULL, ADD `keywords` varchar(10000) NOT NULL,";
 
         $res = mysqli_query($conn,$alter);
 

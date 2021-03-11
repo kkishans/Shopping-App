@@ -65,11 +65,11 @@ error_reporting(0);
             <div class="mb-3 row">
                <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Price</label>
-                    <input type="number" class="form-control" name="price" placeholder="ex. 65000" value ="<?= $price ?>" required>
+                    <input type="number" min="0" class="form-control" name="price" placeholder="ex. 65000" value ="<?= $price ?>" required>
                </div>
                <div class="col-6">
                 <label for="exampleFormControlInput1" class="form-label">Stock</label>
-                <input type="number" class="form-control" name="stock" placeholder="ex. 10  " value ="<?= $stock ?>"required>
+                <input type="number" min="0" class="form-control" name="stock" placeholder="ex. 10  " value ="<?= $stock ?>"required>
             </div>
             </div>
             
@@ -83,6 +83,7 @@ error_reporting(0);
 <?php
 
     if (isset($_POST['add'])) {
+        return;
         $pname = $_POST['pname'];
         $price = $_POST['price'];
         $stock = $_POST['stock'];
