@@ -3,7 +3,7 @@
 {
 
     // Include library file
-    // require_once './VerifyEmail.class.php'; 
+    require_once './VerifyEmail.class.php'; 
     // Initialize library class
     $mail = new VerifyEmail();
 
@@ -23,13 +23,13 @@
     // Check if email is valid and exist
     $b = verifyEmail::validate($email) && $mail->check($email);
     if($b){ 
-        // echo 'Email &lt;'.$email.'&gt; is exist!'; 
-        return true;
+        echo 'Email &lt;'.$email.'&gt; is exist!'; 
+        // return true;
     }else{ 
-        // echo 'Email &lt;'.$email.'&gt; is not valid and not exist!'; 
-        return false;
+        echo 'Email &lt;'.$email.'&gt; is not valid and not exist!'; 
+        // return false;
     } 
     return false;
 }
-
+checkMail('thakornikunj152@gmail.com');
 ?>

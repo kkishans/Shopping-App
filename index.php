@@ -125,7 +125,7 @@
   
   <div class="card-l col-xl-3 col-sm-11 col-md-6 col-xl-3 mt-3"> 
   
-    <div class="card p-2" style="height: 20rem;">
+    <div class="card p-1" style="height: 23rem;">
     <a href="./product.php?id=<?= $r['p_id']  ?>" class="card-l">
       <img src="<?= "img/". $r['p_img']  ?>" class="card-img-top" height="200px" alt="Product Image" style="object-fit: contain;">
       <div class="card-body ">
