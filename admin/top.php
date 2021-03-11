@@ -23,15 +23,19 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand fs-4 p-1" href="./home.php">Admin</a>
+        <a class="navbar-brand fs-4 p-1" href="./dashboard.php">Admin</a>
 
         <?php
             if (isset($_SESSION['aname'])) {
         ?>
 
         <ul class="nav text-light  justify-content-end">
+           
             <li class="nav-item p-1 ">
                 <a class="nav-link link-light " href="./product.php">Add Product</a>
+            </li>
+            <li class="nav-item p-1 ">
+                <a class="nav-link link-light " href="./home.php">Products</a>
             </li>
             <li class="nav-item p-1 ">
             <a class="nav-link  link-light" href="./category.php" >Categories</a>

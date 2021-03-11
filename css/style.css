@@ -95,3 +95,8 @@
   border-bottom: 2px solid gray;
   text-align: center;
 }
+
+.number{
+  text-align: center;
+  font-size: 5rem;
+}

@@ -127,14 +127,14 @@ if(isset($_POST['submit'])) {
         echo "<script>alert('$passwordErr');</script>";
         return;
     }
-    include '../src/VerifyEmail.class.php';
-    include '../src/testEmail.php';
+    // include '../src/VerifyEmail.class.php';
+    // include '../src/testEmail.php';
     
    
-    if(!checkMail($email)){
-        echo "<script>alert('E-mail does not not exist. please check you email address.')</script>";
-        return;
-    }
+    // if(!checkMail($email)){
+    //     echo "<script>alert('E-mail does not not exist. please check you email address.')</script>";
+    //     return;
+    // }
     
     $pass = md5($password);
     $query = "INSERT INTO users(f_name,l_name,email,phone,address,pass) VALUES('$fname','$lname','$email','$phone','$address','$pass')";
