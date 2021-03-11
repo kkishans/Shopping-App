@@ -75,7 +75,7 @@
         <tbody>
         <?php 
          
-         $order_query = "SELECT O.o_id o_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' LIMIT $offset, $no_of_records_per_page";
+         $order_query = "SELECT O.o_id o_id,OP.p_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' LIMIT $offset, $no_of_records_per_page";
             //  echo $order_query;
             //  return
          $res = mysqli_query($conn,$order_query);
@@ -114,7 +114,7 @@
         </li>
         <li class="page-item">
             <form action="" method="post">
-                <input type="number" name="recPerPage" class="from-control txt"  value="<?= $no_of_records_per_page ?>">
+                <input type="number" name="recPerPage" class="from-control txt" min="1" value="<?= $no_of_records_per_page ?>">
                 <input type="submit" class="btn btn-light" value="Apply" name="applyRecPerPage">
             </form>
         </li>

@@ -3,7 +3,7 @@
 {
 
     // Include library file
-    // require_once './VerifyEmail.class.php'; 
+     require_once './VerifyEmail.class.php'; 
     // Initialize library class
     $mail = new VerifyEmail();
 
@@ -31,5 +31,6 @@
     } 
     return false;
 }
+
 
 ?>

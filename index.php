@@ -69,7 +69,7 @@
     <div class=" col-md-3 col-sm-12 p-3 col-xl-4 text-center mt-3">
 
       <div class="form-outline d-flex">
-        <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.." list="searchResult" />
+        <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.."  />
         <button type="submit" name="btnSearch" class="btn btn-outline-success px-4">
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>      
@@ -103,7 +103,7 @@
                         ($category != 0) ?  
                         " c_id = $category" : ""
                       ) 
-        : "")."LIMIT $offset, $no_of_records_per_page" ;
+        : "")." LIMIT $offset, $no_of_records_per_page" ;
      }
      
      
@@ -113,7 +113,7 @@
         $query = "SELECT * from product_details where LOWER(`keywords`) like '%".strtolower($search)."%' LIMIT $offset, $no_of_records_per_page";
      }
      
-
+    
     $result = mysqli_query($conn,$query);
     
     $count_of_data =  mysqli_num_rows($result);

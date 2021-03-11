@@ -2,7 +2,7 @@
   include './top.php';
   include '../db/db.php';
     if (isset($_SESSION['useremail'] )) {
-        echo "<script> window.location ='./dashboard.php' </script>";
+        echo "<script> window.location ='./cart.php' </script>";
     }
 ?>
 

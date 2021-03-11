@@ -124,7 +124,7 @@
         </li>
         <li class="page-item">
             <form action="" method="post">
-                <input type="number" name="recPerPage" class="from-control txt"  value="<?= $no_of_records_per_page ?>">
+                <input type="number" name="recPerPage" class="from-control txt"  min="1"  value="<?= $no_of_records_per_page ?>">
                 <input type="submit" class="btn btn-light" value="Apply" name="applyRecPerPage">
             </form>
         </li>
