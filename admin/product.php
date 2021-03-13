@@ -35,7 +35,7 @@ error_reporting(0);
     
 <div class=" d-flex align-items-center m-auto card border-0 my-3">
     <div class="card col-sm-11 col-sm-11 col-md-5 col-xl-5   col-9">
-        <form action="#" class="p-3 " method="POST" >
+        <form action="" class="p-3 " method="POST" >
             
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Product Name</label>
@@ -83,7 +83,7 @@ error_reporting(0);
 <?php
 
     if (isset($_POST['add'])) {
-        return;
+    
         $pname = $_POST['pname'];
         $price = $_POST['price'];
         $stock = $_POST['stock'];
@@ -94,7 +94,7 @@ error_reporting(0);
         $keywords = $_POST['keywords'];
 
         //get keywords from product name
-        $keyOfProduct = explode(" ",$pname); 
+        $keyOfProduct = explode(" ",$pname);
         foreach($keyOfProduct as $val){
             $keywords .= ", $val";
         }

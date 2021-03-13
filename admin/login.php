@@ -2,7 +2,7 @@
     include "top.php";
     
     if(isset($_SESSION['aname'])) {
-        header("Location: home.php");
+        header("Location: ./dashboard.php");
     }
 
     //First time setup for admin...
@@ -95,7 +95,7 @@
         if( mysqli_num_rows($res) > 0 ){
             $r = mysqli_fetch_assoc($res);
             $_SESSION['aname'] = $r['fname'];
-            header("Location: home.php");
+            header("Location: dashboard.php");
         }
         else{
             echo "<script>alert('Invalid username and Password.')</script>";

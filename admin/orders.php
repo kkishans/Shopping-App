@@ -75,7 +75,19 @@
         <tbody>
         <?php 
          
-         $order_query = "SELECT O.o_id o_id,OP.p_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' LIMIT $offset, $no_of_records_per_page";
+        if (isset($_GET['status'])) {
+            if ($_GET['status'] == 0) {
+                $order_query = "SELECT O.o_id o_id,OP.p_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' and `status` = 'Not Delivered' LIMIT $offset, $no_of_records_per_page";
+            }
+            else {
+                $order_query = "SELECT O.o_id o_id,OP.p_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' and `status` = 'Delivered' LIMIT $offset, $no_of_records_per_page";
+                
+            }
+        }
+        else{
+
+            $order_query = "SELECT O.o_id o_id,OP.p_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' LIMIT $offset, $no_of_records_per_page";
+        }
             //  echo $order_query;
             //  return
          $res = mysqli_query($conn,$order_query);
