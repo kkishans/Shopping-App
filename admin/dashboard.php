@@ -90,12 +90,14 @@
 </div>
 
 <div class="card-l col-xl-3 col-sm-11 col-md-4 mt-3"> 
+<a href="./userList.php" class="nav-link" >
   <div class="card p-1" >
     <div class="card-body ">
         <h4 class="text-center">Total Customers</h4>
         <p class="p-2 number  text-info"><?= $r['user']?></p>
     </div>
   </div>
+</a>
 </div>
 
 

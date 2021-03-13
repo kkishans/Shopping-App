@@ -143,9 +143,4 @@
         }
     }
 ?>
-
-
 <?php include 'bottom.php' ?>
-
-
-

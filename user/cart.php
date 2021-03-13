@@ -5,7 +5,6 @@
     // if (!isset($_SESSION['useremail'] )) {
     //     echo "<script> window.location ='./userLogin.php' </script>";
     // }
-
     $useremail = $_SESSION['useremail'];
 ?>
 
@@ -395,6 +394,5 @@ use PHPMailer\PHPMailer\Exception;
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; 
             } 
         
-    }
-   
+    } 
 ?>
