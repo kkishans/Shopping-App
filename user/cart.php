@@ -200,7 +200,7 @@
           if (mysqli_num_rows($res) > 0) {
     ?>
      <div class="text-center">
-        <h2>Your Ordered List</h2><hr>
+        <h2>Your Ordered Product's List</h2><hr>
     </div>
     <table class="table table-striped" >
         <thead>
@@ -330,7 +330,7 @@
             if (mysqli_query($conn,$ordered_query)) {
                 $query = "UPDATE cart_details SET is_in_cart = 'n' where u_id = $u_id and is_in_cart = 'y'";
                 $res = mysqli_query($conn,$query);
-                $msg =  'Your Ordered Id is O-0 '.$o_id.' .\n Product will deliver soon. \n A Confirmation E-mail will send to you';
+                $msg =  'Your Order Id is O-0 '.$o_id.' .\n Product will deliver soon. \n A Confirmation E-mail will send to you';
                 echo '<script>
                         
                 swal({
