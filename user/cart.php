@@ -200,7 +200,7 @@
           if (mysqli_num_rows($res) > 0) {
     ?>
      <div class="text-center">
-        <h2>Your Ordered List</h2><hr>
+        <h2>Your Ordered Products List</h2><hr>
     </div>
     <table class="table table-striped" >
         <thead>
