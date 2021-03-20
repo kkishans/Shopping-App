@@ -66,27 +66,45 @@
     width: 96%;
     align-items: center;
     margin-top: -35%;
-}
+    cursor: pointer;
+}  
 .arrow-buttons a{
+  color: black;
+  background-color: rgba(241, 241, 234, 0.76);
+  text-decoration: none;
+  padding: 3px;
+  font-size: 26px;
+}
+.right {  
+  right: 0;  
+  border-radius: 3px 0 0 3px;  
+}  
+
+.arrow-buttons .left:hover,.arrow-buttons .right:hover {  
+  background-color: rgba(115, 115, 115, 0.8);  
+}  
+.slide .left a , .right a {
     color: black;
-    background-color: rgba(241, 241, 234, 0.76);
+    background-color: rgba(243, 243, 236, 0.781);
     text-decoration: none;
     padding: 3px;
     font-size: 26px;
 }
-.left, .right {  
-    cursor: pointer;  
-     
-}  
-.right {  
-    right: 0;  
-    border-radius: 3px 0 0 3px;  
-}  
-.left:hover, .right:hover {  
-    background-color: rgba(115, 115, 115, 0.8);  
-}  
-
-
+ 
+.slide .left, .slide .right{
+  width: 30px;
+  height: 50px;
+  margin: auto;
+  cursor: pointer;
+}
+.slide{
+  align-items: center;
+  justify-content: center;
+}
+.slide .left a:hover, .slide .right a:hover{
+  background-color: rgba(115, 115, 115, 0.8);  
+  color:white;
+}
 .txt{
   width:30%;
   outline: none;
