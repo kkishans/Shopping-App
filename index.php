@@ -15,18 +15,18 @@ $result = mysqli_query($conn, $total_pages_sql);
 $total_rows = mysqli_fetch_array($result)[0];
 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
-/*$query = "SELECT * FROM product_details ORDER BY p_id DESC LIMIT 3";
+$query = "SELECT p_img FROM product_details ORDER BY rand() LIMIT 3";
   $result = mysqli_query($conn, $query);
 
   $img = array();
   while($r = mysqli_fetch_assoc($result)){
     array_push($img, $r['p_img']);
-  }*/
-$img = array(
-  'carousal-img-3.png',
-  'carousal-img-1.jpg',
-  'carousal-img-2.jpg'
-)
+  }
+// $img = array(
+//   'carousal-img-3.png',
+//   'carousal-img-1.jpg',
+//   'carousal-img-2.jpg'
+// );
 ?>
 
 
@@ -98,7 +98,7 @@ $img = array(
   <div class="slider ">
     <?php
     $k = 0;
-    for ($i = 0; $i < 3; $i++) {
+    for ($i = 0; $i < sizeof($img); $i++) {
       if ($img[$i] == null || $img == '') {
         continue;
       }
@@ -125,7 +125,7 @@ $img = array(
   <div style="text-align:center">
     <?php
     $k = 1;
-    for ($i = 0; $i < 3; $i++) {
+    for ($i = 0; $i < sizeof($img); $i++) {
       // $s = ($i == 0) ? "" : "hidden" ;
       if ($img[$i] == null || $img == '') {
         continue;
