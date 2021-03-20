@@ -58,7 +58,7 @@
         <tbody>
         <?php 
           include '../db/db.php';
-          $query = "SELECT count(*),c_title,c.c_id from product_details as p, category as c where p.c_id = c.c_id group by c_title";
+          $query = "SELECT count(p.c_id),c_title,c.c_id from product_details as p RIGHT JOIN category as c on p.c_id = c.c_id group by c_title";
 
           $result = mysqli_query($conn,$query);
 
@@ -67,7 +67,7 @@
 
         ?>
             <tr>
-                <th><?= $r['c_title'] ?> ( <?= $r['count(*)']?> )</th>
+                <th><?= $r['c_title'] ?> ( <?= $r['count(p.c_id)']?> )</th>
                 <th><a href="./category.php?update=<?= $r['c_id'] ?>" class="btn btn-outline-success"> Update</a></th>
                 <th><a href="./delete.php?deleteCategory=<?= $r['c_id'] ?>" class="btn btn-outline-danger">X</a></th>
             </tr>
@@ -96,14 +96,14 @@
         $update_query = "UPDATE category SET c_title = '$ctitle' WHERE c_id = $id ";
 
             if (mysqli_query($conn,$update_query)) {
-                echo "<script>alert('Category Update.')</script>";
-                header("Location: category.php");
+                echo "<script>window.location = './category.php'</script>";
+                
              }else{
                  echo mysqli_error($conn);
              }
         }else{
             if (mysqli_query($conn,$insert_query)) {
-                echo "<script>alert('Product Added.')</script>";
+                echo "<script>window.location = './category.php'</script>";
              }else{
                  echo mysqli_error($conn);
              }

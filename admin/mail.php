@@ -113,7 +113,7 @@ require '../vendor/autoload.php';
    
             $mail = new PHPMailer(true); 
            
-            
+            require "../env.php"; 
             try { 
                 $mail->SMTPDebug = 0;                                        
                 $mail->isSMTP();                                             

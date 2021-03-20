@@ -121,7 +121,7 @@ if(isset($_POST['submit'])){
     
     if( mysqli_query($conn,$query) ){
         $_SESSION['aname'] = $fname;
-        echo "<script> window.location ='./home.php' </script>";
+        echo "<script> window.location ='./dashboard.php' </script>";
     }else{
         echo "<script>alert('Something went wrong. Data Not inseted. Try again.')</script>";
 

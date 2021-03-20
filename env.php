@@ -3,7 +3,7 @@
 
     //Email admin setup
 
-    $fromName = "user name";
-    $from = "from@gmail.com";
-    $password = "password";
+    $fromName = "Pooja Elecricals";
+    $from = "poojaelectricals462@gmail.com";
+    $password = "Elect#2021";
 ?>

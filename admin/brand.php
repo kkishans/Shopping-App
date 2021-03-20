@@ -48,7 +48,7 @@
         <tbody>
         <?php 
           include '../db/db.php';
-          $query = "SELECT count(*),b_name,b.b_id from product_details as p, brands as b where p.b_id = b.b_id group by b_name";
+          $query = "SELECT count(p.b_id),b_name,b.b_id from product_details as p RIGHT JOIN brands as b on p.b_id = b.b_id group by b_name";
 
           $result = mysqli_query($conn,$query);
 
@@ -57,7 +57,7 @@
 
         ?>
             <tr>
-                <th><?= $r['b_name'] ?> ( <?= $r['count(*)']?> )</th>
+                <th><?= $r['b_name'] ?> ( <?= $r['count(p.b_id)']?> )</th>
                 <th><a href="./brand.php?update=<?= $r['b_id'] ?>" class="btn btn-outline-success"> Update</a></th>
                 <th><a href="./delete.php?deleteBrand=<?= $r['b_id'] ?>" class="btn btn-outline-danger">X</a></th>
             </tr>
@@ -86,16 +86,16 @@
         $update_query = "UPDATE brands SET b_name = '$bname' WHERE b_id = $id ";
 
             if (mysqli_query($conn,$update_query)) {
-                echo "<script>alert('Brand Update.')</script>";
-                header("Location: ./brand.php");
+                echo "<script>window.location = './brand.php'</script>";
+               
 
              }else{
                  echo mysqli_error($conn);
              }
         }else{
             if (mysqli_query($conn,$insert_query)) {
-                echo "<script>alert('Brand Added.')</script>";
-                header("Location: ./brand.php");
+                echo "<script>window.location = './brand.php'</script>";
+                
              }else{
                  echo mysqli_error($conn);
              }

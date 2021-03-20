@@ -22,7 +22,7 @@
             <p>GST NO-24AARPU7005J1ZA</p>
         </div>
         <div class="col-md-6 col-xl-6 col-sm-11">
-            <form action="#" method="post"> 
+            <form action="" method="post"> 
             <div class="mb-3">
                 <label class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter your name">
@@ -45,6 +45,7 @@
 
 <?php
     if (isset($_POST['submit'])) {
+        require './db/db.php';
         $name = $_POST['name'];
         $email = $_POST['email'];
         $message = $_POST['message'];
@@ -53,8 +54,10 @@
         $res = mysqli_query($conn,$query);
 
         if ($res) {
+            
             echo "<script>swal('Message recieved','We will respond you soon via mail','success')</script>";
         }
+        else mysqli_error($conn);
     }
 
 ?>
