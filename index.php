@@ -15,7 +15,7 @@ $result = mysqli_query($conn, $total_pages_sql);
 $total_rows = mysqli_fetch_array($result)[0];
 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
-$query = "SELECT p_img FROM product_details ORDER BY rand() LIMIT 3";
+$query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMIT 3";
   $result = mysqli_query($conn, $query);
 
   $img = array();
@@ -182,7 +182,7 @@ $query = "SELECT p_img FROM product_details ORDER BY rand() LIMIT 3";
 
         <div class="card p-1" style="height: 23rem;">
           <a href="./product.php?id=<?= $r['p_id']  ?>" class="card-l">
-            <img src="<?= "img/" . $r['p_img']  ?>" class="card-img-top" alt="Product Image" style="object-fit: contain;">
+            <img src="<?= "img/" . $r['p_img']  ?>" class="card-img-top" alt="Product Image" style="max-height:15rem;height:15rem;object-fit: contain;">
             <div class="card-body ">
               <div class="d-flex justify-content-between">
                 <h6 class="card-title"> <?= $r['p_name'] ?> ( <?= $r['stock'] ?> )</h6>
