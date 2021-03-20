@@ -15,7 +15,7 @@ $result = mysqli_query($conn, $total_pages_sql);
 $total_rows = mysqli_fetch_array($result)[0];
 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
-$query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMIT 3";
+$query = "SELECT p_img FROM product_details ORDER BY p_id DESC LIMIT 3";
   $result = mysqli_query($conn, $query);
 
   $img = array();

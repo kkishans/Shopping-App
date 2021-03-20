@@ -89,12 +89,28 @@
     if (isset($_POST['addImage'])) {
        
          $main_file = $u_file;
+
+         $test = getimagesize($_FILES['main_file']['tmp_name']);
+                $width = $test[0];
+                $height = $test[1];
+
           
         if (!isset($_GET['update'])) {
-            $main_file = checkimage($_FILES['main_file'],$u_file);
+                if ($width <500 || $height < 500)
+                {
+                    echo "<script>alert('Image resolution must be grater than 500x500')</script>";
+                    return;
+                }
+                else $main_file = checkimage($_FILES['main_file'],$u_file);
         }else{
             if ($_FILES['new_main_file']['name'] != null) {
-                $main_file = checkimage($_FILES['new_main_file'],$u_file);
+                
+                if ($width <500 || $height < 500)
+                {
+                    echo "<script>alert('Image resolution must be grater than 500x500')</script>";
+                    return;
+                }
+                else $main_file = checkimage($_FILES['new_main_file'],$u_file);
             }
         }
         if ($_FILES['o_image_1']['name'] != null) {
