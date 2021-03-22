@@ -117,3 +117,14 @@
   text-align: center;
   font-size: 5rem;
 }
+
+.img{
+  width: 130px;
+  height: 130px;
+  position: relative;
+  
+}
+.section-title{
+  margin-top: 2.7rem;
+} 
+

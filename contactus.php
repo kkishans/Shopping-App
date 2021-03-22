@@ -3,14 +3,14 @@
 ?>
  
 <div class=" mt-5 text-center ">
-    <!-- Section Titile -->
-    <div class="col-md-12 " data-wow-delay=".2s">
-        <h1 class="section-title">Contact Us </h1>
-    </div>
+    
 </div>
-<div class="card col-8 m-auto p-4 mt-5">
+<div class="card col-8 m-auto p-4 mt-5 ">
+    
    <div class="row">
-        <div class="col-md-5 col-xl-5 col-sm-11  pl-5 ">
+        <div class="col-md-5 col-xl-5 col-sm-11 pl-5 ">
+            <img src="./img/user-dummy-pic.png" class="img" alt="" srcset="">
+
             <p><h4>NEHA SINGH.. </h4><br><b> CON NO-7228010920</b></p>
             <p>ACCOUNTS DEPARTMENT..<br>
             POOJA ELECTRICALS</p>
@@ -21,8 +21,10 @@
             </dl>
             <p>GST NO-24AARPU7005J1ZA</p>
         </div>
-        <div class="col-md-6 col-xl-6 col-sm-11">
-            <form action="" method="post"> 
+        <div class="col-md-6 col-xl-6 col-sm-11 ">
+            <h1 class="section-title">Contact Us </h1>
+
+            <form action="" method="post" class="mt-5"> 
             <div class="mb-3">
                 <label class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter your name">
