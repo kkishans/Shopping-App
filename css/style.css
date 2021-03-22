@@ -118,9 +118,9 @@
   font-size: 5rem;
 }
 
-.img{
-  width: 130px;
-  height: 130px;
+.contact-user-img{
+  width: 100px;
+  height: 100px;
   position: relative;
   
 }
@@ -128,3 +128,14 @@
   margin-top: 2.7rem;
 } 
 
+.multi-column {
+  /* Standard */
+  column-count: 2;
+  column-width: 150px;
+  /* Webkit-based */
+  -webkit-column-count: 2;
+  -webkit-column-width: 150px;
+  /* Gecko-based */
+  -moz-column-count: 2;
+  -moz-column-width: 150px;
+}
