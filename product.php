@@ -66,10 +66,7 @@
             <label class="form-label fs-4 col-8"><?= $pname ?></label>
           </div> 
          
-          <div class="row">
-            <label class="form-label col-3 fs-5"></label>
-            <label class="form-label fs-5 col-8"><?= $desc ?></label>
-          </div> 
+          
           <div class="row">
             <label class="form-label col-3 fs-5">Price: </label>
             <label class="form-label fs-4 col-8"><b><?= $price ?> ₹</b></label>
@@ -92,15 +89,23 @@
             ?>
             <label class="form-label fs-4 col-8"><?= $r['b_name']  ?></label>
           </div> 
-          <div class="row">
-            <label class="form-label col-3 fs-5">Stock: </label>
-            <label class="form-label fs-4 col-8"><?= $stock ?></label>
-          </div>    
           
-          <div class="col-6"> 
+          
+          
+          <div class="col-6 mt-5"> 
             <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $id  ?>" role="button">Add To Cart</a>
           </div> 
         </div>
+    </div>
+    <label class="form-label fs-5 mt-3"><b>Description:</b></label>
+    <div class="multi-column mt-2">
+      <?php
+          $data = explode(",",$desc);
+
+          foreach($data as $i){
+              echo $i ."<br>";
+          }
+      ?>            
     </div>
 </div>
 <script type="text/javascript">  

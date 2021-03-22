@@ -191,12 +191,7 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC LIMIT 3";
                 </div>
               </div>
               <div class="d-flex justify-content-between mt-2">
-                <div class="col-12">
-
-                  <p class="card-title"><?= $r['description'] ?></p>
-                </div>
-
-                <div class="col-6">
+                <div class="col-12  ">
 
                   <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $r['p_id']  ?>" role="button">Add To Cart</a>
                 </div>
