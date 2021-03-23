@@ -61,9 +61,10 @@ $img =
         } ?>
       </div>
     </div>
-    <div class="col-8 mt-5 mb-6 d-flex m-auto ">
+    <div class="col-8 mt-5 mb-5 d-flex m-auto ">
   <a class="btn btn-primary fs-4  w-100" href="./add_to_cart.php?id=<?= $id  ?>" role="button">Add To Cart</a>
 </div>
+
     </div>
     <div class="col-md-6 col-xl-6 col-sm -11 p-5">
       <div class="row">
@@ -94,29 +95,33 @@ $img =
         ?>
         <label class="form-label fs-4 col-8"><?= $r['b_name']  ?></label>
       </div>
+      <?php
+      
+      $query = "SELECT * FROM product_description where p_id =" . $id;
+      $result = mysqli_query($conn, $query);
+        if(mysqli_num_rows($result) > 0){
+      ?>
       <label class="form-label fs-5 my-3"><b>Description:</b></label>
-      <div class="xl-col-3 col-md-5 col-sm-11 fs-5">
-        <div class="row">
-          <div class="col-3">Key</div>
-          <div class="col-6">Value</div>
-        </div>
-        <div class="row">
-          <div class="col-3">Key</div>
-          <div class="col-6">Value</div>
-        </div>
-        <div class="row">
-          <div class="col-3">Key</div>
-          <div class="col-6">Value</div>
-        </div>
-        <div class="row">
-          <div class="col-3">Key</div>
-          <div class="col-6">Value</div>
-        </div>
-        <div class="row">
-          <div class="col-3">Key</div>
-          <div class="col-6">Value</div>
-        </div>
+      <div class="xl-col-6 col-md-10 col-sm-11 fs-5">
+        <?php 
+        
+          while($r = mysqli_fetch_row($result)){
+            ?>
+            <div class="row">
+              <div class="col-5 text-right"><?= $r[2]?> : </div>
+              <div class="col-6"><?= $r[3]?></div>
+            </div>
+            
+            <?php
+          }
+        ?>
       </div>
+      <?php }else{?>
+        <!-- <div class="row">
+              <div class="col-10 my-10">No more details description about the product.</div>
+        </div> -->
+      <?php }?>
+
     </div>
 
   </div>
