@@ -129,9 +129,8 @@
                  echo mysqli_error($conn);
              }
         }else{
-            if (mysqli_query($conn,$insert_query)) {
-                echo "<script>alert('New Specification Added.')</script>";
-                echo "<script>window.location.href = './delete.php?specification=".$pid."</script>";
+            if (mysqli_query($conn,$insert_query)) {            
+                echo "<script>window.location = './specification.php?pid=".$pid."'</script>";
                 
              }else{
                  echo mysqli_error($conn);

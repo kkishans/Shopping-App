@@ -104,6 +104,9 @@
                 else $main_file = checkimage($_FILES['main_file'],$u_file);
         }else{
             if ($_FILES['new_main_file']['name'] != null) {
+                $test = getimagesize($_FILES['new_main_file']['tmp_name']);
+                $width = $test[0];
+                $height = $test[1];
                 
                 if ($width <500 || $height < 500)
                 {
