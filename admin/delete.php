@@ -54,6 +54,19 @@ if(isset($_GET['deleteBrand'])){
         echo mysqli_error($conn);
      }
 }
+
+// Delete Specitication
+if(isset($_GET['deleteSpecification'])){
+    $product_delete_query = "DELETE FROM product_description WHERE id = ".$_GET['deleteSpecification'];
+
+    if (mysqli_query($conn,$product_delete_query)) {
+        echo "<script>alert('Brand Deleted.')</script>";
+        header("location:specification.php?pid=".$_GET['pid']);
+    }else{
+        echo mysqli_error($conn);
+     }
+}
+
 if(isset($_GET['productDelivered'])){
     $order_update_query = "UPDATE ordered_products SET  status = 'Delivered' WHERE o_id = ".$_GET['productDelivered']." AND p_id = ". $_GET['productId'];
 
