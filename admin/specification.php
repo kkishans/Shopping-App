@@ -89,12 +89,25 @@
   </div>
   
 </div>
-
+<?php
+     if (isset($_GET['update_product'])) {
+?>
 <div class="container-fluid row justify-content-md-center mt-3">
     <div class="col-md-6 text-center">
         <a href="./addProductsImage.php?update=<?= $pid ?>" class="btn btn-primary"><?= $label ?> and Next</a>    
     </div>
 </div>
+<?php
+     }else{
+?>
+<div class="container-fluid row justify-content-md-center mt-3">
+    <div class="col-md-6 text-center">
+        <a href="./addProductsImage.php?add=<?= $pid ?>" class="btn btn-primary"><?= $label ?> and Next</a>    
+    </div>
+</div>
+<?php
+     }
+?>
 <?php
 
     if (isset($_POST['addSpecification'])) {
@@ -118,7 +131,7 @@
         }else{
             if (mysqli_query($conn,$insert_query)) {
                 echo "<script>alert('New Specification Added.')</script>";
-                echo "<script>window.location = './specification.php?pid=".$pid."</script>";
+                echo "<script>window.location.href = './delete.php?specification=".$pid."</script>";
                 
              }else{
                  echo mysqli_error($conn);
