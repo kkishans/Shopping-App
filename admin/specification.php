@@ -5,7 +5,6 @@
     }   
  ?>
 
-
 <?php 
  $label = "Add";
     $key = "";
@@ -123,16 +122,13 @@
 
             if (mysqli_query($conn,$update_query)) {
                 echo "<script>window.location = './specification.php?pid=".$pid."'</script>";
-               
-
              }else{
                  echo mysqli_error($conn);
              }
         }else{
             if (mysqli_query($conn,$insert_query)) {
-                echo "<script>alert('New Specification Added.')</script>";
+                // echo "<script>location.reload()</script>";
                 echo "<script>window.location.href = './delete.php?specification=".$pid."</script>";
-                
              }else{
                  echo mysqli_error($conn);
              }
