@@ -18,6 +18,7 @@
     $r = mysqli_fetch_assoc($res);
     $u_id = (int)$r['u_id'];
     $address = $r['address'];
+    $order_falg = false;
 ?>
 <div class="container-fluid mt-3">
     <hr>
@@ -34,7 +35,6 @@
         </div>
     </div>
     <hr>
-
     <div class="mt-4">
         <div class="card col-11 m-auto" >
             <div class="card-body">
@@ -45,6 +45,7 @@
                
                 $res = mysqli_query($conn,$sql);
                 if (mysqli_num_rows($res) > 0) {
+                    $order_falg = true;
                             ?>
                 <table class="table table-striped text-center" >
                     <thead>
@@ -94,7 +95,7 @@
                         else{
                         ?>
                             <div class="col-4 m-auto" >
-                                    <img src="../img/emptyCart" alt="Cart is empty" height="300px" srcset="">   
+                                    <img src="../img/emptyCart.png" alt="Cart is empty" height="300px" srcset="">   
                                     <h4 class="text-center">Your Cart is Empty!!!</h4> 
                             </div>
                         <?php 
@@ -119,6 +120,7 @@
                 <?php
                 
                             foreach($_SESSION['cart'] as $k => $v){
+                                $order_falg = true;
                                 $totalPerProduct = $v['price'] * $v['qty'];
                                 $total += $totalPerProduct;
 
@@ -150,7 +152,7 @@
                         }else{
                             ?>
                             <div class="col-4 m-auto" >
-                                    <img src="../img/emptyCart" alt="Cart is empty" height="300px" srcset="">   
+                                    <img src="../img/emptycart.png" alt="Cart is empty" height="300px" srcset="">   
                                     <h4 class="text-center">Your Cart is Empty!!!</h4> 
                             </div>
                         <?php 
@@ -175,9 +177,7 @@
         </div>
     </div>
     <?php
-    // echo "Result : ". (mysqli_num_rows($res) > 0 || isset($_SESSION['cart']) );
-    //print_r($_SESSION);
-        if(mysqli_num_rows($res) > 0 || isset($_SESSION['cart']) ){
+        if($order_falg){
             ?>
             <div class="justify-content-center d-flex">
                 <form action="" method="post">
