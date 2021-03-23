@@ -66,34 +66,34 @@ $img =
 </div>
 
     </div>
-    <div class="col-md-6 col-xl-6 col-sm -11 p-5">
+    <div class="col-md-6 col-xl-6 col-sm-11 p-5">
       <div class="row">
-        <label class="form-label col-3 fs-5">Product: </label>
-        <label class="form-label fs-4 col-8"><?= $pname ?></label>
+        <label class="form-label col-4 fs-4">Product: </label>
+        <label class="form-label fs-4 col-7 align-baseline"><?= $pname ?></label>
       </div>
 
 
       <div class="row">
-        <label class="form-label col-3 fs-5">Price: </label>
-        <label class="form-label fs-4 col-8"><b><?= $price ?> ₹</b></label>
+        <label class="form-label col-4 fs-4">Price: </label>
+        <label class="form-label fs-4 col-7 align-baseline"><b><?= $price ?> ₹</b></label>
       </div>
       <div class="row">
-        <label class="form-label col-3 fs-5">Category:</label>
+        <label class="form-label col-4 fs-4">Category:</label>
         <?php
         $query = "SELECT * FROM category where c_id =" . $c_id;
         $result = mysqli_query($conn, $query);
         $r = mysqli_fetch_assoc($result);
         ?>
-        <label class="form-label fs-4 col-8"><?= $r['c_title'] ?></label>
+        <label class="form-label fs-4 col-7 align-baseline"><?= $r['c_title'] ?></label>
       </div>
       <div class="row">
-        <label class="form-label col-3 fs-5">Brand: </label>
+        <label class="form-label col-4 fs-4">Brand: </label>
         <?php
         $query = "SELECT * FROM brands where b_id =" . $b_id;
         $result = mysqli_query($conn, $query);
         $r = mysqli_fetch_assoc($result);
         ?>
-        <label class="form-label fs-4 col-8"><?= $r['b_name']  ?></label>
+        <label class="form-label fs-4 col-7 align-top"><?= $r['b_name']  ?></label>
       </div>
       <?php
       
@@ -107,10 +107,14 @@ $img =
         
           while($r = mysqli_fetch_row($result)){
             ?>
-            <div class="row">
-              <div class="col-5 text-right"><?= $r[2]?> : </div>
-              <div class="col-6"><?= $r[3]?></div>
-            </div>
+            
+              <div class="row">
+                <label class="form-label col-4 fs-4"><?= $r[2] ?> : </label>
+                <label class="form-label fs-4 col-7 ms-4"><?= $r[3] ?></label>
+                
+              </div>
+          
+            
             
             <?php
           }
