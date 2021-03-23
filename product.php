@@ -75,7 +75,7 @@ $img =
 
       <div class="row">
         <label class="form-label col-4 fs-5">Price: </label>
-        <label class="form-label fs-5 col-7 align-baseline"><b><?= $price ?> ₹</b></label>
+        <label class="form-label fs-5 col-7 align-baseline"><b>₹ <?= $price ?></b></label>
       </div>
       <div class="row">
         <label class="form-label col-4 fs-5">Category:</label>
