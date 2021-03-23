@@ -145,7 +145,7 @@ error_reporting(0);
   
         if (isset($_GET['update'])) {
             if (mysqli_query($conn,$update_query)) {
-                echo "<script> window.location= './specification.php?pid=".$_GET['update']."'</script>";
+                echo "<script> window.location= './specification.php?pid=".$_GET['update']."&update_product=yes'</script>";
              }else{
                  echo mysqli_error($conn);
              }

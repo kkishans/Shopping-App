@@ -4,7 +4,7 @@
         header("Location: login.php");
     }
 
-    // error_reporting(0);
+    error_reporting(0);
     $label = "Add";
     $u_file = "";
     $img1 = $img2 = $img3 = $img4 = null; 
