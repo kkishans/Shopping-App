@@ -126,6 +126,7 @@
                  echo mysqli_error($conn);
              }
         }else{
+
             if (mysqli_query($conn,$insert_query)) {
                 // echo "<script>location.reload()</script>";
                 echo "<script>window.location.href = './delete.php?specification=".$pid."</script>";
