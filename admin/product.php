@@ -145,13 +145,13 @@ error_reporting(0);
   
         if (isset($_GET['update'])) {
             if (mysqli_query($conn,$update_query)) {
-                echo "<script> window.location= './addProductsImage.php?update=".$_GET['update']."'</script>";
+                echo "<script> window.location= './specification.php?pid=".$_GET['update']."'</script>";
              }else{
                  echo mysqli_error($conn);
              }
         }else{
             if (mysqli_query($conn,$insert_query)) {
-                echo "<script> window.location= './addProductsImage.php?add=$p_id'</script>";
+                echo "<script> window.location= './specification.php?pid=$p_id'</script>";
              }else{
                 echo mysqli_error($conn);
              }
