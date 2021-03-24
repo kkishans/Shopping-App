@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
 <div class="container-fluid row justify-content-center my-5">
 <div class="col-md-6 card login-box">
     <div class="card-body">
-        <form action="#" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             
             <div class="row justify-content-center">
                 <div class="row  col-md-10 m-3">
@@ -42,6 +42,12 @@ if (isset($_POST['submit'])) {
                 <div class="row col-md-10 m-1">
                     <label for="pass">Note: Password Must be minimum length  8 and contain alphabet (uppercase and lowercase both) and number</label>
                 </div>
+                <div class="row col-md-10 m-3">
+                    <label for="admin_photo" class="m-1 ">Admin Photo</label>
+                    <div>
+                    <input class="form-control col-md-6" type="file" name="admin_photo" id="formFile" accept="image/*">
+                    </div>                    
+                </div>                            
                 <div class="row col-md-10 m-3">
                     <div>
                         <input type="password" name="password" class="form-control col-md-6" placeholder="Password" required >
@@ -116,8 +122,13 @@ if(isset($_POST['submit'])){
     //     return;
     // }
 
+    if ($_FILES['admin_photo']['name'] != null) {
+        $img = checkimage($_FILES['admin_photo']);  
+    }
+    else echo "Something went wrong";
+
     $pass = md5($_POST['password']);
-    $query = "INSERT INTO admin_details(fname,lname,email,`password`) VALUES('$fname','$lname','$email','$pass')";
+    $query = "INSERT INTO admin_details(fname,lname,email,`password`,`admin_photo`) VALUES('$fname','$lname','$email','$pass','$img')";
     
     if( mysqli_query($conn,$query) ){
         $_SESSION['aname'] = $fname;
@@ -127,5 +138,28 @@ if(isset($_POST['submit'])){
 
     }
 }
+
+
+function checkimage($file)
+    {
+        if ($file != null || $file['name'] != null) {   
+            $file_name = $file['name'];
+            $file_tmp = $file['tmp_name'];
+            $file_type = $file['type'];
+
+            $file_type = explode("/",$file_type);
+            $file_type = strtolower($file_type[0]);
+
+            if($file_type != "image"){
+                echo "<script>alert('Only Image file allowed.')</script>";
+                return;
+            }else{                
+                if (!move_uploaded_file($file_tmp,"../img/".$file_name)) {
+                    echo "<script>alert('Error while uploading file')</script>";
+                }
+            } 
+        }
+        return $file_name;
+    }
 
 ?>
