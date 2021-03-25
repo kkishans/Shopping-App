@@ -14,7 +14,7 @@ if(isset($_GET['deleteProduct'])){
     if (mysqli_query($conn,$product_delete_query)) {
         echo "<script>alert('Product Deleted.')</script>";
     }else{
-        echo "<script>alert(' Error while deleting product. May this product has ordered by customers.')</script>";
+        echo "<script>alert(' Error while deleting product. May this product has ordered by customers.'); window.location = './home.php'</script>";
         return;
         header("location:./home.php");
     }
