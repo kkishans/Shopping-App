@@ -1,13 +1,22 @@
 <?php 
     include './top.php';
 ?>
- 
+
+<?php
+    $query = "SELECT admin_photo from admin_details";
+    $res = mysqli_query($conn,$query);
+
+    if (mysqli_num_rows($res)) {
+        $data = mysqli_fetch_assoc($res);
+        $admin_photo = $data['admin_photo'];
+    }
+?>
 
 <div class="card col-8 m-auto p-4 mt-5 ">
     
    <div class="row">
         <div class="col-md-5 col-xl-5 col-sm-11 pl-5 ">
-            <img src="./img/user-dummy-pic.png" class="contact-user-img" alt="" srcset="">
+            <img src="./img/<?= $admin_photo ?>" class="contact-user-img" alt="" srcset="">
 
             <p><h4>NEHA SINGH.. </h4><br><b> CON NO-7228010920</b></p>
             <p>ACCOUNTS DEPARTMENT..<br>
