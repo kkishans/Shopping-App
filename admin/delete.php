@@ -11,6 +11,15 @@ if(isset($_GET['deleteProduct'])){
     $r = mysqli_fetch_assoc(mysqli_query($conn,$product_query));
     $product_delete_query = "DELETE FROM product_details WHERE p_id = ".$_GET['deleteProduct'];
 
+    if (mysqli_query($conn,$product_delete_query)) {
+        echo "<script>alert('Product Deleted.')</script>";
+    }else{
+        echo "<script>alert(' Error while deleting product. May this product has ordered by customers.')</script>";
+        return;
+        header("location:./home.php");
+    }
+
+
     $img = 
     array($r['p_img'],
           $r['product_optional_image_1'],
@@ -33,12 +42,8 @@ if(isset($_GET['deleteProduct'])){
             }
         }
     }  
-    if (mysqli_query($conn,$product_delete_query)) {
-        echo "<script>alert('Product Deleted.')</script>";
-    }else{
-         echo mysqli_error($conn);
-    }
-    header("location:./home.php");
+    
+   header("location:./home.php");
 }
 if(isset($_GET['deleteCategory'])){
     $product_delete_query = "DELETE FROM category WHERE c_id = ".$_GET['deleteCategory'];

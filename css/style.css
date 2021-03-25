@@ -139,3 +139,13 @@
   -moz-column-count: 2;
   -moz-column-width: 150px;
 }
+
+/* Add to cart */
+.add-to-cart{
+  position: absolute;
+  bottom: 14px;
+  width: 88%;
+  margin: auto;
+}
+
+/* end of add to cart */
