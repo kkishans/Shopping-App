@@ -115,6 +115,16 @@
 
     $res = mysqli_query($conn,$create_contact_us);
 
+    $product_details = "CREATE TABLE `product_description` (
+      `id` int(10) NOT NULL,
+      `p_id` int(10) NOT NULL,
+      `spec_key` varchar(255) NOT NULL,
+      `value` varchar(255) NOT NULL,
+      FOREIGN KEY (`p_id`) REFERENCES `product_details` (`p_id`)
+    )";
+
+    $res = mysqli_query($conn,$product_details);
+
     if(!$conn){
         echo "<script>alert('Error while connecting to database.')</script>";
         return;
