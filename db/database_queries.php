@@ -23,7 +23,8 @@
         `fname` varchar(255) NOT NULL,
         `lname` varchar(255) NOT NULL,
         `email` varchar(255) NOT NULL,
-        `password` varchar(255) NOT NULL
+        `password` varchar(255) NOT NULL,
+        `admin_photo` varchar(255) NOT NULL
       )";
     $res = mysqli_query($conn,$create_admin_details);
 
