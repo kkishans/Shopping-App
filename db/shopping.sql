@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2021 at 06:47 AM
+-- Generation Time: Mar 25, 2021 at 03:05 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -32,15 +32,16 @@ CREATE TABLE `admin_details` (
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `admin_photo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin_details`
 --
 
-INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `password`) VALUES
-(2, 'Nikunj', 'Thakor', 'thakornikunj152@gmail.com', '294d04e9f5bd67f209e235e2c5b4aa86');
+INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `password`, `admin_photo`) VALUES
+(4, 'Nikunj', 'Thakor', 'thakornikunj152@gmail.com', '22634f7b224f6ca31422165208a59e18', 'user-dummy-pic.png');
 
 -- --------------------------------------------------------
 
@@ -193,7 +194,11 @@ INSERT INTO `product_description` (`id`, `p_id`, `spec_key`, `value`) VALUES
 (3, 12, 'display', 'FHD amoled'),
 (4, 12, 'graphics', '4gb '),
 (7, 11, 'ram', '8gb'),
-(8, 13, 'display', 'FHD amoled');
+(8, 13, 'display', 'FHD amoled'),
+(9, 14, 'ram', '8gb'),
+(10, 14, 'display', 'FHD amoled'),
+(11, 14, 'rom', '128'),
+(13, 15, 'ram', '8gb');
 
 -- --------------------------------------------------------
 
@@ -226,7 +231,7 @@ INSERT INTO `product_details` (`p_id`, `p_name`, `description`, `p_img`, `price`
 (2, 'Lenovo Ideapad 3', 'Slim', 'lenovo_ideapad_3.png', 65000, 4, 2, 3, 'slim, fast, compact, Lenovo, Ideapad, 3', '', '', '', ''),
 (3, 'test', 'Performence Beast', 'maxresdefault.jpg', 7800, 10, 4, 5, 'slim, test, test', '', '', '', ''),
 (4, 'Lenovo legion', 'Performence Beast', 'headpgones.jpg', 12000, 5, 2, 1, 'a, Lenovo, legion', '', '', '', ''),
-(9, 'Apple desktop', 'Performence Beast', 'IMG_20210214_133608.jpg', 12, 1, 2, 1, '1, Apple, desktop', '', '', '', ''),
+(9, 'Apple desktop', 'Performence Beast', 'legion.png', 12, 1, 5, 2, '1, Apple, desktop, Apple, desktop', '', '', '', ''),
 (10, 'Lenovo legion', 'Performence Beast', 'legion.png', 1200, 1, 2, 2, 'slim, Lenovo, legion', '', '', '', ''),
 (11, 'Lenovo ideapad 3', 'ideapad', 'img1.jpg', 123, 1, 2, 1, 'slim, Lenovo, ideapad, 3', '', '', '', ''),
 (12, 'test product', '4gb Ram, 8gb Graphics, FHD Display, i5-10th generation, q1 ,qqq,2wqw,qwwqw,qweqwe,dfsfr,werwe.rwerdfsdf2.afwr,dfsdf,efef', 'photo.webp', 897, 1, 2, 3, 'test, test, product', '', '', '', ''),
@@ -335,7 +340,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_details`
 --
 ALTER TABLE `admin_details`
-  MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -377,13 +382,13 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT for table `product_description`
 --
 ALTER TABLE `product_description`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `product_details`
 --
 ALTER TABLE `product_details`
-  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
