@@ -178,27 +178,38 @@ $img = array(
 
   if (mysqli_num_rows($result) > 0) {
     while ($r = mysqli_fetch_assoc($result)) {
-      $s_price = number_format($r['price'], 2);
+      $s_price = number_format($r['price']);
+     
+      $query = "SELECT * FROM product_description where p_id =" . $r["p_id"] . " LIMIT 3";
+      $result2 = mysqli_query($conn, $query);
+        if(mysqli_num_rows($result2) > 0){
+          $desc_str = "<span style='font-size:15px;'>";
+          while($r2 = mysqli_fetch_row($result2)){
+            $desc_str .= "<span style='font-weight: 500;'>". $r2[2]. "</span> : " . $r2[3]. ", "; 
+          }
+        }
+        $desc_str .= "</span>";
+        $desc_str = rtrim($desc_str, ", ");
   ?>
-      <div class="card-l col-xl-3 col-sm-11 col-md-6 col-xl-3 mt-3">
+      <div class="card-l col-xl-3 col-sm-11 col-md-6 col-xl-3 mt-3"  >
 
-        <div class="card p-1">
+        <div class="card p-1" style="min-height: 27rem;">
           <a href="./product.php?id=<?= $r['p_id']  ?>" class="card-l">
             <img src="<?= "img/" . $r['p_img']  ?>" class="card-img-top" alt="Product Image" style="max-height:15rem;height:15rem;object-fit: contain;">
-            <div class="card-body ">
+            <div class="card-body flex">
               <div class="row justify-content-between">
                 <div class="col-6">
                   <h6 class="card-title"> <?= $r['p_name'] ?></h6>
                 </div>
                 <div class="col-6">
-                  <h6>₹ <?= $s_price ?></h6>
+                  <h5 style="text-align: right;">₹ <?= $s_price ?></h5>
                 </div>
               </div>
-              <div class="d-flex justify-content-between mt-2">
-                <div class="col-12  ">
-
+              <div>
+              <p> <?= $desc_str ?></p>
+              </div>
+              <div class=" mt-2 add-to-cart">
                   <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $r['p_id']  ?>" role="button">Add To Cart</a>
-                </div>
               </div>
             </div>
           </a>
