@@ -11,6 +11,7 @@ $stock = $r['stock'];
 $c_id = $r['c_id'];
 $b_id = $r['b_id'];
 $desc = $r['description'];
+$s_price = number_format($r['price'], 2);
 $img =
   array(
     $r['p_img'],
@@ -75,7 +76,7 @@ $img =
 
       <div class="row">
         <label class="form-label col-4 fs-5">Price: </label>
-        <label class="form-label fs-5 col-7 align-baseline"><b>₹ <?= $price ?></b></label>
+        <label class="form-label fs-5 col-7 align-baseline"><b>₹ <?= $s_price ?></b></label>
       </div>
       <div class="row">
         <label class="form-label col-4 fs-5">Category:</label>
@@ -109,7 +110,7 @@ $img =
             ?>
             
               <div class="row">
-                <label class="form-label col-4 fs-5"><?= $r[2] ?> : </label>
+                <label class="form-label col-4 fs-5" style="font-weight: 500;"><?= $r[2] ?> : </label>
                 <label class="form-label fs-5 col-7 ms-4"><?= $r[3] ?></label>
                 
               </div>

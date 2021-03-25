@@ -135,8 +135,6 @@
              }
         }
         //header("location:brand.php");
-
     }
 ?>
-
 <?php include 'bottom.php' ?>

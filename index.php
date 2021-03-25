@@ -178,18 +178,20 @@ $img = array(
 
   if (mysqli_num_rows($result) > 0) {
     while ($r = mysqli_fetch_assoc($result)) {
-
+      $s_price = number_format($r['price'], 2);
   ?>
       <div class="card-l col-xl-3 col-sm-11 col-md-6 col-xl-3 mt-3">
 
-        <div class="card p-1" style="height: 23rem;">
+        <div class="card p-1">
           <a href="./product.php?id=<?= $r['p_id']  ?>" class="card-l">
             <img src="<?= "img/" . $r['p_img']  ?>" class="card-img-top" alt="Product Image" style="max-height:15rem;height:15rem;object-fit: contain;">
             <div class="card-body ">
-              <div class="d-flex justify-content-between">
-                <h6 class="card-title"> <?= $r['p_name'] ?> ( <?= $r['stock'] ?> )</h6>
-                <div class="cost-button">
-                  <h5>₹ <?= $r['price'] ?></h5>
+              <div class="row justify-content-between">
+                <div class="col-6">
+                  <h6 class="card-title"> <?= $r['p_name'] ?></h6>
+                </div>
+                <div class="col-6">
+                  <h6>₹ <?= $s_price ?></h6>
                 </div>
               </div>
               <div class="d-flex justify-content-between mt-2">

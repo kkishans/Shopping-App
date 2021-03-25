@@ -80,8 +80,8 @@
             <tr>
                 <th>Review</th>
                 <th>Product Name</th>
-                <th>price</th>
-                <th>stock</th>
+                <th>Price</th>
+                <th>Stock</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
