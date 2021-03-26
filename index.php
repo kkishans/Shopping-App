@@ -230,13 +230,10 @@ $img = array(
   <?php
   }
   ?>
-
-
-
 </div>
 <?php
-if ($count_of_data < $total_rows) {
 
+if ($count_of_data < $total_rows) {
 
 ?>
   <nav aria-label="Page navigation example mt-5">
@@ -278,7 +275,9 @@ if ($count_of_data < $total_rows) {
 
   ?>
 </datalist>
-
+<?php  
+  include './bottom.php';
+?>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">

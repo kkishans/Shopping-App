@@ -70,3 +70,4 @@
     }
 
 ?>
+<?php include 'bottom.php' ?>

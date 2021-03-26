@@ -46,6 +46,7 @@
         </form>
     </div>
 </div>
+<?php include 'bottom.php' ?>
 <?php 
 
     if (isset($_POST['addImage'])) {

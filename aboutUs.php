@@ -23,3 +23,4 @@ include './top.php';
     </dl>
     <p>GST NO-24AARPU7005J1ZA</p>
 </div>
+<?php include 'bottom.php' ?>

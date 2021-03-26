@@ -132,7 +132,7 @@ $img =
   </div>
 </div>
 
-
+<?php include 'bottom.php' ?>
 <script type="text/javascript">
   var slide_index = 1;
   displaySlides(slide_index);

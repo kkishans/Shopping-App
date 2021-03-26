@@ -246,7 +246,9 @@
     </table>
   </div>
 </div>
-
+<?php 
+    include './bottom.php';
+?>
 <!-- Qty changing code -->
 <?php
     if (isset($_POST['decrease'])) {
@@ -359,6 +361,7 @@
         }
         
     }
+    
 ?>
 
 <!-- Mail message function -->
@@ -397,3 +400,4 @@ use PHPMailer\PHPMailer\Exception;
         
     } 
 ?>
+<?php include '../bottom.php' ?>

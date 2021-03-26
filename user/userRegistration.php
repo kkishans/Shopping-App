@@ -150,3 +150,4 @@ if(isset($_POST['submit'])) {
 }
 
 ?>
+<?php include '../bottom.php' ?>
