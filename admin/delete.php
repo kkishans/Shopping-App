@@ -1,10 +1,4 @@
 <?php
-if(isset($_GET['specification'])){
-    $pid= $_GET['specification'];
-    //echo "<script>window.location.href = './specification.php?pid=".$pid."</script>";
-    header("location:specification.php?pid=".$pid);
-}
-
 include '../db/db.php';
 if(isset($_GET['deleteProduct'])){
     $product_query = "SELECT * FROM product_details WHERE p_id = ".$_GET['deleteProduct'];

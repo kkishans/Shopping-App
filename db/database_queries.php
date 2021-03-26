@@ -117,7 +117,7 @@
     $res = mysqli_query($conn,$create_contact_us);
 
     $product_details = "CREATE TABLE `product_description` (
-      `id` int(10) NOT NULL,
+      `id` int(10) PRIMARY KEY  AUTO_INCREMENT,
       `p_id` int(10) NOT NULL,
       `spec_key` varchar(255) NOT NULL,
       `value` varchar(255) NOT NULL,
