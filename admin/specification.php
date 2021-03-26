@@ -6,7 +6,8 @@
  ?>
 
 <?php 
- $label = "Add";
+    error_reporting(0);
+    $label = "Add";
     $key = "";
     $value = "";
    
@@ -79,7 +80,7 @@
              }
             }else{
                 echo "
-                    <tr><p' align='center'> No Data Found.</p></tr>
+                    <tr><p' align='center'> There is no specification here.</p></tr>
                 ";
             }            
             ?>
