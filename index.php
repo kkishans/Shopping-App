@@ -188,8 +188,8 @@ $img = array(
             $desc_str .= "<span style='font-weight: 500;'>". $r2[2]. "</span> : " . $r2[3]. ", "; 
           }
         }
-        $desc_str .= "</span>";
         $desc_str = rtrim($desc_str, ", ");
+        $desc_str .= "</span>";
   ?>
       <div class="card-l col-xl-3 col-sm-11 col-md-6 col-xl-3 mt-3"  >
 
