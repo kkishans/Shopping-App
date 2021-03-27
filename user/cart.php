@@ -350,6 +350,7 @@
                 $mailmsg =  'Your Order Id is O-0 '.$o_id.' .<br> Product will deliver soon.';
                   
                 sendMail($_SESSION['useremail'],$o_id,$mailmsg);
+                echo "<script>window.location = 'cart.php'</script>";
             }else{
                 echo "<script>alert('Error while taking your order try again.')</script>";
                 echo mysqli_error($conn);

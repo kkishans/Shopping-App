@@ -41,20 +41,22 @@ if(isset($_GET['deleteCategory'])){
     $product_delete_query = "DELETE FROM category WHERE c_id = ".$_GET['deleteCategory'];
 
     if (mysqli_query($conn,$product_delete_query)) {
-        echo "<script>alert('Category Deleted.')</script>";
-        header("location:category.php");
+        echo "<script>alert('Category Deleted.'); window.location = 'category.php'</script>";
+        // header("location:category.php");
      }else{
-         echo mysqli_error($conn);
+        echo "<script>alert('Can not delete this category.'); window.location = 'category.php'</script>";
      }
+    //  header("location:category.php");
+
 }
 if(isset($_GET['deleteBrand'])){
     $product_delete_query = "DELETE FROM brands WHERE b_id = ".$_GET['deleteBrand'];
 
     if (mysqli_query($conn,$product_delete_query)) {
-        echo "<script>alert('Brand Deleted.')</script>";
-        header("location:brand.php");
+        echo "<script>alert('Brand Deleted.'); window.location = 'brand.php'</script>";
+        // header("location:brand.php");
     }else{
-        echo mysqli_error($conn);
+        echo "<script>alert('Can not delete this brand.'); window.location = 'brand.php'</script>";
      }
 }
 
