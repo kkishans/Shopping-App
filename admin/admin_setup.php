@@ -6,9 +6,9 @@
   $query = "SELECT * from admin_details";
   $res = mysqli_query($conn,$query);
 
-  if(mysqli_num_rows($res) > 0){
-      header("location: ./login.php");
-  }
+//   if(mysqli_num_rows($res) > 0){
+//       header("location: ./login.php");
+//   }
 $fname = $lname = $email  = "";
 if (isset($_POST['submit'])) {
     $fname = $_POST['fname'];
@@ -49,6 +49,22 @@ if (isset($_POST['submit'])) {
                     </div>                    
                 </div>                            
                 <div class="row col-md-10 m-3">
+                <label for="admin_photo" class="m-1 ">Social Media Links : <br> (These are optional, leave it blank if you haven't any of them.)</label>
+
+                    <div class="my-2">
+                        <input type="text" name="facebook_link" class="form-control col-md-6" placeholder="Facebook account URL"  >
+                    </div>
+                    <div class=" my-2">
+                        <input type="text" name="insta_link" class="form-control col-md-6" placeholder="Instagram account URL"  >
+                    </div>
+                    <div class=" my-2">
+                        <input type="text" name="twitter_link" class="form-control col-md-6" placeholder="Twitter account URL"  >
+                    </div>
+                    <div class=" my-2">
+                        <input type="text" name="youtube_link" class="form-control col-md-6" placeholder="YouTube Channel URL">
+                    </div>
+                </div>
+                <div class="row col-md-10 m-3">
                     <div>
                         <input type="password" name="password" class="form-control col-md-6" placeholder="Password" required >
                     </div>
@@ -79,6 +95,10 @@ if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
+    $facebook =  $_POST["facebook_link"];
+    $insta =  $_POST["insta_link"];
+    $twitter =  $_POST["twitter_link"];
+    $youtube =  $_POST["youtube_link"];
     
     if($password != $cpassword){
         $passwordErr ="Passwords does not match.";       
@@ -128,7 +148,7 @@ if(isset($_POST['submit'])){
     else echo "Something went wrong";
 
     $pass = md5($_POST['password']);
-    $query = "INSERT INTO admin_details(fname,lname,email,`password`,`admin_photo`) VALUES('$fname','$lname','$email','$pass','$img')";
+    $query = "INSERT INTO admin_details(fname,lname,email,`password`,`admin_photo`,`facebook_link`,`insta_link`,`twitter_link`,`youtube_link`) VALUES('$fname','$lname','$email','$pass','$img','$facebook','$insta','$twitter','$youtube')";
     
     if( mysqli_query($conn,$query) ){
         $_SESSION['aname'] = $fname;
@@ -137,6 +157,7 @@ if(isset($_POST['submit'])){
         echo "<script>alert('Something went wrong. Data Not inseted. Try again.')</script>";
 
     }
+    echo mysqli_error($conn);
 }
 
 
@@ -163,3 +184,9 @@ function checkimage($file)
     }
 
 ?>
+<div class="pt-5"></div>
+<div class="footer fixed-bottom">
+    <div class="copyright-text">
+      <p>Copyright © 2021 Pooja Electricals, All rights reserved. |</p>
+    </div>
+</div>

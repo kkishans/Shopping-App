@@ -2,16 +2,16 @@
 
 <div class="footer fixed-bottom">
     <div class="copyright-text">
-      <p>&COPY; CopyRightBy Pooja Electronics. All rights resereved. |</p>
+    <p>Copyright © 2021 Pooja Electricals, All rights reserved. |</p>
     </div>
     <div class="copyright">
         <span> connect with </span>
     </div>
     <div class="copyright">
         
-        <a href="#"> <i class="fa fa-instagram insta"></i></a>
-        <a href="#"> <i class="fa fa-facebook facebook"></i></a>
-        <a href="#"> <i class="fa fa-twitter twitter"></i></a>
+        <a href="http://instagram.com/" target="_blank"> <i class="fa fa-instagram insta"></i></a>
+        <a href="#" target="_blank"> <i class="fa fa-facebook facebook"></i></a>
+        <a href="#" target="_blank"> <i class="fa fa-twitter twitter"></i></a>
     </div>
 </div>
 </body>

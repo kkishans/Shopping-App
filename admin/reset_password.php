@@ -59,4 +59,4 @@
 </div>
 
 
-<?php include "bottom.php"; ?>
+<?php include "../bottom.php"; ?>

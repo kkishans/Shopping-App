@@ -188,4 +188,4 @@ error_reporting(0);
                         }
                         ?>
                     </datalist>
-<?php include 'bottom.php' ?>
+<?php include '../bottom.php' ?>

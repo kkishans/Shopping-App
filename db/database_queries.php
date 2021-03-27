@@ -24,7 +24,11 @@
         `lname` varchar(255) NOT NULL,
         `email` varchar(255) NOT NULL,
         `password` varchar(255) NOT NULL,
-        `admin_photo` varchar(255) NOT NULL
+        `admin_photo` varchar(255) NOT NULL,
+        `facebook_link` varchar(255),
+        `insta_link` varchar(255),
+        `twitter_link` varchar(255),
+        `youtube_link` varchar(255) 
       )";
     $res = mysqli_query($conn,$create_admin_details);
 
@@ -121,7 +125,7 @@
       `p_id` int(10) NOT NULL,
       `spec_key` varchar(255) NOT NULL,
       `value` varchar(255) NOT NULL,
-      FOREIGN KEY (`p_id`) REFERENCES `product_details` (`p_id`)
+      FOREIGN KEY (`p_id`) REFERENCES `product_details` (`p_id`) ON DELETE CASCADE
     )";
 
     $res = mysqli_query($conn,$product_details);

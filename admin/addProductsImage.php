@@ -166,3 +166,5 @@
     }
 
 ?>
+
+<?php include '../bottom.php' ?>

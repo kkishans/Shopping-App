@@ -85,7 +85,7 @@
 </div>
 
 
-<?php include 'bottom.php' ?>
+<?php include '../bottom.php' ?>
 <!-- call model -->
 <script>
    $('#replyMail').on('show.bs.modal', function(e) {

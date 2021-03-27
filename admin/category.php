@@ -114,4 +114,4 @@
 <script>
     document.getElementById('ctitle').focus();
 </script>
-<?php include 'bottom.php' ?>
+<?php include '../bottom.php' ?>

@@ -183,7 +183,7 @@ $img = array(
       $query = "SELECT * FROM product_description where p_id =" . $r["p_id"] . " LIMIT 3";
       $result2 = mysqli_query($conn, $query);
         if(mysqli_num_rows($result2) > 0){
-          $desc_str = "<span style='font-size:15px;'>";
+          $desc_str = "<span style='font-size:15px;color:rgba(0,0,0,.7)'>";
           while($r2 = mysqli_fetch_row($result2)){
             $desc_str .= "<span style='font-weight: 500;'>". $r2[2]. "</span> : " . $r2[3]. ", "; 
           }
@@ -199,7 +199,7 @@ $img = array(
             <div class="card-body flex">
               <div class="row justify-content-between">
                 <div class="col-6">
-                  <h6 class="card-title"> <?= $r['p_name'] ?></h6>
+                  <h5 class="card-title"> <?= $r['p_name'] ?></h5>
                 </div>
                 <div class="col-6">
                   <h5 style="text-align: right;">₹ <?= $s_price ?></h5>

@@ -138,4 +138,4 @@
         //header("location:brand.php");
     }
 ?>
-<?php include 'bottom.php' ?>
+<?php include '../bottom.php' ?>
