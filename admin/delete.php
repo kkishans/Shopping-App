@@ -9,7 +9,7 @@ if(isset($_GET['deleteProduct'])){
         echo "<script>alert('Product Deleted.')</script>";
     }else{
         echo mysqli_error($conn);
-        echo "<script>alert(' Error while deleting product.'); window.location = './home.php'</script>";
+        echo "<script>alert(' Error while deleting a product, it might be ordered by someone else'); window.location = './home.php'</script>";
         return;
     }
     $img = 
