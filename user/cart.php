@@ -318,17 +318,22 @@
             $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
             VALUES( $o_id,$u_id,$total,'$address')";
             echo mysqli_error($conn);
-            $sql = "SELECT P.p_id,id from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
-                            
+            $sql = "SELECT P.p_id,id, qty from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
+            
             $res = mysqli_query($conn,$sql);
             if (mysqli_num_rows($res) > 0) {
 
                 while($r = mysqli_fetch_assoc($res)){
+                    $qty = $r['qty'];
+                    echo $qty."<br>";
                     $query = "INSERT into ordered_products(p_id,o_id) VALUES(".$r['p_id'].",$o_id)";
+                    $update_product_query = "UPDATE product_details SET stock = stock - $qty where p_id = " . $r['p_id'];
                     mysqli_query($conn,$query);
+                    mysqli_query($conn,$update_product_query);
                     echo mysqli_error($conn);
                 }
             }
+            
             if (mysqli_query($conn,$ordered_query)) {
                 $query = "UPDATE cart_details SET is_in_cart = 'n' where u_id = $u_id and is_in_cart = 'y'";
                 $res = mysqli_query($conn,$query);

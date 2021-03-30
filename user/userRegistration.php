@@ -143,11 +143,30 @@ if(isset($_POST['submit'])) {
     if( mysqli_query($conn,$query) ){
         $_SESSION['username'] = $fname;
         $_SESSION['useremail'] = $email;
+
+         //session data adding in user cart...
+
+        if (isset($_SESSION['cart'])) {
+            foreach($_SESSION['cart'] as $k => $v){
+                $query = "INSERT into cart_details(p_id,u_id,qty,is_in_cart) values('". $v['id'] ."' ,$u_id,1,'y')";
+                $res = mysqli_query($conn,$query);
+
+                if ($res) {
+                    echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
+                    echo "<script> window.location ='./cart.php' </script>";
+                }
+            }
+            session_unset($_SESSION['cart']);
+        }
+
        echo "<script> window.location ='./cart.php' </script>";
     }else{
         echo "<script> alert('Something went wrong. Data Not inseted. Try again.') </script>";    
     }
 }
+ include '../bottom.php' ?>
+  3 2 1 0 3 2 4 0 2 1 0 4
 
-?>
-<?php include '../bottom.php' ?>
+  3 
+
+   
