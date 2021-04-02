@@ -158,7 +158,7 @@ if(isset($_POST['submit'])) {
                 $res = mysqli_query($conn,$query);
 
                 if ($res) {
-                    echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
+                    //echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
                     echo "<script> window.location ='./cart.php' </script>";
                 }
             }

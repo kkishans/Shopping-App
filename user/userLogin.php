@@ -74,10 +74,9 @@ if(isset($_POST['login'])){
                 $res = mysqli_query($conn,$query);
 
                 if ($res) {
-                    echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
+                    //echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
                     echo "<script> window.location ='./cart.php' </script>";
                 }
-                else echo "<script>alert('Something went wrong.')</script>";
                      
             }
             session_unset($_SESSION['cart']);
