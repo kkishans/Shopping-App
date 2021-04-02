@@ -79,7 +79,7 @@
      </div>
 </div>
 <?php 
-
+    //print_r($_SESSION['cart']);
 if(isset($_POST['submit'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -144,11 +144,17 @@ if(isset($_POST['submit'])) {
         $_SESSION['username'] = $fname;
         $_SESSION['useremail'] = $email;
 
+        //get user id from the session...
+        $query = "SELECT u_id FROM users where email = '". $_SESSION['useremail'] ."'";
+        $res = mysqli_query($conn,$query);
+        $r = mysqli_fetch_assoc($res);
+        $u_id = $r['u_id'];
+
          //session data adding in user cart...
 
         if (isset($_SESSION['cart'])) {
             foreach($_SESSION['cart'] as $k => $v){
-                $query = "INSERT into cart_details(p_id,u_id,qty,is_in_cart) values('". $v['id'] ."' ,$u_id,1,'y')";
+                $query = "INSERT into cart_details(p_id,u_id,qty,is_in_cart) values('". $v['id'] ."' ,$u_id,".$v['qty'].",'y')";
                 $res = mysqli_query($conn,$query);
 
                 if ($res) {
@@ -158,15 +164,14 @@ if(isset($_POST['submit'])) {
             }
             session_unset($_SESSION['cart']);
         }
-
-       echo "<script> window.location ='./cart.php' </script>";
+    
     }else{
         echo "<script> alert('Something went wrong. Data Not inseted. Try again.') </script>";    
     }
 }
- include '../bottom.php' ?>
-  3 2 1 0 3 2 4 0 2 1 0 4
 
-  3 
+
+include '../bottom.php' 
+?>
 
    
