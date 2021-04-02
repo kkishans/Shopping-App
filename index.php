@@ -1,6 +1,13 @@
 <?php
 include './top.php';
 
+$query = "SHOW TABLES FROM shopping";
+$res = mysqli_query($conn,$query);
+if (mysqli_num_rows($res) == 0) {
+  echo "<script>swal('Alert','Something went wrong, Please contact to admin','error')</script>";
+  return;
+}
+
 if (isset($_GET['pageno'])) {
   $pageno = $_GET['pageno'];
 } else {
