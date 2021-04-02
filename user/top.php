@@ -4,16 +4,18 @@
   session_start();
 
   if (isset($_SESSION['useremail'])) {
-    $query = "SELECT count(1) FROM cart_details as C, users as U where C.u_id = U.u_id and email = '". $_SESSION['useremail']."' and is_in_cart = 'y'";
+    $query = "SELECT qty FROM cart_details as C, users as U where C.u_id = U.u_id and email = '". $_SESSION['useremail']."' and is_in_cart = 'y'";
     $result = mysqli_query($conn,$query);
-    $row = mysqli_fetch_array($result);
-    $total_cart_items = $row[0];
+    $total_cart_items = 0;
+    while($row = mysqli_fetch_array($result)){
+      $total_cart_items += $row[0];
+    }
     echo mysqli_error($conn);
   }
   else if (isset($_SESSION["cart"])) {
     $total_cart_items = 0;
     foreach ( $_SESSION['cart'] as $k => $v ){
-       $total_cart_items++;
+       $total_cart_items += $_SESSION['cart'][$k]['qty'];
     } 
   }else{
     $total_cart_items = 0;
@@ -60,6 +62,16 @@
               <li class="nav-item">
                   <a class="nav-link  link-light" href="../contactus.php">Contact Us</a>
               </li>
+              <?php 
+                  if (isset($_SESSION['useremail'] )) {
+              ?>
+              
+              <li class="nav-item">
+                <a class="nav-link  link-light" href="./orders.php">My Orders</a>  
+              </li>
+              <?php 
+                  }
+              ?>
               <li class="nav-item p-1 ">
                   <a class="" name="cart" href="./cart.php"><i class="fa fa-shopping-cart nav-link" style="color:white;font-size:20px" aria-hidden="true"></i></a>
                  <?php
