@@ -16,7 +16,7 @@ error_reporting(0);
     if (isset($_GET['update'])) {
         $label = "Update";
         $id = $_GET['update'];
-        $query = "SELECT * FROM product_details where p_id =". $id;
+        $query = "SELECT * FROM product_details as p ,category as c,brands as b where p.c_id = c.c_id and p.b_id = b.b_id and p.p_id =". $id;
         $result = mysqli_query($conn, $query);
         $r = mysqli_fetch_assoc($result);
         $pname = $r['p_name'];
@@ -24,8 +24,13 @@ error_reporting(0);
         $stock = $r['stock'];
         $c_id = $r['c_id'];
         $b_id = $r['b_id'];
+        $category = $r['c_title'];
+        $brand = $r['b_name'];
         $desc = $r['description'];
         $keywords = $r['keywords'];
+
+        
+
     }
 ?>
 
@@ -53,12 +58,12 @@ error_reporting(0);
             <div class="mb-3 row">
                <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Category</label>
-                    <input type="text" class="form-control" name="category" list="categories">
+                    <input type="text" class="form-control" name="category" value="<?= $category ?>" list="categories">
                     
                </div>
                <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Brand :</label>
-                    <input type="text" class="form-control" name="brands" list="brands">
+                    <input type="text" class="form-control" name="brands" value="<?= $brand ?>" list="brands">
                     
                 </div>
             </div>
