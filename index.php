@@ -185,8 +185,7 @@ $img = array(
 
   if (mysqli_num_rows($result) > 0) {
     while ($r = mysqli_fetch_assoc($result)) {
-      $s_price = number_format($r['price']);
-     
+      $s_price = number_format($r['price']);  
       $query = "SELECT * FROM product_description where p_id =" . $r["p_id"] . " LIMIT 3";
       $result2 = mysqli_query($conn, $query);
         if(mysqli_num_rows($result2) > 0){
@@ -201,12 +200,12 @@ $img = array(
       <div class="card-l col-xl-3 col-sm-11 col-md-6 col-xl-3 mt-3"  >
 
         <div class="card p-1" style="min-height: 27rem;">
-          <a href="./product.php?id=<?= $r['p_id']  ?>" class="card-l">
+          <a href="./product.php?id=<?= $r['p_id']  ?>" class="card-l" style="text-decoration: none;color:black;">
             <img src="<?= "img/" . $r['p_img']  ?>" class="card-img-top" alt="Product Image" style="max-height:15rem;height:15rem;object-fit: contain;">
             <div class="card-body flex">
               <div class="row justify-content-between">
                 <div class="col-6">
-                  <h5 class="card-title"> <?= $r['p_name'] ?></h5>
+                  <h5 class="card-title"> <?= ucwords($r['p_name']) ?></h5>
                 </div>
                 <div class="col-6">
                   <h5 style="text-align: right;">₹ <?= $s_price ?></h5>

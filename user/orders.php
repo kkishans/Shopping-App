@@ -29,9 +29,11 @@
             <tr>
                 <th>Product Name</th>
                 <th>Quantity</th>
-                <th>Order At</th>
+                <th>Order On</th>
                 <th>Delivery address </th>
+                <th>Price</th>
                 <th>Status</th>
+                <th>Cancel Order</th>
             </tr>
         </thead>
         <tbody>
@@ -48,12 +50,25 @@
         ?>
             <tr>
                 
-                <th><?= $p['p_name'] ?></th>
+                <th><a href="../product.php?id=<?= $p['p_id']  ?>" class="card-l" style="text-decoration: none;color:black;"><?= $p['p_name'] ?>
+                <br><p style="font-weight: 400;"> <?= $p['description'] ?></p></a></th>
                 <th><?= $r2['qty'] ?></th>
                 <th><?= $r['ordered_at'] ?></th>
                 <th><?= $r['shipping_address'] ?></th>
+                <th>
+                    <p style="font-weight: 400;"><?= $p['price'] ." * " . $r2['qty']." = " ?></p>
+                    <p style="font-weight: 500;"><?= " ₹ ". number_format(($p['price'] * $r2['qty'])) ?></p>
+                </th>
                 <th><?= $r2['status']?></th>
-                
+                <th><?php 
+                    if($r2['status'] == "Not Delivered"){
+                        ?>
+                        <button class="btn btn-outline-danger">Cancel</button>
+                        <?php
+                    }else{
+                        echo " - ";
+                    }
+                ?></th>
             </tr>
         
             <?php 

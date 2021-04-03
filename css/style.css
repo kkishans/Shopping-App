@@ -17,15 +17,16 @@
     position: relative;
     margin-top: -37px;
     margin-left: 28px;
-    padding: 2px;
+    padding: 2px 3px;
     text-align: center;
     border-radius: 10px;
     height: 1.2rem;
-    width: 1.2rem;
+    width: auto;
+    min-width: 1.2rem;
     background-color: red;
 }
 .cart-badge p{
-    margin-top: -5px;
+  margin-top: -5px;
 }
 .dot {
   cursor: pointer;

@@ -7,7 +7,7 @@
 
 <?php 
     error_reporting(0);
-    $label = "Add";
+    $label = "Save";
     $key = "";
     $value = "";
    

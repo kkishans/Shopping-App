@@ -49,7 +49,7 @@ error_reporting(0);
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Description</label>
-                <input type="text" class="form-control" name="description" placeholder="ex. Lenevo ideaPad" value ="<?= $desc ?>" required>
+                <textarea class="form-control" name="description" placeholder="ex. Lenevo ideaPad" value ="<?= $desc ?>" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Keywords</label>
@@ -89,7 +89,7 @@ error_reporting(0);
 
     if (isset($_POST['add'])) {
     
-        $pname = $_POST['pname'];
+        $pname = ucwords($_POST['pname']);
         $price = $_POST['price'];
         $stock = $_POST['stock'];
         global $brand,$category;

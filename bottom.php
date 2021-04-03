@@ -13,12 +13,12 @@
 ?>
 <div class="footer fixed-bottom">
     <div class="copyright-text">
-      <p>Copyright © 2021 Pooja Electricals, All rights reserved. |</p>
+      <p>Copyright © 2021 Pooja Electricals, All rights reserved.</p>
     </div>
     <div class="copyright">
     <?php 
             if ($facebook != "" || $insta != "" || $twitter != "" || $youtube != "") {
-                echo " <span> connect with </span>";
+                echo " <span> | connect with </span>";
             }
     ?>
     </div>
@@ -37,10 +37,6 @@
                 echo "<a href='$youtube' target='_blank'> <i class='fa fa-youtube youtube'></i></a>";
             }
         ?>
-        <!-- <a href="#" target="_blank"> <i class="fa fa-instagram insta"></i></a>
-        <a href="#" target="_blank"> <i class="fa fa-facebook facebook"></i></a>
-        <a href="#" target="_blank"> <i class="fa fa-twitter twitter"></i></a>
-        <a href="#" target="_blank"> <i class="fa fa-youtube youtube"></i></a> -->
     </div>
 </div>
 </body>
