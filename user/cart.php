@@ -272,7 +272,9 @@
                 while($r = mysqli_fetch_assoc($res)){
                     $qty = $r['qty'];
                     echo $qty."<br>";
-                    $query = "INSERT into ordered_products(p_id,o_id) VALUES(".$r['p_id'].",$o_id)";
+
+
+                    $query = "INSERT into ordered_products(p_id,o_id,qty) VALUES(".$r['p_id'].",$o_id,$qty)";
                     $update_product_query = "UPDATE product_details SET stock = stock - $qty where p_id = " . $r['p_id'];
                     mysqli_query($conn,$query);
                     mysqli_query($conn,$update_product_query);

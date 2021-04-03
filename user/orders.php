@@ -28,6 +28,7 @@
         <thead>
             <tr>
                 <th>Product Name</th>
+                <th>Quantity</th>
                 <th>Order At</th>
                 <th>Delivery address </th>
                 <th>Status</th>
@@ -48,6 +49,7 @@
             <tr>
                 
                 <th><?= $p['p_name'] ?></th>
+                <th><?= $r2['qty'] ?></th>
                 <th><?= $r['ordered_at'] ?></th>
                 <th><?= $r['shipping_address'] ?></th>
                 <th><?= $r2['status']?></th>
