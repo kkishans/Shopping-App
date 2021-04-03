@@ -258,13 +258,13 @@
     }
 
     if (isset($_POST['order'])) {
-        
+        $flag = 0;
         
         if (isset($_SESSION['useremail'])) {
             $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
             VALUES( $o_id,$u_id,$total,'$address')";
             echo mysqli_error($conn);
-            $sql = "SELECT P.p_id,id, qty from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
+            $sql = "SELECT P.p_id,P.p_name,id, qty,stock from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
             
             $res = mysqli_query($conn,$sql);
             if (mysqli_num_rows($res) > 0) {
@@ -273,41 +273,55 @@
                     $qty = $r['qty'];
                     echo $qty."<br>";
 
+                    if ($qty > $r['stock']) {
+                        $qty = $r['stock'];
+
+                        if ($r['stock'] == 0) {
+                            echo "<script>alert('We currently out of stock of ".$r['p_name'].".')</script>";
+                            $flag = 1; 
+                        }
+                        else echo "<script>alert('We currently have only ".$r['stock']." pieces of ".$r['p_name'].".')</script>";
+                         
+                    }
 
                     $query = "INSERT into ordered_products(p_id,o_id,qty) VALUES(".$r['p_id'].",$o_id,$qty)";
                     $update_product_query = "UPDATE product_details SET stock = stock - $qty where p_id = " . $r['p_id'];
                     mysqli_query($conn,$query);
                     mysqli_query($conn,$update_product_query);
                     echo mysqli_error($conn);
+                    
+                    
+                }
+            }
+            if ($flag == 0) {
+                if (mysqli_query($conn,$ordered_query)) {
+                    $query = "UPDATE cart_details SET is_in_cart = 'n' where u_id = $u_id and is_in_cart = 'y'";
+                    $res = mysqli_query($conn,$query);
+                    $msg =  'Your Order Id is O-0 '.$o_id.' .\n Product will deliver soon. \n A Confirmation E-mail will send to you';
+                    echo '<script>
+                            
+                    swal({
+                        title: "Order placed!",
+                        text: "'.$msg.'",
+                        icon: "success",
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                            //window.location = "./cart.php";
+                        } 
+                      });
+                </script>';
+                    
+                    $mailmsg =  'Your Order Id is O-0 '.$o_id.' .<br> Product will deliver soon.';
+                      
+                    sendMail($_SESSION['useremail'],$o_id,$mailmsg);
+                    echo "<script>window.location = 'cart.php'</script>";
+                }else{
+                    echo "<script>alert('Error while taking your order try again.')</script>";
+                    echo mysqli_error($conn);
                 }
             }
             
-            if (mysqli_query($conn,$ordered_query)) {
-                $query = "UPDATE cart_details SET is_in_cart = 'n' where u_id = $u_id and is_in_cart = 'y'";
-                $res = mysqli_query($conn,$query);
-                $msg =  'Your Order Id is O-0 '.$o_id.' .\n Product will deliver soon. \n A Confirmation E-mail will send to you';
-                echo '<script>
-                        
-                swal({
-                    title: "Order placed!",
-                    text: "'.$msg.'",
-                    icon: "success",
-                  })
-                  .then((willDelete) => {
-                    if (willDelete) {
-                        //window.location = "./cart.php";
-                    } 
-                  });
-            </script>';
-                
-                $mailmsg =  'Your Order Id is O-0 '.$o_id.' .<br> Product will deliver soon.';
-                  
-                sendMail($_SESSION['useremail'],$o_id,$mailmsg);
-                echo "<script>window.location = 'cart.php'</script>";
-            }else{
-                echo "<script>alert('Error while taking your order try again.')</script>";
-                echo mysqli_error($conn);
-            }
         }
         else{
             

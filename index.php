@@ -215,7 +215,7 @@ $img = array(
               <div>
               <p> <?= $desc_str ?></p>
               </div>
-              <?php if($r['stock'] > 1){ ?>
+              <?php if($r['stock'] > 0){ ?>
                 <div class=" mt-2 add-to-cart">
                     <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $r['p_id']  ?>" role="button">Add To Cart</a>
                 </div>
