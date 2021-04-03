@@ -161,6 +161,7 @@ if(isset($_POST['submit'])) {
                     //echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
                     echo "<script> window.location ='./cart.php' </script>";
                 }
+                echo mysqli_error();
             }
             session_unset($_SESSION['cart']);
         }

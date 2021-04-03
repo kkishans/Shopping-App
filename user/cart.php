@@ -9,10 +9,8 @@
 ?>
 
 <?php 
-    $query = "SELECT o_id FROM order_details  ORDER BY o_id DESC LIMIT 1";
-    $res = mysqli_query($conn,$query);
-    $r = mysqli_fetch_assoc($res);
-    $o_id = (int)$r['o_id'] + 1;
+    $date = date_default_timezone_set('Asia/Kolkata');
+    $o_id =  "O-".rand(100,999).Date("-dmYhis",time()) ."-".rand(10000,99999);
     $query = "SELECT u_id, address FROM users  WHERE  email = '".$useremail."'" ;
     $res = mysqli_query($conn,$query);
     $r = mysqli_fetch_assoc($res);
@@ -261,7 +259,7 @@
         
         if (isset($_SESSION['useremail'])) {
             $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
-                        VALUES( $o_id,$u_id,$total,'$address')";
+                        VALUES('$o_id',$u_id,$total,'$address')";
             echo mysqli_error($conn);
             $sql = "SELECT P.p_id,P.p_name,id, qty,stock from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
             
@@ -311,7 +309,7 @@
                     
                     $query = "UPDATE cart_details SET is_in_cart = 'n' where u_id = $u_id and is_in_cart = 'y'";
                     $res = mysqli_query($conn,$query);
-                    $msg =  'Your Order Id is O-0 '.$o_id.' .\n Product will deliver soon. \n A Confirmation E-mail will send to you';
+                    $msg =  'Your Order Id is '.$o_id.' .\n Product will deliver soon. \n A Confirmation E-mail will send to you';
                     echo '<script>
                             
                     swal({

@@ -40,7 +40,7 @@
         <?php 
         
              while($r = mysqli_fetch_assoc($res)){
-                $order_query = "SELECT * FROM ordered_products WHERE o_id = ".$r['o_id'] ;
+                $order_query = "SELECT * FROM ordered_products WHERE o_id = '".$r['o_id']."'" ;
                 $res1 = mysqli_query($conn,$order_query);
 
                 while($r2 = mysqli_fetch_assoc($res1)){
