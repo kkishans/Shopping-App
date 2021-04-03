@@ -76,6 +76,7 @@
                                     <input type="hidden" name="pid" value="<?=$v['p_id']?>"/>
                                     <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="-"/>
                                 </form>
+                                
                                     <?= $v['qty'] ?>
                                 <form method="post" style="display:inline">
                                     <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
@@ -235,8 +236,8 @@
                     $_SESSION['cart'][$k]['qty'] = $v['qty'] + 1;
                     break;
                 }
-             }
-             echo "<script> window.location ='./cart.php' </script>"; 
+            }
+            echo "<script> window.location ='./cart.php' </script>"; 
         }
     }
 
@@ -311,6 +312,10 @@
                     
                     $query = "UPDATE cart_details SET is_in_cart = 'n' where u_id = $u_id and is_in_cart = 'y'";
                     $res = mysqli_query($conn,$query);
+
+                    $mailmsg =  'Your Order Id is O-0 '.$o_id.' .<br> Product will deliver soon.';
+                    sendMail($_SESSION['useremail'],$o_id,$mailmsg);
+                    
                     $msg =  'Your Order Id is O-0 '.$o_id.' .\n Product will deliver soon. \n A Confirmation E-mail will send to you';
                     echo '<script>
                             
@@ -321,15 +326,13 @@
                       })
                       .then((willDelete) => {
                         if (willDelete) {
-                            //window.location = "./cart.php";
+                            window.location = "./cart.php";
                         } 
                       });
                 </script>';
                     
-                    $mailmsg =  'Your Order Id is O-0 '.$o_id.' .<br> Product will deliver soon.';
-                      
-                    sendMail($_SESSION['useremail'],$o_id,$mailmsg);
-                    echo "<script>window.location = 'cart.php'</script>";
+                    
+                    //echo "<script>window.location = 'cart.php'</script>";
                 }else{
                     echo "<script>alert('Error while taking your order try again.')</script>";
                     echo mysqli_error($conn);
