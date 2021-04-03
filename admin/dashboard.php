@@ -10,7 +10,7 @@
         ( SELECT count(*) from brands ) as bid,
         ( select count(*) from users ) as user,
         ( select count(*) from contact_us ) as mails,
-        ( select count(*) from order_details ) as orders,
+        ( select count(*) from ordered_products ) as orders,
         ( select count(*) from ordered_products where `status` = 'Delivered' ) as deliver, 
         ( select count(*) from ordered_products where `status` = 'Not Delivered' ) as notDeliver
         
