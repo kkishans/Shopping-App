@@ -2,7 +2,7 @@
   include '../db/db.php';
   include './top.php';
   if (isset($_SESSION['useremail'] )) {
-    echo "<script> window.location ='./dashboard.php' </script>";
+    echo "<script> window.location ='./cart.php' </script>";
     }
 
     $fname = $lname = $email = $address = $phone = "";
@@ -158,12 +158,14 @@ if(isset($_POST['submit'])) {
                 $res = mysqli_query($conn,$query);
 
                 if ($res) {
-                    //echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
+                    echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
                     echo "<script> window.location ='./cart.php' </script>";
                 }
-                echo mysqli_error();
+                echo mysqli_error($conn);
             }
             session_unset($_SESSION['cart']);
+        }else{
+            echo "<script> window.location ='./cart.php' </script>";
         }
     
     }else{
