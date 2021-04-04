@@ -124,12 +124,19 @@
                                 $total += $totalPerProduct;
 
                     ?>
-                        <tr onclick="window.location=' ../product.php?id=<?= $v['id']  ?>'" style="cursor:pointer">
-                            <td><img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
-                            <th><?= $v['p_name'] ?></th>
-                            <th><?= $v['price'] ?></th>
+                        <tr  style="cursor:pointer">
+                            <td>  <img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
+                            <th><a href="../product.php?id=<?= $v['id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
+                            <th><a href="../product.php?id=<?= $v['id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
+                            
                             <!-- <th> <?= $v['qty'] ?> </th>  -->
                             <th>
+
+                             <form method="post" style="display:inline">
+                                    <input type="number" id="txtqty<?=$v['id']?>" class="form-control justify-content-center" oninput="return updateQty(<?=$v['id']?>)" style="width:20%;"  name="qty" value="<?=trim($v['qty'])?>" min="1"/>
+                                    <input type="hidden" name="pid" id="pid<?=$v['id']?>" value="<?= $v['id']?>"/>
+                                    <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
+                                </form> 
                                 <!-- <form method="post" style="display:inline">
                                     <input type="hidden" name="qty" value=""/>
                                     <input type="hidden" name="pid" value=""/>
@@ -220,20 +227,13 @@
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById('txtqty'+pid).value = qty;
-                
+                //alert(this.responseText)
+                document.getElementById('badge').innerHTML = this.responseText
             }
         };
         xmlhttp.open("GET", "updateQty.php?pid=" + pid + "&qty= "+qty, true);
         xmlhttp.send();
-        // $.ajax({
-
-        //     url: "updateQty.php?pid="+pid+"&qty="+qty ,    //the page containing php script
-        //     type: "get",    //request type,
-            
-        //     success:function(result){
-        //         console.log(result.abc);
-        //     }
-        // });
+        
     }
   </script>
 

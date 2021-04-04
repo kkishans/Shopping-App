@@ -74,7 +74,7 @@
                  <?php
                   if ($total_cart_items > 0 ) {
                     echo " <div class='cart-badge'>
-                            <p>$total_cart_items</p>
+                            <p id='badge'>$total_cart_items</p>
                           </div>";
                   }
                  
