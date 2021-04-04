@@ -68,7 +68,7 @@
                             <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             <th>
                                 <form method="post" style="display:inline">
-                                    <input type="number" id="txtqty" class="form-control justify-content-center" onfocusout="return   updateQty()" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
+                                    <input type="number" id="txtqty" class="form-control justify-content-center" onfocusout="return updateQty()" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
                                     <input type="hidden" name="pid" id="pid" value="<?= $v['p_id']?>"/>
                                     <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
                                 </form>                                
@@ -127,17 +127,17 @@
                             <th><?= $v['price'] ?></th>
                             <!-- <th> <?= $v['qty'] ?> </th>  -->
                             <th>
-                                <form method="post" style="display:inline">
-                                    <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
-                                    <input type="hidden" name="pid" value="<?=$v['id']?>"/>
+                                <!-- <form method="post" style="display:inline">
+                                    <input type="hidden" name="qty" value=""/>
+                                    <input type="hidden" name="pid" value=""/>
                                     <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="-"/>
                                 </form>
-                                    <?= $v['qty'] ?>
+                            
                                 <form method="post" style="display:inline">
-                                    <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
-                                    <input type="hidden" name="pid" value="<?=$v['id']?>"/>
+                                    <input type="hidden" name="qty" value=""/>
+                                    <input type="hidden" name="pid" value=""/>
                                     <input type="submit" class="btn btn-sm btn-outline-primary ms-2" name="increse" value="+"/>
-                                </form>
+                                </form> -->
                             
                             </th> 
                             <th><a href="./remove_product.php?index=<?= $v['id'] ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
@@ -195,15 +195,15 @@
         var pid = document.getElementById('pid').value
 
         alert("updateQty.php?pid="+pid+"&qty="+qty)
-        // $.ajax((qty)=>{
+        $.ajax((pid,qty)=>{
 
-        //     url:"updateQty.php?pid=&qty=${qty}",    //the page containing php script
-        //     type: "get",    //request type,
+            url: "updateQty.php?pid="+pid+"&qty="+qty ,    //the page containing php script
+            type: "get",    //request type,
             
-        //     success:function(result){
-        //         console.log(result.abc);
-        //     }
-        // });
+            success:function(result){
+                console.log(result.abc);
+            }
+        });
     }
   </script>
 
