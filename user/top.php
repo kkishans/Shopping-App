@@ -54,9 +54,6 @@
                   <a class="nav-link link-light " href="../index.php">All Products</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link  link-light" href="#">Services</a>
-              </li>
-              <li class="nav-item">
                   <a class="nav-link  link-light" href="#">About Us</a>
               </li>
               <li class="nav-item">

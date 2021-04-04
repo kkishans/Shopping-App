@@ -59,7 +59,7 @@
 
     
     $create_order_details = "CREATE TABLE IF NOT EXISTS `order_details` (
-        `o_id` int(8) primary key AUTO_INCREMENT,
+        `o_id` varchar(255) primary key ,
         `u_id` int(8) NOT NULL,
         `total_amount` double NOT NULL,
         `shipping_address` varchar(300) NOT NULL,
