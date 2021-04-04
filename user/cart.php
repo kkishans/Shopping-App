@@ -60,7 +60,7 @@
                     <?php                             
                         while( $v = mysqli_fetch_assoc($res)){
                         $totalPerProduct = $v['price'] * $v['qty'];
-                        array_push($priceTable,array($v['p_name'],$v['price'],$v['qty']));
+                        array_push($priceTable,array($v['p_name'],$v['price'],$v['qty'],$v['p_id']));
                         $total += $totalPerProduct;
                     ?>
                        
@@ -120,7 +120,7 @@
                             foreach($_SESSION['cart'] as $k => $v){
                                 $order_flag = true;
                                 $totalPerProduct = $v['price'] * $v['qty'];
-                                array_push($priceTable,array($v['p_name'],$v['price'],$v['qty']));
+                                array_push($priceTable,array($v['p_name'],$v['price'],$v['qty'],$v['p_id']));
                                 $total += $totalPerProduct;
 
                     ?>
@@ -184,21 +184,25 @@
                         <th>Total</th>
                     </tr>
                    <?php
+                   $i = 1;
                    foreach ($priceTable as $a) {
                         ?>
                             <tr>
                                 <td><?= $a[0] ?></td>
-                                <td><?= "₹ ". number_format($a[1]) ?></td>
-                                <td id="summeryQty"><?= $a[2]?></td>
-                                <td><?="₹ ". number_format($a[1] * $a[2]) ?></td>
+                                <td ><?= "₹ ". number_format($a[1]) ?></td>
+                                    <span id="price<?= $a[3] ?>" hidden ><?= $a[1] ?></span>
+                                <td id="summeryQty<?= $a[3] ?>" ><?= $a[2]?></td>
+                                <td id="summeryPrice<?= $a[3] ?>" ><?="₹ ". number_format($a[1] * $a[2]) ?></td>
+                                <span id="total<?= $a[3] ?>" hidden><?= $a[1] * $a[2] ?></span>
                             </tr>
                         <?php
                     }
                    ?>
                     </table>
                     <hr class="col-11 text-center m-auto my-3">
+                    <span id="myTotalhidden" hidden><?= $total ?></span>
                     <h5 class="mt-4 text-rigth col-12">
-                        Total Amount To Pay : <?= "₹ ". number_format($total) ?>
+                        Total Amount To Pay : ₹ <span id="myTotalPrice" > <?= number_format($total) ?></span>
                     </h5>
                 </div>  
                 <div class="col-6 text-center" >
@@ -222,12 +226,49 @@
         var qty = document.getElementById('txtqty'+pid).value
         var pid = document.getElementById('pid'+pid).value
 
+        if (qty == "") {
+            return false;
+        }
+        
+       const currencyCovert = function (x) {
+            x=x.toString();
+            var lastThree = x.substring(x.length-3);
+            var otherNumbers = x.substring(0,x.length-3);
+            if(otherNumbers != '')
+                lastThree = ',' + lastThree;
+            var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+            return res
+       }
         //alert("updateQty.php?pid="+pid+"&qty="+qty)
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById('txtqty'+pid).value = qty;
-                //alert(this.responseText)
+
+                let q = document.getElementById('summeryQty'+pid);
+                let p = document.getElementById('summeryPrice'+pid);
+                let price = document.getElementById("price"+pid);
+               
+                let getTotalPrice = document.getElementById("myTotalhidden");
+                let setTotalPrice = document.getElementById("myTotalPrice");
+                let getOldTotal = document.getElementById("total"+pid);
+                
+                let oldPrice = parseFloat( getOldTotal.textContent)
+                let totalPrice = parseFloat(getTotalPrice.textContent)
+                let newPrice = (totalPrice - oldPrice)
+                console.log(newPrice)
+                let myqty = parseInt(qty)
+                let myprice = parseFloat(price.textContent)
+                q.innerHTML = qty
+                total = myqty * myprice
+                p.innerHTML = " ₹ " + currencyCovert(total);
+                console.log(total)
+                let grantTotal = (newPrice + total)
+                console.log(grantTotal)
+                getOldTotal.innerText = " " + total
+                getTotalPrice.innerText = " " + grantTotal
+                setTotalPrice.innerText  =  currencyCovert(grantTotal);
+               
                 document.getElementById('badge').innerHTML = this.responseText
             }
         };
