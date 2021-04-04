@@ -70,7 +70,7 @@
                             <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             <th>
                                 <form method="post" style="display:inline">
-                                    <input type="number" id="txtqty<?=$v['p_id']?>" class="form-control justify-content-center" onfocusout="return updateQty(<?=$v['p_id']?>)" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
+                                    <input type="number" id="txtqty<?=$v['p_id']?>" class="form-control justify-content-center" oninput="return updateQty(<?=$v['p_id']?>)" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
                                     <input type="hidden" name="pid" id="pid<?=$v['p_id']?>" value="<?= $v['p_id']?>"/>
                                     <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
                                 </form>                                
