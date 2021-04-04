@@ -64,7 +64,7 @@
                 <th><?php 
                     if($r2['status'] == "Not Delivered"){
                         ?>
-                        <button class="btn btn-outline-danger">Cancel</button>
+                        <a href="./cancelOrder.php?id=<?= $r['o_id'] ?>&pid=<?= $p['p_id'] ?>" class="btn btn-outline-danger">Cancel</a>
                         <?php
                     }else{
                         echo " - ";

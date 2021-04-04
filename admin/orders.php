@@ -80,7 +80,7 @@
                 $order_query = "SELECT O.o_id o_id,OP.p_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' and `status` = 'Not Delivered' LIMIT $offset, $no_of_records_per_page";
             }
             else {
-                $order_query = "SELECT O.o_id o_id,OP.p_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' and `status` = 'Delivered' LIMIT $offset, $no_of_records_per_page";
+                $order_query = "SELECT O.o_id o_id,OP.p_id, f_name,l_name, p_name , ordered_at , status FROM ordered_products AS OP, order_details AS O, users AS U, product_details  AS P WHERE  O.o_id = OP.o_id AND O.u_id = U.u_id AND OP.o_id = O.o_id AND P.p_id = OP.p_id AND DATE_FORMAT(ordered_at, '%Y-%m-%d') =  '$date' LIMIT $offset, $no_of_records_per_page";
                 
             }
         }
@@ -102,7 +102,9 @@
                 <th><?= $r['ordered_at'] ?></th>
                 <?php if($r['status'] == "Not Delivered") {   ?>
                 <th><a href="./delete.php?productDelivered=<?= $r['o_id'] ?>&productId=<?= $r['p_id'] ?>" class="btn btn-success">Delivered</a></th>
-                <?php  }else{ ?>
+                <?php  }else if($r['status'] == "Cancelled"){ ?>
+                    <th><a href="#" class="btn disable">Cancelled</a></th>
+                <?php  }else{?>
                     <th><a href="#" class="btn disable">Delivered</a></th>
                 <?php  } ?>
             </tr>
