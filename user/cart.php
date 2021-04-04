@@ -68,8 +68,8 @@
                             <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             <th>
                                 <form method="post" style="display:inline">
-                                    <input type="number" id="txtqty" class="form-control justify-content-center" onfocusout="return updateQty()" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
-                                    <input type="hidden" name="pid" id="pid" value="<?= $v['p_id']?>"/>
+                                    <input type="number" id="txtqty<?=$v['p_id']?>" class="form-control justify-content-center" onfocusout="return updateQty(<?=$v['p_id']?>)" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
+                                    <input type="hidden" name="pid" id="pid<?=$v['p_id']?>" value="<?= $v['p_id']?>"/>
                                     <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
                                 </form>                                
                                     
@@ -190,20 +190,28 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
   <script>
-    function updateQty(){
-        var qty = document.getElementById('txtqty').value
-        var pid = document.getElementById('pid').value
+    function updateQty(pid){
+        var qty = document.getElementById('txtqty'+pid).value
+        var pid = document.getElementById('pid'+pid).value
 
-        alert("updateQty.php?pid="+pid+"&qty="+qty)
-        $.ajax((pid,qty)=>{
-
-            url: "updateQty.php?pid="+pid+"&qty="+qty ,    //the page containing php script
-            type: "get",    //request type,
-            
-            success:function(result){
-                console.log(result.abc);
+        //alert("updateQty.php?pid="+pid+"&qty="+qty)
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtQty"+pid).value = this.responseText;
             }
-        });
+        };
+        xmlhttp.open("GET", "updateQty.php?pid=" + pid + "&qty= "+qty, true);
+        xmlhttp.send();
+        // $.ajax({
+
+        //     url: "updateQty.php?pid="+pid+"&qty="+qty ,    //the page containing php script
+        //     type: "get",    //request type,
+            
+        //     success:function(result){
+        //         console.log(result.abc);
+        //     }
+        // });
     }
   </script>
 
