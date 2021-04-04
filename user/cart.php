@@ -16,7 +16,8 @@
     $r = mysqli_fetch_assoc($res);
     $u_id = (int)$r['u_id'];
     $address = $r['address'];
-    $order_falg = false;
+    $priceTable = array();
+    $order_flag = false;
 ?>
 <div class="container-fluid mt-3">
     <hr>
@@ -43,7 +44,7 @@
                
                 $res = mysqli_query($conn,$sql);
                 if (mysqli_num_rows($res) > 0) {
-                    $order_falg = true;
+                    $order_flag = true;
                             ?>
                 <table class="table table-striped text-center" >
                     <thead>
@@ -59,6 +60,7 @@
                     <?php                             
                         while( $v = mysqli_fetch_assoc($res)){
                         $totalPerProduct = $v['price'] * $v['qty'];
+                        array_push($priceTable,array($v['p_name'],$v['price'],$v['qty']));
                         $total += $totalPerProduct;
                     ?>
                        
@@ -119,8 +121,9 @@
                 <?php
                 
                             foreach($_SESSION['cart'] as $k => $v){
-                                $order_falg = true;
+                                $order_flag = true;
                                 $totalPerProduct = $v['price'] * $v['qty'];
+                                array_push($priceTable,array($v['p_name'],$v['price'],$v['qty']));
                                 $total += $totalPerProduct;
 
                     ?>
@@ -161,27 +164,45 @@
           
                     </tbody>
                 </table>
-                <?php
-                    if(mysqli_num_rows($res) > 0 || isset($_SESSION['cart']) ){
-                        ?>
-                        <div class="mt-3">
-                            <h5 class="text-end pe-2">Total : <?= $total?></h5>
-                        </div>
-                        
-                        <?php
-                    }
-                
-                ?>
             </div>
         </div>
     </div>
     <?php
-        if($order_falg){
+        if($order_flag){
             ?>
-            <div class="justify-content-center d-flex">
-                <form action="" method="post">
-                    <button type="submit" name="order" class="btn btn-outline-primary my-5 m-auto fs-4">Order Now</button>
-                </form>
+            <div class="row justify-center align-items-center p-5 border-1 border col-10 mt-5 m-auto">
+                 <div class="col-6 text-center ">
+                    <table class=col-12>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                   <?php
+                   foreach ($priceTable as $a) {
+                        ?>
+                            <tr>
+                                <td><?= $a[0] ?></td>
+                                <td><?= "₹ ". number_format($a[1]) ?></td>
+                                <td><?= $a[2]?></td>
+                                <td><?="₹ ". number_format($a[1] * $a[2]) ?></td>
+                            </tr>
+                        <?php
+                    }
+                   ?>
+                    </table>
+                    <hr class="col-11 text-center m-auto my-3">
+                    <h5 class="mt-4 text-rigth col-12">
+                        Total Amount To Pay : <?= "₹ ". number_format($total) ?>
+                    </h5>
+                </div>  
+                <div class="col-6 text-center" >
+                    <form action="" method="post">
+                        <button type="submit" name="order" class="btn btn-outline-primary my-5 m-auto fs-4">Order Now</button>
+                    </form>
+                </div>
+                
             </div>
             <?php
         }

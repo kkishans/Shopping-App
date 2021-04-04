@@ -28,9 +28,6 @@ error_reporting(0);
         $brand = $r['b_name'];
         $desc = $r['description'];
         $keywords = $r['keywords'];
-
-        
-
     }
 ?>
 
@@ -49,7 +46,7 @@ error_reporting(0);
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Description</label>
-                <textarea class="form-control" name="description" placeholder="ex. Lenevo ideaPad" value ="<?= $desc ?>" required></textarea>
+                <textarea class="form-control" name="description" placeholder="ex. Lenevo ideaPad" required><?= $desc ?></textarea>
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Keywords</label>
@@ -93,17 +90,18 @@ error_reporting(0);
         $price = $_POST['price'];
         $stock = $_POST['stock'];
         global $brand,$category;
-        $desc = $_POST['description'];
+        $desc = htmlspecialchars($_POST['description']);
 
         
         $keywords = $_POST['keywords'];
 
         //get keywords from product name
-        $keyOfProduct = explode(" ",$pname);
-        foreach($keyOfProduct as $val){
-            $keywords .= ", $val";
+        if (!isset($_GET['update'])) {
+            $keyOfProduct = explode(" ",$pname);
+            foreach($keyOfProduct as $val){
+                $keywords .= ", $val";
+            }
         }
-
         if (!isset($_POST['category'])) {
             $category = 'none';
             $query = "INSERT into category(c_title) values('$category')";
