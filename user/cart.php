@@ -64,25 +64,22 @@
                         $total += $totalPerProduct;
                     ?>
                        
-                        <tr onclick="window.location=' ../product.php?id=<?= $v['p_id']  ?>'" style="cursor:pointer">
-                        
-                        
-                            <td><img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
-                            <th><?= $v['p_name'] ?></th>
-                            <th><?= $v['price'] ?></th>
+                        <tr>
+                            <td>  <img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
+                            <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
+                            <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             <th>
                                 <form method="post" style="display:inline">
-                                    <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
-                                    <input type="hidden" name="pid" value="<?=$v['p_id']?>"/>
-                                    <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="-"/>
-                                </form>
-                                
-                                    <?= $v['qty'] ?>
-                                <form method="post" style="display:inline">
-                                    <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
-                                    <input type="hidden" name="pid" value="<?=$v['p_id']?>"/>
+                                    <input type="number" id="txtqty" class="form-control justify-content-center" onfocusout="return updateQty()" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
+                                    <input type="hidden" name="pid" id="pid" value="<?= $v['p_id']?>"/>
+                                    <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
+                                </form>                                
+                                    
+                                <!--<form method="post" style="display:inline">
+                                    <input type="hidden" name="qty" value=""/>
+                                    <input type="hidden" name="pid" value=""/>
                                     <input type="submit" class="btn btn-sm btn-outline-primary ms-2" name="increse" value="+"/>
-                                </form>
+                                </form> -->
                             
                             </th> 
                             <th><a href="./remove_product.php?index=<?= $v['id'] ?>" class="btn btn-outline-danger "> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
@@ -133,17 +130,17 @@
                             <th><?= $v['price'] ?></th>
                             <!-- <th> <?= $v['qty'] ?> </th>  -->
                             <th>
-                                <form method="post" style="display:inline">
-                                    <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
-                                    <input type="hidden" name="pid" value="<?=$v['id']?>"/>
+                                <!-- <form method="post" style="display:inline">
+                                    <input type="hidden" name="qty" value=""/>
+                                    <input type="hidden" name="pid" value=""/>
                                     <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="-"/>
                                 </form>
-                                    <?= $v['qty'] ?>
+                            
                                 <form method="post" style="display:inline">
-                                    <input type="hidden" name="qty" value="<?=$v['qty']?>"/>
-                                    <input type="hidden" name="pid" value="<?=$v['id']?>"/>
+                                    <input type="hidden" name="qty" value=""/>
+                                    <input type="hidden" name="pid" value=""/>
                                     <input type="submit" class="btn btn-sm btn-outline-primary ms-2" name="increse" value="+"/>
-                                </form>
+                                </form> -->
                             
                             </th> 
                             <th><a href="./remove_product.php?index=<?= $v['id'] ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
@@ -209,56 +206,76 @@
     
     ?>
 </div>
-  
+
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <script>
+    function updateQty(){
+        var qty = document.getElementById('txtqty').value
+        var pid = document.getElementById('pid').value
+
+        alert("updateQty.php?pid="+pid+"&qty="+qty)
+        $.ajax((pid,qty)=>{
+
+            url: "updateQty.php?pid="+pid+"&qty="+qty ,    //the page containing php script
+            type: "get",    //request type,
+            
+            success:function(result){
+                console.log(result.abc);
+            }
+        });
+    }
+  </script>
 
 <?php 
     include './bottom.php';
 ?>
 <!-- Qty changing code -->
 <?php
-    if (isset($_POST['decrease'])) {
-        $p_id = $_POST['pid'];
-        $qty = $_POST['qty'];
+    // if (isset($_POST['decrease'])) {
+    //     $p_id = $_POST['pid'];
+    //     $qty = $_POST['qty'];
 
-        if ($qty > 1) {
-            if (isset($_SESSION['useremail'])) {
-                $query = "UPDATE cart_details SET qty = qty-1 where u_id = $u_id and p_id = $p_id and is_in_cart = 'y'";
-                $res = mysqli_query($conn,$query);
-                echo "<script> window.location ='./cart.php' </script>";
-            }
-            else if(isset($_SESSION['cart'])){
-                foreach ( $_SESSION['cart'] as $k => $v ){
-                    if ($v['id'] == $p_id) {
-                        $_SESSION['cart'][$k]['qty'] = $v['qty'] - 1;
-                        break;
-                    }
-                 }
-                 echo "<script> window.location ='./cart.php' </script>"; 
-            }
+    //     if ($qty > 1) {
+    //         if (isset($_SESSION['useremail'])) {
+    //             $query = "UPDATE cart_details SET qty = qty-1 where u_id = $u_id and p_id = $p_id and is_in_cart = 'y'";
+    //             $res = mysqli_query($conn,$query);
+    //             echo "<script> window.location ='./cart.php' </script>";
+    //         }
+    //         else if(isset($_SESSION['cart'])){
+    //             foreach ( $_SESSION['cart'] as $k => $v ){
+    //                 if ($v['id'] == $p_id) {
+    //                     $_SESSION['cart'][$k]['qty'] = $v['qty'] - 1;
+    //                     break;
+    //                 }
+    //              }
+    //              echo "<script> window.location ='./cart.php' </script>"; 
+    //         }
             
-        }else echo "<script>swal('Alert','Quatity must be grater than 0','info')</script>"; 
+    //     }else echo "<script>swal('Alert','Quatity must be grater than 0','info')</script>"; 
         
-    }
+    // }
 
-    if (isset($_POST['increse'])) {
-        $p_id = $_POST['pid'];
-        $qty = $_POST['qty'];
+    // if (isset($_POST['increse'])) {
+    //     $p_id = $_POST['pid'];
+    //     $qty = $_POST['qty'];
         
-        if (isset($_SESSION['useremail'])) {
-            $query = "UPDATE cart_details SET qty = qty+1 where u_id = $u_id and p_id = $p_id and is_in_cart = 'y'";
-            $res = mysqli_query($conn,$query);
-            echo "<script> window.location ='./cart.php' </script>";
-        }
-        else if(isset($_SESSION['cart'])){
-            foreach ( $_SESSION['cart'] as $k => $v ){
-                if ($v['id'] == $p_id) {
-                    $_SESSION['cart'][$k]['qty'] = $v['qty'] + 1;
-                    break;
-                }
-            }
-            echo "<script> window.location ='./cart.php' </script>"; 
-        }
-    }
+    //     if (isset($_SESSION['useremail'])) {
+    //         $query = "UPDATE cart_details SET qty = qty+1 where u_id = $u_id and p_id = $p_id and is_in_cart = 'y'";
+    //         $res = mysqli_query($conn,$query);
+    //         echo "<script> window.location ='./cart.php' </script>";
+    //     }
+    //     else if(isset($_SESSION['cart'])){
+    //         foreach ( $_SESSION['cart'] as $k => $v ){
+    //             if ($v['id'] == $p_id) {
+    //                 $_SESSION['cart'][$k]['qty'] = $v['qty'] + 1;
+    //                 break;
+    //             }
+    //         }
+    //         echo "<script> window.location ='./cart.php' </script>"; 
+    //     }
+    //}
 
 ?>
 
