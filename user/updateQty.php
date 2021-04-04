@@ -11,7 +11,7 @@
         $qty = $_GET['qty'];
         
 
-        if ($qty > 1) {
+        if ($qty >= 1) {
             if (isset($_SESSION['useremail'])) {
                 $query = "SELECT u_id FROM users  WHERE  email = '".$_SESSION['useremail']."'" ;
                 $res = mysqli_query($conn,$query);
