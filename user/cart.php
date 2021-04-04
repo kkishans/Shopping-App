@@ -74,7 +74,7 @@
                                     <input type="hidden" name="pid" id="pid<?=$v['p_id']?>" value="<?= $v['p_id']?>"/>
                                     <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
                                 </form>                                
-                                    
+
                                 <!--<form method="post" style="display:inline">
                                     <input type="hidden" name="qty" value=""/>
                                     <input type="hidden" name="pid" value=""/>
@@ -120,7 +120,7 @@
                             foreach($_SESSION['cart'] as $k => $v){
                                 $order_flag = true;
                                 $totalPerProduct = $v['price'] * $v['qty'];
-                                array_push($priceTable,array($v['p_name'],$v['price'],$v['qty'],$v['p_id']));
+                                array_push($priceTable,array($v['p_name'],$v['price'],$v['qty'],$v['id']));
                                 $total += $totalPerProduct;
 
                     ?>
