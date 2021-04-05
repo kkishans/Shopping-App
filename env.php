@@ -6,4 +6,5 @@
     $fromName = "Pooja Elecricals";
     $from = "poojaelectricals462@gmail.com";
     $password = "Elect#2021";
+    
 ?>
