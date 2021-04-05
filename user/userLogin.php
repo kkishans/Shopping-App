@@ -84,7 +84,7 @@ if(isset($_POST['login'])){
 
         header("Location: cart.php");
     }else{
-        echo "<script>alert('Invalid username and Password.')</script>";
+        echo "<script>alert('Invalid username and Password. Go to registration if you are new here.')</script>";
     }
 }
 

@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-3 text-end me-4">
             <form  method="post">
-                <input type="submit" class="btn btn-outline-danger" value="Remove all" name="clear">
+                <input type="submit" class="btn btn-outline-danger" value="Cancel all" name="clear">
             </form>
         </div>
     </div>
@@ -53,7 +53,7 @@
                             <th>Product Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th>Remove</th>
+                            <th>Cancel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,8 +69,8 @@
                             <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
                             <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             <th>
-                                <form method="post" style="display:inline">
-                                    <input type="number" id="txtqty<?=$v['p_id']?>" class="form-control justify-content-center" oninput="return updateQty(<?=$v['p_id']?>)" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
+                                <form method="post">
+                                    <input type="number" id="txtqty<?=$v['p_id']?>" class="form-control m-auto" oninput="return updateQty(<?=$v['p_id']?>)" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
                                     <input type="hidden" name="pid" id="pid<?=$v['p_id']?>" value="<?= $v['p_id']?>"/>
                                     <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
                                 </form>                                
@@ -111,7 +111,7 @@
                             <th>Product Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th>Remove</th>
+                            <th>Cancel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -132,8 +132,8 @@
                             <!-- <th> <?= $v['qty'] ?> </th>  -->
                             <th>
 
-                             <form method="post" style="display:inline">
-                                    <input type="number" id="txtqty<?=$v['id']?>" class="form-control justify-content-center" oninput="return updateQty(<?=$v['id']?>)" style="width:20%;"  name="qty" value="<?=trim($v['qty'])?>" min="1"/>
+                             <form method="post" >
+                                    <input type="number" id="txtqty<?=$v['id']?>" class="form-control m-auto" oninput="return updateQty(<?=$v['id']?>)" style="width:20%;"  name="qty" value="<?=trim($v['qty'])?>" min="1"/>
                                     <input type="hidden" name="pid" id="pid<?=$v['id']?>" value="<?= $v['id']?>"/>
                                     <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
                                 </form> 
@@ -200,13 +200,17 @@
                    ?>
                     </table>
                     <hr class="col-11 text-center m-auto my-3">
-                    <span id="myTotalhidden" hidden><?= $total ?></span>
+                    <span  id="myTotalhidden" hidden><?= $total ?></span>
                     <h5 class="mt-4 text-rigth col-12">
                         Total Amount To Pay : ₹ <span id="myTotalPrice" > <?= number_format($total) ?></span>
                     </h5>
                 </div>  
                 <div class="col-6 text-center" >
-                    <form action="" method="post">
+                    <form action="#" method="post">
+                        <div style="display: none;">
+                            <input type="hidden" name="lblTotalPrice" value="<?= $total ?>">
+                        </div>
+                    
                         <button type="submit" name="order" class="btn btn-outline-primary my-5 m-auto fs-4">Order Now</button>
                     </form>
                 </div>
@@ -268,7 +272,9 @@
                 getOldTotal.innerText = " " + total
                 getTotalPrice.innerText = " " + grantTotal
                 setTotalPrice.innerText  =  currencyCovert(grantTotal);
-               
+
+                document.getElementsByName("lblTotalPrice")[0].value = ""+grantTotal;
+                
                 document.getElementById('badge').innerHTML = this.responseText
             }
         };
@@ -345,7 +351,7 @@
 
     if (isset($_POST['order'])) {
         $flag = 1;
-        
+        $total = $_POST['lblTotalPrice'];
         if (isset($_SESSION['useremail'])) {
             $ordered_query = "INSERT INTO order_details(o_id,u_id,total_amount,shipping_address) 
                         VALUES('$o_id',$u_id,$total,'$address')";

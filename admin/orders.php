@@ -101,7 +101,7 @@
                 <th><?= $r['p_name'] ?></th>
                 <th><?= $r['ordered_at'] ?></th>
                 <?php if($r['status'] == "Not Delivered") {   ?>
-                <th><a href="./delete.php?productDelivered=<?= $r['o_id'] ?>&productId=<?= $r['p_id'] ?>" class="btn btn-success">Delivered</a></th>
+                <th><a href="./delete.php?productDelivered=<?= $r['o_id'] ?>&productId=<?= $r['p_id'] ?>" class="btn btn-success"> Yet to Deliver</a></th>
                 <?php  }else if($r['status'] == "Cancelled"){ ?>
                     <th><a href="#" class="btn disable">Cancelled</a></th>
                 <?php  }else{?>
