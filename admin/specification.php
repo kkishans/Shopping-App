@@ -36,10 +36,10 @@
     <div class="card col-sm-11 col-sm-11 col-md-6 col-xl-6 col-9">
         <form action="" class="p-3 row" enctype="multipart/form-data" method="POST" >
             <div class="col-4 ">
-                <input type="text" class="form-control" name="spec_key" placeholder="Key" value="<?= $key ?>" required>
+                <input type="text" class="form-control" name="spec_key" placeholder="Title" value="<?= $key ?>" required>
             </div>
             <div class="col-4 ">
-                <input type="text" class="form-control" name="value" placeholder="Value" value="<?= $value ?>" required>
+                <input type="text" class="form-control" name="value" placeholder="Description" value="<?= $value ?>" required>
             </div>
             <div class="col-4">
                 <input class="btn btn-outline-primary" type="submit" name="addSpecification" value="<?= $label ?> Specification" />
@@ -52,8 +52,8 @@
     <table class="table table-striped" >
         <thead>
             <tr>
-                <th>Key</th>
-                <th>Value</th>
+                <th>Title</th>
+                <th>Description</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
