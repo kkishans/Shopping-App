@@ -45,7 +45,7 @@ $img = array(
   </div>
   <div class="col-xl-7 col-md-7 col-sm-10 col-xm-11">
     <form action="#" class="row">
-      <div class="col-xl-3 col-md-3 col-sm-5 ">
+      <div class="col-xl-3 col-md-3 col-sm-6 ">
         <label class="form-label">Category :</label>
         <select class="form-select" name="category">
           <option value="0">All</option>
@@ -67,7 +67,7 @@ $img = array(
           ?>
         </select>
       </div>
-      <div class="col-xl-3 col-md-3 col-sm-5">
+      <div class="col-xl-3 col-md-3 col-sm-6">
         <label class="form-label">Brand :</label>
         <select class="form-select" name="brand">
           <option value="0">All</option>
@@ -87,10 +87,10 @@ $img = array(
         </select>
       </div>
 
-      <div class=" col-md-1 col-sm-5 p-3 col-xl-2 text-center mt-3 ">
+      <div class=" col-md-1 col-sm-6 m-auto   p-3 col-xl-2 text-center mt-3 ">
         <button type="submit" name="filter" class="btn btn-outline-success px-4">Filter</button>
       </div>
-      <div class=" col-md-3 col-sm-12 p-3 col-xl-4 text-center mt-3">
+      <div class=" col-md-4 col-sm-12 p-3 col-xl-4 text-center mt-3">
 
         <div class="form-outline d-flex">
           <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.." />

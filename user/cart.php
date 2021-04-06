@@ -7,23 +7,6 @@
     // }
     $useremail = $_SESSION['useremail'];
 
-    // pagination code //
-
-    if (isset($_GET['pageno'])) {
-        $pageno = $_GET['pageno'];
-    } else {
-        $pageno = 1;
-    }
-
-    $no_of_records_per_page = 2;
-    
-    $offset = ($pageno-1) * $no_of_records_per_page; 
-
-    $total_pages_sql = "SELECT COUNT(*) FROM cart_details as c,users as u where c.u_id = u.u_id and u.email = '".$_SESSION['useremail']."' and is_in_cart = 'y'";
-    $result = mysqli_query($conn,$total_pages_sql);
-    $total_rows = mysqli_fetch_array($result)[0];
-    $total_pages = ceil($total_rows / $no_of_records_per_page);
-
 ?>
 
 <?php 
@@ -58,7 +41,7 @@
             <?php 
                 $total = 0;
                 if(isset($_SESSION['useremail'])){
-                $sql = "SELECT P.p_id,id,p_name,qty,p_img,price from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."' LIMIT $offset, $no_of_records_per_page";
+                $sql = "SELECT P.p_id,id,p_name,qty,p_img,price from cart_details as C,product_details as P,users as U where  C.p_id = P.p_id and U.u_id = C.u_id and is_in_cart = 'y' and U.email = '".$_SESSION['useremail']."'";
                     
                 $res = mysqli_query($conn,$sql);
                 $total_record = 0;
@@ -177,20 +160,7 @@
                     </tbody>
                 </table>
             </div>
-
-        <nav aria-label="row Page navigation example">
-            <ul class="col-11 m-auto pagination justify-content-between mt-3 <?php if($total_rows <= 2){ echo " d-none";}?>">
-                
-                <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
-                <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>"   tabindex="-1">Previous</a>
-                </li>
-                
-                <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-                <a class="page-link " href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" >Next</a>
-                </li>
-            </ul>
-        </nav>
-        <!-- end -->    
+           
         </div>
     <?php
         if($order_flag){
