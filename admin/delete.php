@@ -1,5 +1,10 @@
 <?php
 include '../db/db.php';
+
+use PHPMailer\PHPMailer\PHPMailer; 
+use PHPMailer\PHPMailer\Exception; 
+require '../vendor/autoload.php';
+
 if(isset($_GET['deleteProduct'])){
     $product_query = "SELECT * FROM product_details WHERE p_id = ".$_GET['deleteProduct'];
     $r = mysqli_fetch_assoc(mysqli_query($conn,$product_query));
@@ -81,6 +86,57 @@ if(isset($_GET['productDelivered'])){
      }else{
          echo mysqli_error($conn);
      }
+}
+
+if(isset($_GET['cancelOrder'])){
+    $order_update_query = "UPDATE ordered_products SET  status = 'Cancelled' WHERE o_id = '".$_GET['cancelOrder']."' AND p_id = ". $_GET['productId'];
+
+    if (mysqli_query($conn,$order_update_query)) {
+        sendMail($_GET['productId'],$_GET['email']);
+        header("location:orders.php");
+     }else{
+         echo mysqli_error($conn);
+     }
+}
+
+ 
+
+function sendMail($pid,$email){
+    include '../db/db.php';
+
+    require "../env.php";
+    $query = "SELECT p_name from product_details where p_id = $pid";
+
+    $res = mysqli_query($conn,$query);
+    $r = mysqli_fetch_assoc($res);
+    $p_name = $r['p_name'];
+    $to = $email ;
+    $msg =  "Due some reasons Your $p_name order is cancelled by us. \nFor more detail please contact us.";
+
+    echo $msg;
+        $mail = new PHPMailer(true); 
+       
+        try { 
+            $mail->SMTPDebug = 0;                                        
+            $mail->isSMTP();                                             
+            $mail->Host       = 'smtp.gmail.com;';                     
+            $mail->SMTPAuth   = true;                              
+            $mail->Username   = $from;                  
+            $mail->Password   = $password;                                                       
+            $mail->Port       = 587;   
+        
+            $mail->setFrom($from, $fromName);            
+            $mail->addAddress($to); 
+            
+            $mail->isHTML(true);                                   
+            $mail->Subject = 'Pooja Electronics'; 
+            $mail->Body    = $msg; 
+            $mail->send(); 
+            
+            
+        } catch (Exception $e) { 
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; 
+        } 
 }
 
 

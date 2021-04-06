@@ -92,7 +92,7 @@
 
     $create_ordered_product = "CREATE TABLE IF NOT EXISTS `ordered_products` (
       `id` int(11) primary key AUTO_INCREMENT,
-      `o_id` int(8) NOT NULL,
+      `o_id` varchar(255) NOT NULL,
       `p_id` int(8) NOT NULL,
       `qty` int(8) NOT NULL,  
       `status` text NOT NULL DEFAULT 'Not Delivered',
