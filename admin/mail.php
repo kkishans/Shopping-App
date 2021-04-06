@@ -38,7 +38,7 @@
                 <td><?= $r['name'] ?></td>
                 <td><?= $r['message']?></td>
                 <th>
-                <a href="#replyMail" class="btn col-md-4 btn-outline-success" data-toggle="modal" data-id="<?= $r['email']?>">Reply </a>
+                <a href="#replyMail" class="btn btn-outline-success" data-toggle="modal" data-id="<?= $r['email']?>">Reply </a>
                 
                 </th> 
                 

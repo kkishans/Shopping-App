@@ -33,15 +33,15 @@
 </div>
     
 <div class=" d-flex align-items-center m-auto card border-0 my-3">
-    <div class="card col-sm-11 col-sm-11 col-md-6 col-xl-6 col-9">
+    <div class="card col-sm-11 col-sm-11 col-md-8 col-xl-6 col-9">
         <form action="" class="p-3 row" enctype="multipart/form-data" method="POST" >
-            <div class="col-4 ">
+            <div class="col-md-5 col-xl-4 col-sm-5 m-auto mb-2">
                 <input type="text" class="form-control" name="spec_key" placeholder="Key" value="<?= $key ?>" required>
             </div>
-            <div class="col-4 ">
+            <div class="col-md-5 col-xl-4 col-sm-5 m-auto mb-2">
                 <input type="text" class="form-control" name="value" placeholder="Value" value="<?= $value ?>" required>
             </div>
-            <div class="col-4">
+            <div class="col-md-12 col-xl-3 col-sm-10 m-auto text-center mb-2">
                 <input class="btn btn-outline-primary" type="submit" name="addSpecification" value="<?= $label ?> Specification" />
             </div>
         </form>   

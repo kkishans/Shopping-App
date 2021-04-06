@@ -24,12 +24,12 @@
 </div>
     
 <div class=" d-flex align-items-center m-auto card border-0 my-3">
-    <div class="card col-sm-11 col-sm-11 col-md-5 col-xl-5 col-9 ">
+    <div class="card col-sm-11 col-sm-11 col-md-5 col-xl-5 ">
         <form action="" class="p-3 row" enctype="multipart/form-data" method="POST" >
-            <div class="col-8 ">
+            <div class="col-xl-8 col-sm-12  m-auto my-3 ">
                 <input type="text" class="form-control" name="bname" placeholder="Brand name" value ="<?= $bname ?>"required>
             </div>
-            <div class=" col-4">
+            <div class="col-xl-4 col-sm-12  m-auto my-3 text-center">
                 <input class="btn btn-outline-primary" type="submit" name="addBrand" value="<?= $label ?> Brand">
             </div>
         </form>   
