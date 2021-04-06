@@ -60,20 +60,20 @@
             <div class="my-3">
             
                 <div class="row">
-                    <div class="col-xl-6 col-md-6 col-sm-11 my-3">
+                    <div class="col-xl-6 col-md-6 col-sm-12 my-3">
                         <input class="form-control" type="file" name="o_image_1" id="formFile" accept="image/*">
                     </div>
-                    <div class="col-xl-6 col-md-6 col-sm-11 my-3">
+                    <div class="col-xl-6 col-md-6 col-sm-12 my-3">
                         <input class="form-control" type="file" name="o_image_2" id="formFile" accept="image/*">
                     </div>                    
                 </div>
             </div>
             <div class="my-3">
                 <div class="row">
-                    <div class="col-xl-6 col-md-6 col-sm-11 my-3">
+                    <div class="col-xl-6 col-md-6 col-sm-12 my-3">
                             <input class="form-control" type="file" name="o_image_3" id="formFile" accept="image/*">
                     </div>
-                    <div class="col-xl-6 col-md-6 col-sm-11 my-3">
+                    <div class="col-xl-6 col-md-6 col-sm-12 my-3">
                         <input class="form-control" type="file" name="o_image_4" id="formFile" accept="image/*">
                     </div>                    
                 </div>

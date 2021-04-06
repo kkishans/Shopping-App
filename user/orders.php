@@ -51,17 +51,17 @@
         ?>
             <tr>
                 
-                <th><a href="../product.php?id=<?= $p['p_id']  ?>" class="card-l" style="text-decoration: none;color:black;"><?= $p['p_name'] ?>
+                <th><a href="../product.php?id=<?= $p['p_id']  ?>" class="card-l" style="max-width:4rem;text-decoration: none;color:black;"><?= $p['p_name'] ?>
                 <br><p style="font-weight: 400;"> <?= $p['description'] ?></p></a></th>
                 <th><?= $r2['qty'] ?></th>
-                <th style="max-width: 5rem;"><?= $r['ordered_at'] ?></th>
-                <th style="max-width: 9rem;font-weight: 500;"><?= $r['shipping_address'] ?></th>
-                <th style="max-width: 9rem;">
+                <th style="min-width: 4rem;"><?= $r['ordered_at'] ?></th>
+                <th style="min-width: 5rem;font-weight: 500;"><?= $r['shipping_address'] ?></th>
+                <th style="min-width: 6rem;">
                     <p style="font-weight: 400;"><?= $p['price'] ." * " . $r2['qty']." = " ?></p>
                     <p style="font-weight: 500;"><?= " ₹ ". number_format(($p['price'] * $r2['qty'])) ?></p>
                 </th>
                 <th><?= $r2['status']?></th>
-                <th><?php 
+                <th style="min-width: 6rem; text-align:center;"><?php 
                     if($r2['status'] == "Not Delivered"){
                         ?>
                         <a href="./cancelOrder.php?id=<?= $r['o_id'] ?>&pid=<?= $p['p_id'] ?>" class="btn btn-outline-danger">Cancel</a>
