@@ -66,15 +66,12 @@ if(isset($_POST['login'])){
          $r = mysqli_fetch_assoc($res);
          $u_id = $r['u_id'];
 
-        //session data adding in user cart...
-
         if (isset($_SESSION['cart'])) {
             foreach($_SESSION['cart'] as $k => $v){
                 $query = "INSERT into cart_details(p_id,u_id,qty,is_in_cart) values('". $v['id'] ."' ,$u_id,".$v['qty'].",'y')";
                 $res = mysqli_query($conn,$query);
 
                 if ($res) {
-                    //echo "<script>alert('Item added in cart. Please click on order button again.')</script>";
                     echo "<script> window.location ='./cart.php' </script>";
                 }
                      

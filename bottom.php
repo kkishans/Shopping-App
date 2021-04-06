@@ -11,18 +11,12 @@
         $youtube = $data['youtube_link'];
     }
 ?>
-<div class="footer fixed-bottom">
-    <div class="copyright-text">
+<div class="footer row text-center">
+    <div class="copyright-text col-xl-4 col-md-11 col-sm-12">
       <p>Copyright © 2021 Pooja Electricals, All rights reserved.</p>
     </div>
-    <div class="copyright">
-    <?php 
-            if ($facebook != "" || $insta != "" || $twitter != "" || $youtube != "") {
-                echo " <span> | connect with </span>";
-            }
-    ?>
-    </div>
-    <div class="copyright">
+    <div class="copyright col-xl-3 col-md-11 col-sm-12">
+    
         <?php 
             if ($facebook != "") {
                 echo "<a href='$facebook' target='_blank'> <i class='fa fa-facebook facebook'></i></a>";

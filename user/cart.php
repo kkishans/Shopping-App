@@ -34,8 +34,8 @@
         </div>
     </div>
     <hr>
-    <div class="mt-4">
-        <div class="card col-11 m-auto" >
+    <div class="row">
+        <div class="card col-7 m-auto" >
             <div class="card-body">
             <?php 
                 $total = 0;
@@ -46,7 +46,7 @@
                 if (mysqli_num_rows($res) > 0) {
                     $order_flag = true;
                             ?>
-                <table class="table table-striped text-center" >
+                <table class="table table-striped text-center col-6" >
                     <thead>
                         <tr>
                             <th>Review</th>
@@ -66,7 +66,7 @@
                        
                         <tr>
                             <td>  <img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
-                            <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
+                            <th style="max-width: 5rem;"><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
                             <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             <th>
                                 <form method="post">
@@ -92,7 +92,7 @@
                         }
                         else{
                         ?>
-                            <div class="col-4 m-auto" >
+                            <div class="col-11 text-center m-auto" >
                                     <img src="../img/emptyCart.png" alt="Cart is empty" height="300px" srcset="">   
                                     <h4 class="text-center">Your Cart is Empty!!!</h4> 
                             </div>
@@ -126,7 +126,7 @@
                     ?>
                         <tr  style="cursor:pointer">
                             <td>  <img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
-                            <th><a href="../product.php?id=<?= $v['id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
+                            <th style="max-width: 5rem;"><a href="../product.php?id=<?= $v['id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
                             <th><a href="../product.php?id=<?= $v['id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             
                             <!-- <th> <?= $v['qty'] ?> </th>  -->
@@ -157,7 +157,7 @@
                             }
                         }else{
                             ?>
-                            <div class="col-4 m-auto" >
+                            <div class="col-11 text-center m-auto" >
                                     <img src="../img/emptycart.png" alt="Cart is empty" height="300px" srcset="">   
                                     <h4 class="text-center">Your Cart is Empty!!!</h4> 
                             </div>
@@ -170,12 +170,20 @@
                 </table>
             </div>
         </div>
-    </div>
-    <?php
+        <?php
         if($order_flag){
             ?>
-            <div class="row justify-center align-items-center p-5 border-1 border col-10 mt-5 m-auto">
-                 <div class="col-6 text-center ">
+            <div class="col-4 justify-center align-items-center p-5 border-1 border  mt-5 m-auto">
+            <div class="text-center" >
+                    <form action="#" method="post">
+                        <div style="display: none;">
+                            <input type="hidden" name="lblTotalPrice" value="<?= $total ?>">
+                        </div>
+                    
+                        <button type="submit" name="order" class="btn btn-outline-primary my-5 m-auto fs-4">Order Now</button>
+                    </form>
+                </div>
+                 <div class="text-center ">
                     <table class=col-12>
                     <tr>
                         <th>Product Name</th>
@@ -188,7 +196,7 @@
                    foreach ($priceTable as $a) {
                         ?>
                             <tr>
-                                <td><?= $a[0] ?></td>
+                                <td style="max-width: 3rem;"><?= $a[0] ?></td>
                                 <td ><?= "₹ ". number_format($a[1]) ?></td>
                                     <span id="price<?= $a[3] ?>" hidden ><?= $a[1] ?></span>
                                 <td id="summeryQty<?= $a[3] ?>" ><?= $a[2]?></td>
@@ -205,21 +213,15 @@
                         Total Amount To Pay : ₹ <span id="myTotalPrice" > <?= number_format($total) ?></span>
                     </h5>
                 </div>  
-                <div class="col-6 text-center" >
-                    <form action="#" method="post">
-                        <div style="display: none;">
-                            <input type="hidden" name="lblTotalPrice" value="<?= $total ?>">
-                        </div>
-                    
-                        <button type="submit" name="order" class="btn btn-outline-primary my-5 m-auto fs-4">Order Now</button>
-                    </form>
-                </div>
+                
                 
             </div>
             <?php
         }
     
     ?>
+    </div>
+   
 </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>

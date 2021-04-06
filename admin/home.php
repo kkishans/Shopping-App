@@ -102,7 +102,7 @@
         ?>
             <tr>
                 <td><img src="<?= "../img/". $r['p_img']  ?>" alt="product image" width="50p" height="40px"></td>
-                <th><?= ucwords($r['p_name']) ?></th>
+                <th style="max-width: 5rem;"><?= ucwords($r['p_name']) ?></th>
                 <th><?= $r['price'] ?></th>
                 <th><?= $r['stock'] ?></th>
                 <th><a href="./product.php?update=<?= $r['p_id'] ?>" class="btn btn-outline-success"> <i class="fa fa-pencil" aria-hidden="true"></i></a></th>
