@@ -157,18 +157,6 @@
                                     <input type="hidden" name="pid" id="pid<?=$v['id']?>" value="<?= $v['id']?>"/>
                                     <!-- <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="Apply"/> -->
                                 </form> 
-                                <!-- <form method="post" style="display:inline">
-                                    <input type="hidden" name="qty" value=""/>
-                                    <input type="hidden" name="pid" value=""/>
-                                    <input type="submit" name="decrease" class="btn btn-sm btn-outline-primary me-2" value="-"/>
-                                </form>
-                            
-                                <form method="post" style="display:inline">
-                                    <input type="hidden" name="qty" value=""/>
-                                    <input type="hidden" name="pid" value=""/>
-                                    <input type="submit" class="btn btn-sm btn-outline-primary ms-2" name="increse" value="+"/>
-                                </form> -->
-                            
                             </th> 
                             <th><a href="./remove_product.php?index=<?= $v['id'] ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>
                         </tr>
@@ -189,33 +177,35 @@
                     </tbody>
                 </table>
             </div>
+
+        <nav aria-label="row Page navigation example">
+            <ul class="col-11 m-auto pagination justify-content-between mt-3 <?php if($total_rows <= 2){ echo " d-none";}?>">
+                
+                <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
+                <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>"   tabindex="-1">Previous</a>
+                </li>
+                
+                <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                <a class="page-link " href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" >Next</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- end -->    
         </div>
-    
-    <nav aria-label="row Page navigation example">
-        <ul class="col-11 m-auto pagination justify-content-between mt-3 <?php if($total_rows <= 2){ echo " d-none";}?>">
-            
-            <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
-            <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>"   tabindex="-1">Previous</a>
-            </li>
-            
-            <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-            <a class="page-link " href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" >Next</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- end -->
     <?php
         if($order_flag){
             ?>
             <div class="col-4 justify-center align-items-center p-5 border-1 border  mt-5 m-auto">
-                    <form action="#" method="post">
+                    <div class="text-center">
+                    <form action="#" method="post" >
                         <div style="display: none;">
                             <input type="hidden" name="lblTotalPrice" value="<?= $total ?>">
                         </div>
                     
                         <button type="submit" name="order" class="btn btn-outline-primary my-5 m-auto fs-4">Order Now</button>
                     </form>
-                </div>
+                    </div>
+               
                  <div class="text-center ">
                     <table class=col-12>
                     <tr>
@@ -228,8 +218,8 @@
                    $i = 1;
                    foreach ($priceTable as $a) {
                         ?>
-                            <tr>
-                                <td style="max-width: 3rem;"><?= $a[0] ?></td>
+                            <tr style="border-top: 1px solid lightgray;margin-top:1rem">
+                                <td style="max-width: 3rem;text-align: left;"><?= $a[0] ?></td>
                                 <td ><?= "₹ ". number_format($a[1]) ?></td>
                                     <span id="price<?= $a[3] ?>" hidden ><?= $a[1] ?></span>
                                 <td id="summeryQty<?= $a[3] ?>" ><?= $a[2]?></td>
@@ -245,9 +235,7 @@
                     <h5 class="mt-4 text-rigth col-12">
                         Total Amount To Pay : ₹ <span id="myTotalPrice" > <?= number_format($total) ?></span>
                     </h5>
-                </div>  
-                
-                
+                </div>       
             </div>
             <?php
         }
