@@ -12,7 +12,7 @@
     }
 ?>
 
-<div class="card col-8 m-auto p-4 mt-5 ">
+<div class="card col-md-8 col-xl-7 col-sm-10 m-auto p-4 mt-5 ">
     
    <div class="row">
         <div class="col-md-5 col-xl-5 col-sm-11 pl-5 ">

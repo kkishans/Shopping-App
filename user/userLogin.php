@@ -9,8 +9,8 @@
 <div>
     <h1 class="text-center my-3">User Login</h1>
 </div>
-<div class="container-fluid row justify-content-center mt-5">
-<div class="col-md-6 card login-box">
+<div class="m-auto justify-content-center mt-5 w-full mx-3">
+<div class="col-md-6 card login-box m-auto ">
     <div class="card-body">
         <form action="" method="post">
             

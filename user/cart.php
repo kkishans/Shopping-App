@@ -53,7 +53,7 @@
     </div>
     <hr>
     <div class="row">
-        <div class="card col-7 m-auto" >
+        <div class="card col-xl-7 col-md-7 col-sma-11 m-auto" >
             <div class="card-body">
             <?php 
                 $total = 0;
@@ -86,8 +86,8 @@
                        
                         <tr>
                             <td>  <img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
-                            <th style="max-width: 5rem;"><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
-                            <th><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
+                            <th style="min-width: 5rem;text-align: left;"><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
+                            <th style="width: 100px;"><a href="../product.php?id=<?= $v['p_id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             <th>
                                 <form method="post">
                                     <input type="number" id="txtqty<?=$v['p_id']?>" class="form-control m-auto" oninput="return updateQty(<?=$v['p_id']?>)" style="width:20%;"  name="qty" value="<?=$v['qty']?>" min="1"/>
@@ -146,7 +146,7 @@
                     ?>
                         <tr  style="cursor:pointer">
                             <td>  <img src="<?= "../img/". $v['p_img']  ?>" alt="product image" width="60px" height="60px"></td>
-                            <th style="max-width: 5rem;"><a href="../product.php?id=<?= $v['id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
+                            <th style="min-width: 5rem;text-align: left;"><a href="../product.php?id=<?= $v['id'] ?>" class="nav-link text-dark"> <?= $v['p_name'] ?></a></th>
                             <th><a href="../product.php?id=<?= $v['id'] ?>" class="nav-link text-dark"> <?= $v['price'] ?></a>  </th>
                             
                             <!-- <th> <?= $v['qty'] ?> </th>  -->
@@ -195,7 +195,7 @@
     <?php
         if($order_flag){
             ?>
-            <div class="col-4 justify-center align-items-center p-5 border-1 border  mt-5 m-auto">
+            <div class="col-xl-4 col-md-4 col-sm-12 justify-center align-items-center p-5 border-1 border  mt-5 m-auto">
                     <div class="text-center">
                     <form action="#" method="post" >
                         <div style="display: none;">
