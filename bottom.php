@@ -11,7 +11,9 @@
         $youtube = $data['youtube_link'];
     }
 ?>
-<div class="footer row text-center">
+<div class="footer  ">
+<div class="row text-center py-2">
+
     <div class="copyright-text col-xl-4 col-md-11 col-sm-12">
       <p>Copyright © 2021 Pooja Electricals, All rights reserved.</p>
     </div>
@@ -32,6 +34,7 @@
             }
         ?>
     </div>
+</div>
 </div>
 </body>
 </html>
