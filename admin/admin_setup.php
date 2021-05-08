@@ -185,8 +185,9 @@ function checkimage($file)
 
 ?>
 <div class="pt-5"></div>
+
 <div class="footer fixed-bottom">
-    <div class="copyright-text">
+    <div class="copyright-text text-center">
       <p>Copyright © 2021 Pooja Electricals, All rights reserved. |</p>
     </div>
 </div>
