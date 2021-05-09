@@ -206,12 +206,12 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMI
               
               if (mysqli_num_rows($res) > 0) {
               ?>
-              <div class="row ">
+              <div style="display: flex;">
               <?php
                 while ($rs = mysqli_fetch_assoc($res)) {
                 
                 if ($rs['b_icon'] != "") {?>
-                    <img src="<?= "upload/brand/". $rs['b_icon']  ?>"  width="50p" height="40px" alt="No Brand Image" class="col-3" style="object-fit: contain;">
+                    <img src="<?= "upload/brand/". $rs['b_icon']  ?>"  width="50p" height="40px" alt="No Brand Image"  style=" margin: 10px; height: 2rem; min-width: 3rem;">
               
             <?php
                 }
