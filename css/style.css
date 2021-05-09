@@ -237,6 +237,31 @@ background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75
 }
 
 /* end of  copyright a */
+
+
+.fixedButton{
+  position: fixed;
+  bottom: 65px;
+  right: 0px; 
+  padding: 20px;
+}
+.roundedFixedBtn{
+height: 50px;
+line-height: 50px;  
+width: 50px;  
+font-size: 2em;
+font-weight: bold;
+border-radius: 50%;
+background-color: #4CAF50;
+color: white;
+text-align: center;
+cursor: pointer;
+}
+
+.borderless {
+  border: none;
+}
+
 /* WA logo */
 /* .wa-logo{
   height: 50px;
@@ -278,3 +303,4 @@ background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75
   font-weight: bold;
 }
 /* end of d-card */
+
