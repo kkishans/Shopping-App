@@ -1,5 +1,15 @@
 <?php
 include './top.php';
+
+    $query = "SELECT 
+        ( SELECT count(*) from product_details ) as products,
+        ( SELECT count(*) from brands ) as brands,
+        ( select count(*) from users ) as users
+    ";
+      
+    $res = mysqli_query($conn,$query);
+    $r = mysqli_fetch_assoc($res);
+
 ?>
 
 <div class=" mt-5 text-center ">
@@ -8,6 +18,32 @@ include './top.php';
         <h1 class="section-title"> POOJA ELECTRICALS</h1>
     </div>
     <p>The online electronic products shop. Fast delivery, as you deserved.  </p>
+</div>
+<div class="card-main col-xl-8 m-auto text-center">
+    <div class="b-card col-4">
+        <div class="b-data">
+            <p><?= ($r['brands'] == 1 ) ? "1" : ($r['brands'] - 1) ?>+</p>
+        </div>
+        <div class="b-title">
+            <p>Brands</p>
+        </div>
+    </div>
+    <div class="b-card col-4">
+        <div class="b-data">
+        <p><?= ($r['products'] == 1 ) ? "1" : ($r['products'] - 1) ?>+</p>
+        </div>
+        <div class="b-title">
+            <p>Products</p>
+        </div>
+    </div>
+    <div class="b-card col-4">
+        <div class="b-data">
+            <p><?= ($r['users'] == 1 ) ? "1" : ($r['users'] - 1) ?>+</p>
+        </div>
+        <div class="b-title">
+            <p>Clients</p>
+        </div>
+    </div>  
 </div>
 <div class="card col-8 m-auto p-4 mt-5 text-center">
     <p>
