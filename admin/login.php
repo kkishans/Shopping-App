@@ -82,12 +82,14 @@
       
     require '../vendor/autoload.php'; 
 
-
+    echo md5("Elect#2021");
     if(isset($_POST['login'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
+
         
-        $query = "select * from admin_details where email = '$email' and password = '". md5($password) ."'" ;
+        
+        $query = "SELECT * from admin_details where email = '$email' and `password` = '". md5($password) ."'" ;
         
        
         $res = mysqli_query($conn,$query);
@@ -97,6 +99,7 @@
             header("Location: dashboard.php");
         }
         else{
+            //echo mysqli_error($conn);
             echo "<script>alert('Invalid username and Password.')</script>";
         }
     }

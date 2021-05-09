@@ -23,19 +23,19 @@ $total_rows = mysqli_fetch_array($result)[0];
 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
 
-// $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMIT 3";
-//   $result = mysqli_query($conn, $query);
+$query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMIT 3";
+  $result = mysqli_query($conn, $query);
 
-//   $img = array();
-//   while($r = mysqli_fetch_assoc($result)){
-//     array_push($img, $r['p_img']);
-//   }
-$img = array(
-  'carousal-img-1.jpg',
-  'carousal-img-2.jpg',
-  'carousal-img-3.jpg',
-  'carousal-img-4.jpg',
-);
+  $img = array();
+  while($r = mysqli_fetch_assoc($result)){
+    array_push($img, $r['p_img']);
+  }
+// $img = array(
+//   'carousal-img-1.jpg',
+//   'carousal-img-2.jpg',
+//   'carousal-img-3.jpg',
+//   'carousal-img-4.jpg',
+// );
 ?>
 
 
@@ -119,7 +119,7 @@ $img = array(
             <a onclick="displaySlides(<?= $k - 1 ?>)">&#10094;</a>
           </div>
           <div class="img col-xl-10">
-            <img src="<?= "img/carousel/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
+            <img src="<?= "img/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
           </div>
           <div class="right col-xl-1">
             <a onclick="displaySlides(<?= $k + 1 ?>)">&#10095;</a>
@@ -147,12 +147,12 @@ $img = array(
 </div>
 
 <hr>
-<div class="items row col-11 m-auto mt-2 mb-5">
+<!-- <div class="items row col-10 m-auto mt-2 mb-5"> -->
   <?php
   include './db/db.php';
 
   // $query = "SELECT * from product_details LIMIT $offset, $no_of_records_per_page";
-  $query = "SELECT distinct(c_title),c.c_id from product_details as p,category as c where p.c_id = c.c_id";
+  $query = "SELECT distinct(c_title),c.c_id from product_details as p,category as c where p.c_id = c.c_id; ";
 
   // if (isset($_GET['filter'])) {
   //   $category = $_GET['category'];
@@ -186,14 +186,19 @@ $img = array(
 
   if (mysqli_num_rows($result) > 0) {
     $i = 1;
+    
     while ($r = mysqli_fetch_assoc($result)) {
+
+      $q = "SELECT p_img from product_details where c_id = ".$r['c_id']."  order by rand() limit 1";
+      $img = mysqli_query($conn,$q);
+      $data = mysqli_fetch_assoc($img);
   ?>
-      <div class="container mt-4 ">
+      <div class="container mt-4 mx-auto w-100">
         <div class="d-flex <?= ($i % 2 == 0)? "flex-row-reverse" : "flex-row" ?>" >
-          <div class="col-md-6 text-center">
-            <img src="./img/wire.jpg" class="w-50" alt="">
+          <div class="col-md-6 ps-5">
+            <img src="./img/<?= $data['p_img'] ?>" class="w-50" alt="">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 ps-5">
             <h1 class="py-3"><?=  $r['c_title'] ?></h1>
             <ul class="list-group list-group-flush borderless">
             <?php
@@ -244,7 +249,7 @@ $img = array(
 
 
 
-<div class="container text-center">
+<div class="container text-center mt-5">
   <div class="py-4 mb-5">
     <h1>Why Pooja Electricals?</h1>
   </div>

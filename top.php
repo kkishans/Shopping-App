@@ -44,8 +44,8 @@ if (isset($_SESSION['useremail'])) {
 <body>
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid row justify-content-end  text-white text-end">  
-      <div class="col-md-2"><i class="fas fa-phone-alt px-2"></i>00000 00000</div>
-      <div class="col-md-2"><i class="fas fa-envelope px-2"></i>test@mail.com</div>
+      <div class="col-md-2"><i class="fas fa-phone-alt px-2"></i>7228010920</div>
+      <div class="col-md-3"><i class="fas fa-envelope px-1"></i> <a class="text-decoration-none text-white" href="mailto:poojaelectricals462@gmail.com">poojaelectricals462@gmail.com</a> </div>
     </div>
     <div class="container-fluid d-flex align-items-center">
       <div>
