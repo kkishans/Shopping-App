@@ -256,3 +256,25 @@ background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75
   box-shadow: 3px 2px 10px #bbb;
 } */
 /* end of  WA logo */
+/* d-card */
+.card-main{
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.b-card{
+  border: 2px solid rgb(223, 220, 220);
+  width: 18rem;
+  margin: .3rem;
+  border-radius: 3px;
+  box-shadow: 4px 4px 10px #bbb;
+}
+.b-title{
+  font-size: 18px;
+  font-weight: 400;
+}
+.b-data{
+  font-size: 36px;
+  font-weight: bold;
+}
+/* end of d-card */
