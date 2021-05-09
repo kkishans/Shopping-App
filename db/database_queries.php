@@ -46,7 +46,8 @@
 
     $create_brands = "CREATE TABLE IF NOT EXISTS `brands` (
         `b_id` int(10) primary key AUTO_INCREMENT,
-        `b_name` text NOT NULL
+        `b_name` text NOT NULL,
+        `b_icon` text NOT NULL
       )";
     $res = mysqli_query($conn,$create_brands);
 

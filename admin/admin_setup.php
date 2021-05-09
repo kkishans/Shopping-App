@@ -104,7 +104,7 @@ if(isset($_POST['submit'])){
         $passwordErr ="Passwords does not match.";       
     }
     
-    if (strlen($_POST["password"]) <= 8) {
+    if (strlen($_POST["password"]) < 8) {
         $passwordErr = "Your Password Must Contain At Least 8 Characters!";
     }
     elseif(!preg_match("#[0-9]+#",$password)) {

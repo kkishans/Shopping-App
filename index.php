@@ -200,15 +200,29 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMI
           </div>
           <div class="col-md-6 ps-5">
             <h1 class="py-3"><?=  $r['c_title'] ?></h1>
-            <ul class="list-group list-group-flush borderless">
             <?php
-              $q = "SELECT distinct(b_name),b.b_id from product_details as p, brands as b where p.b_id = b.b_id and p.c_id =".$r['c_id'];
+              $q = "SELECT distinct(b_name),b.b_id, b.b_icon from product_details as p, brands as b where p.b_id = b.b_id and p.c_id =".$r['c_id'];
               $res = mysqli_query($conn,$q);
-
+              
               if (mysqli_num_rows($res) > 0) {
-                //$i = 1;
+              ?>
+              <div class="row ">
+              <?php
                 while ($rs = mysqli_fetch_assoc($res)) {
+                
+                if ($rs['b_icon'] != "") {?>
+                    <img src="<?= "upload/brand/". $rs['b_icon']  ?>"  width="50p" height="40px" alt="No Brand Image" class="col-3" style="object-fit: contain;">
+              
+            <?php
+                }
+                }
+                ?>
+                </div>
+            <ol type="01" class="list-group list-group-flush borderless">
 
+                <?php
+                mysqli_data_seek($res, 0);
+                while ($rs = mysqli_fetch_assoc($res)) {
             ?>
               <li class="list-group-item py-0 borderless">
                 <a class="nav-link" href="./product_list.php?category=<?= $r['c_id'] ?>&brand=<?= $rs['b_id'] ?>&filter=&searchKey=#"><?= $rs['b_name'] ?></a>  
@@ -221,7 +235,7 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMI
                 echo mysqli_error($conn);
               }
             ?>
-            </ul>
+            </ol>
           </div>
         </div>
       </div>
