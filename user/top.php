@@ -42,7 +42,12 @@
     <title><?= $app_name ?></title>
   </head>
 <body>
+
   <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid row justify-content-end  text-white text-end">  
+      <div class="col-md-2"><i class="fas fa-phone-alt px-2"></i>00000 00000</div>
+      <div class="col-md-2"><i class="fas fa-envelope px-2"></i>test@mail.com</div>
+    </div>
     <div class="container-fluid d-flex align-items-center">
        <div>
           <img src="./favicon.png" style="object-fit: contain;height: 50px;width: 50px;">

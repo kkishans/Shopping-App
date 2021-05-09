@@ -39,7 +39,7 @@ $img = array(
 ?>
 
 
-<!-- <div class="row col-11 py-3 m-auto border-0 border rounded">
+<div class="row col-11 py-3 m-auto border-0 border rounded">
   <div class="col-xl-5 col-md-5 col-sm-10 col-xm-11">
     <h1 class="text-center my-3"> Our Collection</h1>
   </div>
@@ -101,7 +101,7 @@ $img = array(
       </div>
     </form>
   </div>
-</div> -->
+</div>
 <hr>
 <div class=" col-11 justify-content-center m-auto">
   <div class="slider ">
@@ -151,33 +151,36 @@ $img = array(
   <?php
   include './db/db.php';
 
-  // $query = "SELECT * from product_details LIMIT $offset, $no_of_records_per_page";
-  $query = "SELECT distinct(c_title),c.c_id from product_details as p,category as c where p.c_id = c.c_id";
+  //$query = "select * from product_details LIMIT $offset, $no_of_records_per_page";
+  $query = "select * from product_details";
+  
 
-  // if (isset($_GET['filter'])) {
-  //   $category = $_GET['category'];
-  //   $brand = $_GET['brand'];
+  if (isset($_GET['filter'])) {
+    $category = $_GET['category'];
+    $brand = $_GET['brand'];
 
-  //   $query = "select * from product_details " .
-  //     (($category != 0 || $brand != 0) ?
-  //       " where " . (
-  //         ($brand != 0) ?
-  //         "b_id = $brand " : "") .
-  //       (
-  //         ($category != 0 && $brand != 0) ?
-  //         " and " : "") .
-  //       (
-  //         ($category != 0) ?
-  //         " c_id = $category" : "")
-  //       : "") . " LIMIT $offset, $no_of_records_per_page";
-  // }
+    $query = "select * from product_details " .
+      (($category != 0 || $brand != 0) ?
+        " where " . (
+          ($brand != 0) ?
+          "b_id = $brand " : "") .
+        (
+          ($category != 0 && $brand != 0) ?
+          " and " : "") .
+        (
+          ($category != 0) ?
+          " c_id = $category" : "")
+        : "") . " "; //LIMIT $offset, $no_of_records_per_page
+  }
 
 
-  // if (isset($_GET['btnSearch'])) {
-  //   $search = $_GET['searchKey'];
-  //   /*$query = "SELECT * from product_details as p,category as c, brands as b where c.c_id = p.c_id and b.b_id = p.b_id  and ( LOWER(p_name) like '%".strtolower($search)."%' or LOWER(c_title) like '%".strtolower($search)."%' or LOWER(b_name) like '%".strtolower($search)."%' or LOWER(`description`) like '%".strtolower($search)."%' )  LIMIT $offset, $no_of_records_per_page";*/
-  //   $query = "SELECT * from product_details where LOWER(`keywords`) like '%" . strtolower($search) . "%' LIMIT $offset, $no_of_records_per_page";
-  // }
+  if (isset($_GET['btnSearch'])) {
+    $search = $_GET['searchKey'];
+    /*$query = "SELECT * from product_details as p,category as c, brands as b where c.c_id = p.c_id and b.b_id = p.b_id  and ( LOWER(p_name) like '%".strtolower($search)."%' or LOWER(c_title) like '%".strtolower($search)."%' or LOWER(b_name) like '%".strtolower($search)."%' or LOWER(`description`) like '%".strtolower($search)."%' )  LIMIT $offset, $no_of_records_per_page";*/
+    //$query = "SELECT * from product_details where LOWER(`keywords`) like '%" . strtolower($search) . "%' LIMIT $offset, $no_of_records_per_page";
+    $query = "SELECT * from product_details where LOWER(`keywords`) like '%" . strtolower($search) . "%'";
+
+  }
 
 
   $result = mysqli_query($conn, $query);
@@ -185,50 +188,57 @@ $img = array(
   $count_of_data =  mysqli_num_rows($result);
 
   if (mysqli_num_rows($result) > 0) {
-    $i = 1;
     while ($r = mysqli_fetch_assoc($result)) {
+      
+      $s_price = number_format($r['price']);
+      $query = "SELECT * FROM product_description where p_id =" . $r["p_id"] . " LIMIT 3";
+      $result2 = mysqli_query($conn, $query);
+      if (mysqli_num_rows($result2) > 0) {
+        $desc_str = "<span style='font-size:15px;color:rgba(0,0,0,.7)'>";
+        while ($r2 = mysqli_fetch_row($result2)) {
+          $desc_str .= "<span style='font-weight: 500;'>" . $r2[2] . "</span> : " . $r2[3] . ", ";
+        }
+      }
+      $desc_str = rtrim($desc_str, ", ");
+      $desc_str .= "</span>";
   ?>
-      <div class="container mt-4 ">
-        <div class="d-flex <?= ($i % 2 == 0)? "flex-row-reverse" : "flex-row" ?>" >
-          <div class="col-md-6 text-center">
-            <img src="./img/wire.jpg" class="w-50" alt="">
-          </div>
-          <div class="col-md-6">
-            <h1 class="py-3"><?=  $r['c_title'] ?></h1>
-            <ul class="list-group list-group-flush borderless">
-            <?php
-              $q = "SELECT distinct(b_name),b.b_id from product_details as p, brands as b where p.b_id = b.b_id and p.c_id =".$r['c_id'];
-              $res = mysqli_query($conn,$q);
+      <div class="card-l col-xl-3 col-sm-11 col-md-6 col-xl-3 mt-3">
 
-              if (mysqli_num_rows($res) > 0) {
-                //$i = 1;
-                while ($rs = mysqli_fetch_assoc($res)) {
-
-            ?>
-              <li class="list-group-item py-0 borderless">
-                <a class="nav-link" href="./product_list.php?category=<?= $r['c_id'] ?>&brand=<?= $rs['b_id'] ?>&filter=&searchKey=#"><?= $rs['b_name'] ?></a>  
-              </li>
-
-            <?php
-                }
-              }
-              else{
-                echo mysqli_error($conn);
-              }
-            ?>
-            </ul>
-          </div>
+        <div class="card p-1" style="min-height: 27rem;">
+          <a href="./product.php?id=<?= $r['p_id']  ?>" class="card-l" style="text-decoration: none;color:black;">
+            <img src="<?= "img/" . $r['p_img']  ?>" class="card-img-top" alt="Product Image" style="max-height:15rem;height:15rem;object-fit: contain;">
+            <div class="card-body flex">
+              <div class="row justify-content-between">
+                <div class="col-6">
+                  <h5 class="card-title"> <?= ucwords($r['p_name']) ?></h5>
+                </div>
+                <div class="col-6">
+                  <h5 style="text-align: right;">₹ <?= $s_price ?></h5>
+                </div>
+              </div>
+              <div>
+                <p> <?= $desc_str ?></p>
+              </div>
+              <?php if ($r['stock'] > 0) { ?>
+                <div class=" mt-2 add-to-cart">
+                  <a class="btn btn-primary w-100" href="./add_to_cart.php?id=<?= $r['p_id']  ?>" role="button">Add To Cart</a>
+                </div>
+              <?php } else { ?>
+                <div class=" mt-2 add-to-cart">
+                  <Button class="btn btn-outline-secondary w-100">Out Of Stock</Button>
+                </div>
+              <?php } ?>
+            </div>
+          </a>
         </div>
-      </div>
-</div>
+      </div>      
+
 
 
 
 <?php
-  $i++;
     }
   } else {
-    mysqli_error($conn);
 ?>
 <div class="row justify-content-md-center mt-4">
   <div class="col-md-6">
@@ -243,59 +253,12 @@ $img = array(
 ?>
 
 
-
-<div class="container text-center">
-  <div class="py-4 mb-5">
-    <h1>Why Pooja Electricals?</h1>
-  </div>
-  <div class="row py-2">
-    <div class="col-md-3">
-      <i class="fas fa-bolt fa-4x text-secondary"></i>
-      <p class="py-3">COMPLETE RANGE OF ELECTRICAL SEGMENT</p>
-    </div>
-    <div class="col-md-3">
-      <i class="fas fa-comment-alt fa-4x text-secondary"></i>
-      <p class="py-3">INSTANT FEEDBACK</p>
-    </div>
-    <div class="col-md-3">
-      <i class="fas fa-truck fa-4x text-secondary"></i>
-      <p class="py-3">PROMPT DELIVERY</p>
-    </div>
-    <div class="col-md-3">
-      <i class="fas fa-parachute-box fa-4x text-secondary"></i>
-      <p class="py-3">GENUINE-SUPPLIES</p>
-    </div>
-  </div>
-  <div class="row py-5">
-    <div class="col-md-3">
-      <i class="fas fa-money-bill-wave fa-4x text-secondary"></i>
-      <p class="py-3">COMPETITIVE-PRICING</p>
-    </div>
-    <div class="col-md-3">
-      <i class="fas fa-user-cog fa-4x text-secondary"></i>
-      <p class="py-3">EFFICIENT MANAGEMENT SYSTEM</p>
-    </div>
-    <div class="col-md-3">
-      <i class="fas fa-users fa-4x text-secondary"></i>
-      <p class="py-3">YOUNG AND DYNAMIC PROFESSIONAL TEAM</p>
-    </div>
-    <div class="col-md-3">
-      <i class="fas fa-check-circle fa-4x text-secondary"></i>
-      <p class="py-3">QUALITY ASSURANCE</p>
-    </div>
-  </div>
-</div>
-
-<a class="fixedButton" href="#">
-  <div class="roundedFixedBtn"><i class="fab fa-whatsapp"></i></div>
-</a>
-
 <?php
 
 if ($count_of_data < $total_rows) {
 
 ?>
-  <nav aria-label="Page navigation example mt-5">
+  <!-- <nav aria-label="Page navigation example mt-5">
     <ul class="pagination justify-content-around">
 
       <li class="page-item <?php if ($pageno <= 1) {
@@ -317,7 +280,7 @@ if ($count_of_data < $total_rows) {
                                     } ?>">Next</a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
 <?php
 }
 ?>
