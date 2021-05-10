@@ -24,12 +24,12 @@ $total_pages = ceil($total_rows / $no_of_records_per_page);
 
 
 $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMIT 3";
-  $result = mysqli_query($conn, $query);
+$result = mysqli_query($conn, $query);
 
-  $img = array();
-  while($r = mysqli_fetch_assoc($result)){
-    array_push($img, $r['p_img']);
-  }
+$img = array();
+while ($r = mysqli_fetch_assoc($result)) {
+  array_push($img, $r['p_img']);
+}
 // $img = array(
 //   'carousal-img-1.jpg',
 //   'carousal-img-2.jpg',
@@ -148,116 +148,94 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMI
 
 <hr>
 <!-- <div class="items row col-10 m-auto mt-2 mb-5"> -->
-  <?php
-  include './db/db.php';
+<?php
+include './db/db.php';
 
-  // $query = "SELECT * from product_details LIMIT $offset, $no_of_records_per_page";
-  $query = "SELECT distinct(c_title),c.c_id from product_details as p,category as c where p.c_id = c.c_id; ";
-
-  // if (isset($_GET['filter'])) {
-  //   $category = $_GET['category'];
-  //   $brand = $_GET['brand'];
-
-  //   $query = "select * from product_details " .
-  //     (($category != 0 || $brand != 0) ?
-  //       " where " . (
-  //         ($brand != 0) ?
-  //         "b_id = $brand " : "") .
-  //       (
-  //         ($category != 0 && $brand != 0) ?
-  //         " and " : "") .
-  //       (
-  //         ($category != 0) ?
-  //         " c_id = $category" : "")
-  //       : "") . " LIMIT $offset, $no_of_records_per_page";
-  // }
+// $query = "SELECT * from product_details LIMIT $offset, $no_of_records_per_page";
+$query = "SELECT distinct(c_title),c.c_id from product_details as p,category as c where p.c_id = c.c_id; ";
 
 
-  // if (isset($_GET['btnSearch'])) {
-  //   $search = $_GET['searchKey'];
-  //   /*$query = "SELECT * from product_details as p,category as c, brands as b where c.c_id = p.c_id and b.b_id = p.b_id  and ( LOWER(p_name) like '%".strtolower($search)."%' or LOWER(c_title) like '%".strtolower($search)."%' or LOWER(b_name) like '%".strtolower($search)."%' or LOWER(`description`) like '%".strtolower($search)."%' )  LIMIT $offset, $no_of_records_per_page";*/
-  //   $query = "SELECT * from product_details where LOWER(`keywords`) like '%" . strtolower($search) . "%' LIMIT $offset, $no_of_records_per_page";
-  // }
 
+$result = mysqli_query($conn, $query);
 
-  $result = mysqli_query($conn, $query);
+$count_of_data =  mysqli_num_rows($result);
 
-  $count_of_data =  mysqli_num_rows($result);
+if (mysqli_num_rows($result) > 0) {
+  $i = 1;
 
-  if (mysqli_num_rows($result) > 0) {
-    $i = 1;
-    
-    while ($r = mysqli_fetch_assoc($result)) {
+  while ($r = mysqli_fetch_assoc($result)) {
 
-      $q = "SELECT p_img from product_details where c_id = ".$r['c_id']."  order by rand() limit 1";
-      $img = mysqli_query($conn,$q);
-      $data = mysqli_fetch_assoc($img);
-  ?>
-      <div class="container mt-4 mx-auto w-100">
-        <div class="d-flex <?= ($i % 2 == 0)? "flex-row-reverse" : "flex-row" ?>" >
-          <div class="col-md-6 ps-5">
-            <img src="./img/<?= $data['p_img'] ?>" class="w-50" alt="">
-          </div>
-          <div class="col-md-6 ps-5">
-            <h1 class="py-3"><?=  $r['c_title'] ?></h1>
-            <?php
-              $q = "SELECT distinct(b_name),b.b_id, b.b_icon from product_details as p, brands as b where p.b_id = b.b_id and p.c_id =".$r['c_id'];
-              $res = mysqli_query($conn,$q);
-              
-              if (mysqli_num_rows($res) > 0) {
-              ?>
-              <div style="display: flex;">
+    $q = "SELECT p_img from product_details where c_id = " . $r['c_id'] . "  order by rand() limit 1";
+    $img = mysqli_query($conn, $q);
+    $data = mysqli_fetch_assoc($img);
+?>
+    <div class="container mt-4 mx-auto w-100">
+      <div class="d-flex <?= ($i % 2 == 0) ? "flex-row-reverse" : "flex-row" ?>">
+        <div class="col-md-6 ps-5">
+          <img src="./img/<?= $data['p_img'] ?>" class="w-50" alt="">
+        </div>
+        <div class="col-md-6 ps-5">
+          <h1 class="py-3">
+            <a class="nav-link text-dark px-0" href="./product_list.php?category=<?= $r['c_id'] ?>&brand=&filter=&searchKey=#"><?= $r['c_title'] ?></a>
+
+          </h1>
+          <?php
+          $q = "SELECT distinct(b_name),b.b_id, b.b_icon from product_details as p, brands as b where p.b_id = b.b_id and p.c_id =" . $r['c_id'];
+          $res = mysqli_query($conn, $q);
+
+          if (mysqli_num_rows($res) > 0) {
+          ?>
+            <div style="display: flex;">
               <?php
-                while ($rs = mysqli_fetch_assoc($res)) {
-                
-                if ($rs['b_icon'] != "") {?>
-                    <img src="<?= "upload/brand/". $rs['b_icon']  ?>"   alt="No Brand Image"  style=" margin: 10px; height: 3rem; min-width: 3.5rem;width:4rem;">              
-            <?php
+              while ($rs = mysqli_fetch_assoc($res)) {
+
+                if ($rs['b_icon'] != "") { ?>
+                  <img src="<?= "upload/brand/" . $rs['b_icon']  ?>" alt="No Brand Image" style=" margin: 10px; height: 3rem; min-width: 3.5rem;width:4rem;">
+              <?php
                 }
-                }
-                ?>
-                </div>
+              }
+              ?>
+            </div>
             <ol type="01" class="list-group list-group-flush borderless">
 
-                <?php
-                mysqli_data_seek($res, 0);
-                while ($rs = mysqli_fetch_assoc($res)) {
-            ?>
-              <li class="list-group-item py-0 borderless">
-                <a class="nav-link" href="./product_list.php?category=<?= $r['c_id'] ?>&brand=<?= $rs['b_id'] ?>&filter=&searchKey=#"><?= $rs['b_name'] ?></a>  
-              </li>
+              <?php
+              mysqli_data_seek($res, 0);
+              while ($rs = mysqli_fetch_assoc($res)) {
+              ?>
+                <li class="list-group-item py-0 borderless">
+                  <a class="nav-link" href="./product_list.php?category=<?= $r['c_id'] ?>&brand=<?= $rs['b_id'] ?>&filter=&searchKey=#"><?= $rs['b_name'] ?></a>
+                </li>
 
             <?php
-                }
               }
-              else{
-                echo mysqli_error($conn);
-              }
+            } else {
+              echo mysqli_error($conn);
+            }
             ?>
             </ol>
-          </div>
         </div>
       </div>
-</div>
+    </div>
+    </div>
 
 
 
-<?php
-  $i++;
-    }
-  } else {
-    mysqli_error($conn);
-?>
-<div class="row justify-content-md-center mt-4">
-  <div class="col-md-6">
-    <img src="img/no_result.jpg" class="card-img-top" height="200px" alt="No result Image" style="object-fit: contain;">
-    <div class="card-body text-center noResult">
-      No Result Found
+  <?php
+    $i++;
+  }
+} else {
+  mysqli_error($conn);
+  ?>
+  <div class="row justify-content-md-center mt-4">
+    <div class="col-md-6">
+      <img src="img/no_result.jpg" class="card-img-top" height="200px" alt="No result Image" style="object-fit: contain;">
+      <div class="card-body text-center noResult">
+        No Result Found
+      </div>
     </div>
   </div>
-</div>
 <?php
-  }
+}
 ?>
 
 
@@ -304,9 +282,48 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMI
   </div>
 </div>
 
-<a class="fixedButton" href="#">
-  <div class="roundedFixedBtn"><i class="fab fa-whatsapp"></i></div>
-</a>
+
+<button type="button" class="btn fixedButton" style="outline: none;" data-toggle="modal" data-target="#wa-popup">
+  <div class="roundedFixedBtn" ><i class="fab fa-whatsapp"></i></div>
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="wa-popup" tabindex="-1" role="dialog" aria-labelledby="wa-popup" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Whats App</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Mobile No. :</label>
+            <input type="text" class="form-control" id="mobile_no" maxlength="10" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text" required></textarea>
+          </div>
+          <div class="form-group">
+            <button type="button" class="form-control btn  btn-success btn-block  my-3" onclick="sendWAMsg()"><i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i></button>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const sendWAMsg = () => {
+    let mobile = document.querySelector("#mobile_no").value
+    let msg = document.querySelector("#message-text").value
+    //alert(`https://wa.me/${mobile}?text=${msg}`)
+    window.location = `https://wa.me/91${mobile}?text=${msg}`
+  }
+</script>
 
 <?php
 
