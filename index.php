@@ -287,6 +287,12 @@ if (mysqli_num_rows($result) > 0) {
   <div class="roundedFixedBtn" ><i class="fab fa-whatsapp"></i></div>
 </button>
 
+<?php
+  $query = "SELECT wa_no from admin_details";
+  $res = mysqli_query($conn,$query);
+  $r = mysqli_fetch_assoc($res);
+  $wa_no = $r['wa_no'];
+?>
 
 <!-- Modal -->
 <div class="modal fade" id="wa-popup" tabindex="-1" role="dialog" aria-labelledby="wa-popup" aria-hidden="true">
@@ -298,15 +304,11 @@ if (mysqli_num_rows($result) > 0) {
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Mobile No. :</label>
-            <input type="text" class="form-control" id="mobile_no" maxlength="10" required>
-          </div>
-          <div class="form-group">
             <label for="message-text" class="col-form-label">Message:</label>
             <textarea class="form-control" id="message-text" required></textarea>
           </div>
           <div class="form-group">
-            <button type="button" class="form-control btn  btn-success btn-block  my-3" onclick="sendWAMsg()"><i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i></button>
+            <button type="button" class="form-control btn  btn-success btn-block  my-3" onclick="sendWAMsg(<?= $wa_no ?>)"><i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i></button>
 
           </div>
 
@@ -317,11 +319,11 @@ if (mysqli_num_rows($result) > 0) {
 </div>
 
 <script>
-  const sendWAMsg = () => {
-    let mobile = document.querySelector("#mobile_no").value
+  const sendWAMsg = (number) => {
+    // let mobile = document.querySelector("#mobile_no").value
     let msg = document.querySelector("#message-text").value
     //alert(`https://wa.me/${mobile}?text=${msg}`)
-    window.location = `https://wa.me/91${mobile}?text=${msg}`
+    window.location = `https://wa.me/91${number}?text=${msg}`
   }
 </script>
 

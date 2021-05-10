@@ -82,7 +82,6 @@
       
     require '../vendor/autoload.php'; 
 
-    echo md5("Elect#2021");
     if(isset($_POST['login'])){
         $email = $_POST['email'];
         $password = $_POST['password'];

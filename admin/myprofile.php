@@ -10,6 +10,7 @@
         $fname = $row['fname'];
         $lname = $row['lname'];
         $email = $row['email'];
+        $wa_no = $row['wa_no'];
         $admin_photo = $row['admin_photo'];
         $fname = $row['fname'];
         $facebook = $row['facebook_link'];
@@ -65,7 +66,12 @@
                     <?php
                     }
                     ?>           
-                </div>                            
+                </div>    
+                <div class="row col-md-10 m-3">
+                   <div>
+                     <input type="text" name="wa_no" class="form-control col-md-6" placeholder="Whats App number" value="<?= $wa_no?>" required >
+                   </div>
+                </div>                         
                 <div class="row col-md-10 m-3">
                 <label for="admin_photo" class="m-1 ">Social Media Links : <br> (These are optional, leave it blank if you haven't any of them.)</label>
 
@@ -101,6 +107,7 @@ if(isset($_POST['submit'])){
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
+    $wa_no = $_POST['wa_no'];
     $facebook =  $_POST["facebook_link"];
     $insta =  $_POST["insta_link"];
     $twitter =  $_POST["twitter_link"];
@@ -117,6 +124,7 @@ if(isset($_POST['submit'])){
         `fname` = '$fname' ,
         `lname` = '$lname',
         `email` = '$email',
+        `wa_no` = '$wa_no',
         `admin_photo` = '$img' ,
         `facebook_link` =  '$facebook',
         `insta_link` = '$insta',

@@ -6,14 +6,15 @@
   $query = "SELECT * from admin_details";
   $res = mysqli_query($conn,$query);
 
-//   if(mysqli_num_rows($res) > 0){
-//       header("location: ./login.php");
-//   }
-$fname = $lname = $email  = "";
+  if(mysqli_num_rows($res) > 0){
+      header("location: ./login.php");
+  }
+$fname = $lname = $email  = $wa_no = "";
 if (isset($_POST['submit'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
+    $wa_no = $_POST['wa_no'];
 }
 
 ?>
@@ -47,7 +48,12 @@ if (isset($_POST['submit'])) {
                     <div>
                     <input class="form-control col-md-6" type="file" name="admin_photo" id="formFile" accept="image/*">
                     </div>                    
-                </div>                            
+                </div>    
+                <div class="row col-md-10 m-3">
+                   <div>
+                     <input type="text" name="wa_no" class="form-control col-md-6" placeholder="Whats App number" value="<?= $wa_no?>" required >
+                   </div>
+                </div>                        
                 <div class="row col-md-10 m-3">
                 <label for="admin_photo" class="m-1 ">Social Media Links : <br> (These are optional, leave it blank if you haven't any of them.)</label>
 
@@ -94,6 +100,7 @@ if(isset($_POST['submit'])){
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $password = $_POST["password"];
+    $wa_no = $_POST['wa_no'];
     $cpassword = $_POST["cpassword"];
     $facebook =  $_POST["facebook_link"];
     $insta =  $_POST["insta_link"];
@@ -148,7 +155,7 @@ if(isset($_POST['submit'])){
     else echo "Something went wrong";
 
     $pass = md5($_POST['password']);
-    $query = "INSERT INTO admin_details(fname,lname,email,`password`,`admin_photo`,`facebook_link`,`insta_link`,`twitter_link`,`youtube_link`) VALUES('$fname','$lname','$email','$pass','$img','$facebook','$insta','$twitter','$youtube')";
+    $query = "INSERT INTO admin_details(fname,lname,email,`password`,`wa_no`,`admin_photo`,`facebook_link`,`insta_link`,`twitter_link`,`youtube_link`) VALUES('$fname','$lname','$email','$pass','$wa_no','$img','$facebook','$insta','$twitter','$youtube')";
     
     if( mysqli_query($conn,$query) ){
         $_SESSION['aname'] = $fname;
