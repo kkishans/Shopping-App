@@ -35,6 +35,7 @@ if (isset($_SESSION['useremail'])) {
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   <link rel="stylesheet" href="./css/style.css">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -56,6 +57,9 @@ if (isset($_SESSION['useremail'])) {
         <ul class="nav text-light  justify-content-end">
           <li class="nav-item">
             <a class="nav-link link-light " href="./index.php">All Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-light " href="./gallery.php">Gallery</a>
           </li>
           <li class="nav-item">
             <a class="nav-link  link-light" href="./aboutUs.php">About Us</a>

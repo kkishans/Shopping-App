@@ -132,6 +132,25 @@
 
     $res = mysqli_query($conn,$product_details);
 
+    $create_gallery_categories = "CREATE TABLE `gallery_categories` (
+      `id` int(11) PRIMARY KEY,
+      `title` varchar(255) NOT NULL
+    )";
+
+    $res = mysqli_query($conn,$create_gallery_categories);
+    
+
+    $create_gallery = "CREATE TABLE `gallery` (
+      `id` int(11) PRIMARY KEY,
+      `caption` varchar(255) NOT NULL,
+      `image` varchar(255) NOT NULL,
+      `category_id` int(11) NOT NULL,
+      FOREIGN KEY (`category_id`) REFERENCES `gallery_categories`(`id`) ON DELETE CASCADE
+    )";
+
+    $res = mysqli_query($conn,$create_gallery);
+    
+    
     if(!$conn){
         echo "<script>alert('Error while connecting to database.')</script>";
         return;

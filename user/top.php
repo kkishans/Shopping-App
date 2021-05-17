@@ -59,7 +59,10 @@
                   <a class="nav-link link-light " href="../index.php">All Products</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link  link-light" href="#">About Us</a>
+                  <a class="nav-link link-light " href="../gallery.php">Gallery</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link  link-light" href="../aboutUs.php">About Us</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link  link-light" href="../contactus.php">Contact Us</a>

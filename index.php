@@ -332,7 +332,7 @@ if (mysqli_num_rows($result) > 0) {
 if ($count_of_data < $total_rows) {
 
 ?>
-  <nav aria-label="Page navigation example mt-5">
+  <!-- <nav aria-label="Page navigation example mt-5">
     <ul class="pagination justify-content-around">
 
       <li class="page-item <?php if ($pageno <= 1) {
@@ -354,7 +354,7 @@ if ($count_of_data < $total_rows) {
                                     } ?>">Next</a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
 <?php
 }
 ?>

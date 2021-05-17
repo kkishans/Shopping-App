@@ -54,6 +54,20 @@ if(isset($_GET['deleteCategory'])){
     //  header("location:category.php");
 
 }
+
+if(isset($_GET['deleteTitle'])){
+    $product_delete_query = "DELETE FROM gallery_categories WHERE id = ".$_GET['deleteTitle'];
+
+    if (mysqli_query($conn,$product_delete_query)) {
+        echo "<script>alert('Title Deleted.'); window.location = 'gallery.php'</script>";
+        // header("location:gallery.php");
+     }else{
+        echo "<script>alert('Can not delete this title.'); window.location = 'gallery.php'</script>";
+     }
+    //  header("location:category.php");
+
+}
+
 if(isset($_GET['deleteBrand'])){
     $product_delete_query = "DELETE FROM brands WHERE b_id = ".$_GET['deleteBrand'];
 
@@ -62,6 +76,17 @@ if(isset($_GET['deleteBrand'])){
         // header("location:brand.php");
     }else{
         echo "<script>alert('Can not delete this brand.'); window.location = 'brand.php'</script>";
+     }
+}
+
+if(isset($_GET['deleteGallery'])){
+    $product_delete_query = "DELETE FROM gallery WHERE id = ".$_GET['deleteGallery'];
+
+    if (mysqli_query($conn,$product_delete_query)) {
+        echo "<script>alert('Gallery Deleted.'); window.location = 'gallery.php'</script>";
+        // header("location:brand.php");
+    }else{
+        echo "<script>alert('Can not delete this gallery.'); window.location = 'gallery.php'</script>";
      }
 }
 

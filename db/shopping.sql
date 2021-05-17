@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2021 at 09:07 AM
+-- Generation Time: May 17, 2021 at 06:14 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -32,6 +32,7 @@ CREATE TABLE `admin_details` (
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `wa_no` varchar(15) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin_photo` varchar(255) NOT NULL,
   `facebook_link` varchar(255) DEFAULT NULL,
@@ -44,8 +45,8 @@ CREATE TABLE `admin_details` (
 -- Dumping data for table `admin_details`
 --
 
-INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `password`, `admin_photo`, `facebook_link`, `insta_link`, `twitter_link`, `youtube_link`) VALUES
-(1, 'Nikunj', 'Thakor', 'thakornikunj152@gmail.com', '4de518f35a2a288388de929d56fe7852', 'user-dummy-pic.png', '', '', '', '');
+INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `wa_no`, `password`, `admin_photo`, `facebook_link`, `insta_link`, `twitter_link`, `youtube_link`) VALUES
+(2, 'Pooja', 'Electricals', 'poojaelectricals462@gmail.com', '7041555399', 'a6346bcbfe7a5bf487243dba7705c16b', 'user-dummy-pic.png', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -55,17 +56,19 @@ INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `password`, `admi
 
 CREATE TABLE `brands` (
   `b_id` int(10) NOT NULL,
-  `b_name` text NOT NULL
+  `b_name` text NOT NULL,
+  `b_icon` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `brands`
 --
 
-INSERT INTO `brands` (`b_id`, `b_name`) VALUES
-(1, 'Generic'),
-(2, 'Lenovo'),
-(3, 'Apple');
+INSERT INTO `brands` (`b_id`, `b_name`, `b_icon`) VALUES
+(1, 'Generic', ''),
+(2, 'RR Cables', 'rr-cable.png'),
+(3, 'HAVELLS', '1200px-Havells_Logo.png'),
+(4, 'UNICAB (APAR)', 'unicab_logo.png');
 
 -- --------------------------------------------------------
 
@@ -80,35 +83,6 @@ CREATE TABLE `cart_details` (
   `qty` int(10) NOT NULL,
   `is_in_cart` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart_details`
---
-
-INSERT INTO `cart_details` (`id`, `p_id`, `u_id`, `qty`, `is_in_cart`) VALUES
-(1, 1, 1, 5, 'n'),
-(2, 1, 1, 4, 'n'),
-(6, 1, 2, 3, 'n'),
-(7, 1, 6, 1, 'n'),
-(8, 1, 6, 1, 'y'),
-(10, 1, 10, 2, 'n'),
-(11, 2, 1, 2, 'n'),
-(12, 1, 1, 1, 'n'),
-(13, 2, 1, 3, 'n'),
-(14, 2, 1, 2, 'n'),
-(15, 1, 1, 1, 'n'),
-(16, 2, 1, 1, 'n'),
-(17, 2, 2, 2, 'n'),
-(18, 2, 2, 3, 'n'),
-(19, 2, 2, 1, 'n'),
-(20, 1, 2, 2, 'n'),
-(21, 2, 2, 3, 'n'),
-(22, 2, 2, 4, 'n'),
-(23, 2, 2, 1, 'n'),
-(24, 2, 1, 1, 'n'),
-(25, 2, 2, 1, 'n'),
-(26, 2, 1, 2, 'n'),
-(27, 2, 2, 3, 'n');
 
 -- --------------------------------------------------------
 
@@ -127,8 +101,8 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`c_id`, `c_title`) VALUES
 (1, 'none'),
-(2, 'Laptop'),
-(3, 'Desktop');
+(2, 'Wires & Cables'),
+(3, 'Motors');
 
 -- --------------------------------------------------------
 
@@ -146,41 +120,57 @@ CREATE TABLE `contact_us` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gallery`
+--
+
+CREATE TABLE `gallery` (
+  `id` int(11) NOT NULL,
+  `caption` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gallery`
+--
+
+INSERT INTO `gallery` (`id`, `caption`, `image`, `category_id`) VALUES
+(1, 'Office', '60732eda9addb8.20762103.png', 1),
+(5, 'Pooja Electricals', '6074494521e779.25449001.png', 1),
+(7, 'Pooja ', '6074494521e779.25449001.png', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery_categories`
+--
+
+CREATE TABLE `gallery_categories` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gallery_categories`
+--
+
+INSERT INTO `gallery_categories` (`id`, `title`) VALUES
+(1, 'Warehouse'),
+(4, 'Office');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ordered_products`
 --
 
 CREATE TABLE `ordered_products` (
   `id` int(11) NOT NULL,
-  `o_id` int(8) NOT NULL,
+  `o_id` varchar(255) NOT NULL,
   `p_id` int(8) NOT NULL,
-  `qty` int(10) NOT NULL,
+  `qty` int(8) NOT NULL,
   `status` text NOT NULL DEFAULT 'Not Delivered'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ordered_products`
---
-
-INSERT INTO `ordered_products` (`id`, `o_id`, `p_id`, `qty`, `status`) VALUES
-(9, 7, 2, 2, 'Not Delivered'),
-(10, 8, 1, 1, 'Not Delivered'),
-(11, 8, 2, 1, 'Not Delivered'),
-(12, 9, 1, 3, 'Not Delivered'),
-(13, 12, 2, 1, 'Not Delivered'),
-(14, 13, 1, 2, 'Not Delivered'),
-(15, 13, 2, 3, 'Not Delivered'),
-(16, 14, 2, 2, 'Not Delivered'),
-(17, 15, 2, 1, 'Not Delivered'),
-(18, 16, 2, 0, 'Not Delivered'),
-(19, 17, 2, 1, 'Not Delivered'),
-(20, 18, 2, 0, 'Not Delivered'),
-(21, 19, 2, 0, 'Not Delivered'),
-(22, 20, 2, 0, 'Not Delivered'),
-(23, 21, 2, 0, 'Not Delivered'),
-(24, 21, 2, 0, 'Not Delivered'),
-(25, 21, 2, 0, 'Not Delivered'),
-(26, 21, 2, 1, 'Not Delivered'),
-(27, 22, 2, 2, 'Not Delivered');
 
 -- --------------------------------------------------------
 
@@ -189,40 +179,12 @@ INSERT INTO `ordered_products` (`id`, `o_id`, `p_id`, `qty`, `status`) VALUES
 --
 
 CREATE TABLE `order_details` (
-  `o_id` int(8) NOT NULL,
+  `o_id` varchar(255) NOT NULL,
   `u_id` int(8) NOT NULL,
   `total_amount` double NOT NULL,
   `shipping_address` varchar(300) NOT NULL,
   `ordered_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `order_details`
---
-
-INSERT INTO `order_details` (`o_id`, `u_id`, `total_amount`, `shipping_address`, `ordered_at`) VALUES
-(1, 1, 36000, '2306\r\nGhikudiya', '2021-04-02 13:14:55'),
-(2, 1, 24000, '2306\r\nGhikudiya', '2021-04-02 13:16:00'),
-(3, 6, 12000, 'bharuch', '2021-04-02 15:36:54'),
-(4, 10, 24000, 'bharuch', '2021-04-02 17:11:04'),
-(5, 1, 46000, '2306\r\nGhikudiya', '2021-04-03 03:58:47'),
-(6, 1, 68000, '2306\r\nGhikudiya', '2021-04-03 04:27:41'),
-(7, 1, 68000, '2306\r\nGhikudiya', '2021-04-03 04:39:07'),
-(8, 1, 46000, '2306\r\nGhikudiya', '2021-04-03 04:40:06'),
-(9, 2, 36000, 'bharuch', '2021-04-03 04:43:26'),
-(10, 2, 68000, 'bharuch', '2021-04-03 04:52:35'),
-(11, 2, 102000, 'bharuch', '2021-04-03 04:53:01'),
-(12, 2, 34000, 'bharuch', '2021-04-03 04:54:44'),
-(13, 2, 126000, 'bharuch', '2021-04-03 04:57:51'),
-(14, 2, 136000, 'bharuch', '2021-04-03 05:14:27'),
-(15, 1, 34000, '2306\r\nGhikudiya', '2021-04-03 05:18:54'),
-(16, 2, 34000, 'bharuch', '2021-04-03 05:19:15'),
-(17, 2, 34000, 'bharuch', '2021-04-03 05:22:40'),
-(18, 1, 34000, '2306\r\nGhikudiya', '2021-04-03 05:23:08'),
-(19, 1, 34000, '2306\r\nGhikudiya', '2021-04-03 05:23:31'),
-(20, 1, 34000, '2306\r\nGhikudiya', '2021-04-03 05:23:40'),
-(21, 1, 68000, '2306\r\nGhikudiya', '2021-04-03 05:28:21'),
-(22, 2, 102000, 'bharuch', '2021-04-03 06:10:04');
 
 -- --------------------------------------------------------
 
@@ -242,8 +204,11 @@ CREATE TABLE `product_description` (
 --
 
 INSERT INTO `product_description` (`id`, `p_id`, `spec_key`, `value`) VALUES
-(1, 1, 'RAM', '8gb ddr4'),
-(2, 2, 'display', 'FHD amoled');
+(1, 1, 'Colors', 'red,yellow'),
+(2, 1, 'Size', '0.75,1'),
+(3, 4, 'input', '220w'),
+(4, 3, 'Colors', 'red,yellow'),
+(5, 2, 'Size', '0.75,1');
 
 -- --------------------------------------------------------
 
@@ -272,8 +237,10 @@ CREATE TABLE `product_details` (
 --
 
 INSERT INTO `product_details` (`p_id`, `p_name`, `description`, `p_img`, `price`, `stock`, `c_id`, `b_id`, `keywords`, `product_optional_image_1`, `product_optional_image_2`, `product_optional_image_3`, `product_optional_image_4`) VALUES
-(1, 'Lenovo ideapad 3', 'Performence Beast', 'carousal-img-1.jpg', 12000, 4, 2, 2, 'slim, Lenovo, ideapad, 3, Lenovo, ideapad, 3', '', '', '', ''),
-(2, 'Apple desktop', 'HDR', 'maxresdefault.jpg', 34000, 0, 3, 3, 'slim, Apple, desktop, Apple, desktop, Apple, desktop, Apple, desktop, Apple, desktop, Apple, desktop, Apple, desktop, Apple, desktop', '', '', '', '');
+(1, 'SUPEREX FR', 'thin', 'istockphoto-144349803-612x612.jpg', 1200, 120, 2, 2, 'SUPEREX FR, SUPEREX, FR', '', '', '', ''),
+(2, 'HT POWER CABLES', 'thin', 'istockphoto-1095876376-612x612.jpg', 1200, 120, 2, 3, 'SUPEREX FR, SUPEREX, FR', '', '', '', ''),
+(3, 'SUPEREX', 'thin', 'istockphoto-144349803-612x612.jpg', 1200, 120, 2, 4, 'SUPEREX FR, SUPEREX, FR', '', '', '', ''),
+(4, 'INVERTER DUTY MOTORS', 'test', 'ac-electric-motor-500x500.jpg', 2500, 10, 3, 3, 'motor, INVERTER, DUTY, MOTORS', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -290,16 +257,6 @@ CREATE TABLE `users` (
   `address` text NOT NULL,
   `pass` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`u_id`, `f_name`, `l_name`, `email`, `phone`, `address`, `pass`) VALUES
-(1, 'Nikunj', 'Thakor', 'thakornikunj152@gmail.com', '8980112582', '2306\r\nGhikudiya', '4de518f35a2a288388de929d56fe7852'),
-(2, 'Test', 'test', 'test@mail.com', '9876543210', 'bharuch', '662af1cd1976f09a9f8cecc868ccc0a2'),
-(6, 'test1', 'test1', 'test1@mail.com', '9876543210', 'bharuch', '662af1cd1976f09a9f8cecc868ccc0a2'),
-(10, 'kishan', 'khant', 'kishan@mail.com', '7894561230', 'bharuch', '22d502e00e17f11e9ed4322ceb9099af');
 
 --
 -- Indexes for dumped tables
@@ -336,6 +293,18 @@ ALTER TABLE `category`
 --
 ALTER TABLE `contact_us`
   ADD PRIMARY KEY (`contact_id`);
+
+--
+-- Indexes for table `gallery`
+--
+ALTER TABLE `gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gallery_categories`
+--
+ALTER TABLE `gallery_categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ordered_products`
@@ -380,19 +349,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_details`
 --
 ALTER TABLE `admin_details`
-  MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `aid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `b_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `b_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -407,34 +376,40 @@ ALTER TABLE `contact_us`
   MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `gallery`
+--
+ALTER TABLE `gallery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `gallery_categories`
+--
+ALTER TABLE `gallery_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `ordered_products`
 --
 ALTER TABLE `ordered_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `order_details`
---
-ALTER TABLE `order_details`
-  MODIFY `o_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_description`
 --
 ALTER TABLE `product_description`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product_details`
 --
 ALTER TABLE `product_details`
-  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `u_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
