@@ -35,6 +35,7 @@ CREATE TABLE `admin_details` (
   `wa_no` varchar(15) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin_photo` varchar(255) NOT NULL,
+  `wa_no` varchar(20) not null,
   `facebook_link` varchar(255) DEFAULT NULL,
   `insta_link` varchar(255) DEFAULT NULL,
   `twitter_link` varchar(255) DEFAULT NULL,

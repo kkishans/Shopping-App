@@ -25,6 +25,7 @@
         `email` varchar(255) NOT NULL,
         `password` varchar(255) NOT NULL,
         `admin_photo` varchar(255) NOT NULL,
+        `wa_no` varchar(20) not null,
         `facebook_link` varchar(255),
         `insta_link` varchar(255),
         `twitter_link` varchar(255),

@@ -161,7 +161,8 @@ if(isset($_POST['submit'])){
         $_SESSION['aname'] = $fname;
         echo "<script> window.location ='./dashboard.php' </script>";
     }else{
-        echo "<script>alert('Something went wrong. Data Not inseted. Try again.')</script>";
+        mysqli_error($conn);
+        echo "<script>alert('Something went wrong. Data not inserted. Try again.')</script>";
 
     }
     echo mysqli_error($conn);
