@@ -145,12 +145,41 @@
       `id` int(11) PRIMARY KEY,
       `caption` varchar(255) NOT NULL,
       `image` varchar(255) NOT NULL,
+      `desc` varchar(1000) not null,
       `category_id` int(11) NOT NULL,
       FOREIGN KEY (`category_id`) REFERENCES `gallery_categories`(`id`) ON DELETE CASCADE
     )";
 
     $res = mysqli_query($conn,$create_gallery);
+
+    $create_csr_categories = "CREATE TABLE `csr_categories` (
+      `id` int(11) PRIMARY KEY,
+      `title` varchar(255) NOT NULL
+    )";
+
+    $res = mysqli_query($conn,$create_csr_categories);
     
+
+    $create_csr = "CREATE TABLE `csr` (
+      `id` int(11) PRIMARY KEY,
+      `caption` varchar(255) NOT NULL,
+      `image` varchar(255) NOT NULL,
+      `desc` varchar(1000) not null
+      `category_id` int(11) NOT NULL,
+      FOREIGN KEY (`category_id`) REFERENCES `csr_categories`(`id`) ON DELETE CASCADE
+    )";
+
+    $res = mysqli_query($conn,$create_csr);
+    
+    $create_upcoming_products = "CREATE TABLE `upcoming_products` (
+      `id` int(10) primary key,
+      `title` varchar(255) NOT NULL,
+      `desc` varchar(1000) NOT NULL,
+      `image` varchar(255) NOT NULL
+    )";
+
+    $res = mysqli_query($conn,$create_upcoming_products);
+
     
     if(!$conn){
         echo "<script>alert('Error while connecting to database.')</script>";

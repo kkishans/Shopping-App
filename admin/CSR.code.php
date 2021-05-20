@@ -1,35 +1,33 @@
 <?php
 $label = "Add New";
 $title = "";
-$desc = "";
 global $id;
 if (isset($_GET['update'])) {
     $label = "Update";
     $id = $_GET['update'];
-    $query = "SELECT * FROM gallery_categories where id =" . $id;
+    $query = "SELECT * FROM csr_categories where id =" . $id;
     $result = mysqli_query($conn, $query);
     $r = mysqli_fetch_assoc($result);
     $title = $r['title'];
-    $desc = $r['desc'];
 }
 
 if (isset($_POST['addCategory'])) {
     $title = $_POST['title'];
-    $desc = $_POST['desc'];
+
     include '../db/db.php';
-    $insert_query = "INSERT INTO gallery_categories(title) values('$title')";
+    $insert_query = "INSERT INTO csr_categories(title) values('$title')";
 
     if (isset($_GET['update'])) {
-        $update_query = "UPDATE gallery_categories SET title = '$title' WHERE id = $id ";
+        $update_query = "UPDATE csr_categories SET title = '$title' WHERE id = $id ";
 
         if (mysqli_query($conn, $update_query)) {
-            echo "<script>window.location = './gallery.php'</script>";
+            echo "<script>window.location = './CSR.php'</script>";
         } else {
             echo mysqli_error($conn);
         }
     } else {
         if (mysqli_query($conn, $insert_query)) {
-            echo "<script>window.location = './gallery.php'</script>";
+            echo "<script>window.location = './CSR.php'</script>";
         } else {
             echo mysqli_error($conn);
         }
@@ -43,10 +41,11 @@ if (isset($_POST['addCategory'])) {
 $glabel = "Add";
 $caption = "";
 $gtitle = "";
+$desc = "";
 if (isset($_GET['gupdate'])) {
     $glabel = "Update";
     $id = $_GET['gupdate'];
-    $query = "SELECT * FROM gallery where id =" . $id;
+    $query = "SELECT * FROM csr where id =" . $id;
     $result = mysqli_query($conn, $query);
     $r = mysqli_fetch_assoc($result);
     $caption = $r['caption'];
@@ -67,7 +66,7 @@ if (isset($_POST['addGallery'])) {
         }
     }
     include '../db/db.php';
-    $insert_query = "INSERT INTO gallery(caption,`image`,`desc`,`category_id`) values('$caption','$img','$desc',$title)";
+    $insert_query = "INSERT INTO csr(caption,`image`,`desc`,`category_id`) values('$caption','$img','$desc',$title)";
 
     if (isset($_GET['gupdate'])) {
         if ($_FILES['newImage']['name'] != null) {
@@ -75,16 +74,16 @@ if (isset($_POST['addGallery'])) {
         } else {
             $img = $gimg;
         }
-        $update_query = "UPDATE gallery SET caption = '$caption', `image` = '$img',`desc` = '$desc', `category_id` = $title  WHERE id = $id ";
+        $update_query = "UPDATE csr SET caption = '$caption', `image` = '$img',`desc` = '$desc', `category_id` = $title  WHERE id = $id ";
 
         if (mysqli_query($conn, $update_query)) {
-            echo "<script>window.location = './gallery.php'</script>";
+            echo "<script>window.location = './CSR.php'</script>";
         } else {
             echo mysqli_error($conn);
         }
     } else {
         if (mysqli_query($conn, $insert_query)) {
-            echo "<script>window.location = './gallery.php'</script>";
+            echo "<script>window.location = './CSR.php'</script>";
         } else {
             echo mysqli_error($conn);
         }
@@ -108,7 +107,7 @@ function checkimage($file)
             echo "<script>alert('Only Image file allowed.')</script>";
             return;
         } else {
-            if (!move_uploaded_file($file_tmp, "../upload/gallery/" . $file_name)) {
+            if (!move_uploaded_file($file_tmp, "../upload/csr/" . $file_name)) {
                 echo "<script>alert('Error while uploading file')</script>";
             }
         }

@@ -90,6 +90,29 @@ if(isset($_GET['deleteGallery'])){
      }
 }
 
+if(isset($_GET['deleteupcoming'])){
+    $product_delete_query = "DELETE FROM upcoming_products WHERE id = ".$_GET['deleteupcoming'];
+
+    if (mysqli_query($conn,$product_delete_query)) {
+        echo "<script>alert('Product Deleted.'); window.location = 'upcoming_product.php'</script>";
+        // header("location:brand.php");
+    }else{
+        echo "<script>alert('Can not delete this Product.'); window.location = 'upcoming_product.php'</script>";
+     }
+}
+
+if(isset($_GET['deleteCSR'])){
+    $product_delete_query = "DELETE FROM csr WHERE id = ".$_GET['deleteCSR'];
+
+    if (mysqli_query($conn,$product_delete_query)) {
+        echo "<script>alert('CSR Deleted.'); window.location = 'CSR.php'</script>";
+        // header("location:brand.php");
+    }else{
+        echo "<script>alert('Can not delete this CSR.'); window.location = 'CSR.php'</script>";
+     }
+}
+
+
 // Delete Specitication
 if(isset($_GET['deleteSpecification'])){
     $product_delete_query = "DELETE FROM product_description WHERE id = ".$_GET['deleteSpecification'];

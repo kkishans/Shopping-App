@@ -18,7 +18,7 @@
 
     <title><?= $app_name ?> | Admin</title>
    <link rel="stylesheet" href="../css/style.css">
-
+   <meta name="description" content="We provide enlightening services.">
 
 </head>
 <body>
@@ -51,7 +51,13 @@
                 <a class="nav-link  link-light" href="./gallery.php">Gallery</a>
             </li>
             <li class="nav-item p-1 ">
+                <a class="nav-link  link-light" href="./CSR.php">CSR</a>
+            </li>
+            <li class="nav-item p-1 ">
                 <a class="nav-link  link-light" href="./mail.php">View Mails</a>
+            </li>
+            <li class="nav-item p-1 ">
+                <a class="nav-link  link-light" href="./upcoming_product.php">Upcoming</a>
             </li>
             <li class="nav-item p-1 ">
                 <a class="nav-link  link-light" href="./manageCarousel.php">Carousel</a>

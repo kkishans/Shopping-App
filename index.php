@@ -23,12 +23,14 @@ $total_rows = mysqli_fetch_array($result)[0];
 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
 
-$query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMIT 3";
+$query = "SELECT * FROM upcoming_products ORDER BY id desc";
 $result = mysqli_query($conn, $query);
 
 $img = array();
+$img_id = array();
 while ($r = mysqli_fetch_assoc($result)) {
-  array_push($img, $r['p_img']);
+  array_push($img_id,$r['id']);
+  array_push($img, $r['image']);
 }
 // $img = array(
 //   'carousal-img-1.jpg',
@@ -39,7 +41,7 @@ while ($r = mysqli_fetch_assoc($result)) {
 ?>
 
 
-<!-- <div class="row col-11 py-3 m-auto border-0 border rounded">
+<div class="row col-11 py-3 m-auto border-0 border rounded">
   <div class="col-xl-5 col-md-5 col-sm-10 col-xm-11">
     <h1 class="text-center my-3"> Our Collection</h1>
   </div>
@@ -47,7 +49,7 @@ while ($r = mysqli_fetch_assoc($result)) {
     <form action="#" class="row">
       <div class="col-xl-3 col-md-6 col-sm-6">
         <label class="form-label">Category :</label>
-        <select class="form-select" name="category">
+        <select class="form-select" name="category" id="category">
           <option value="0">All</option>
           <?php
           include './db/db.php';
@@ -69,7 +71,7 @@ while ($r = mysqli_fetch_assoc($result)) {
       </div>
       <div class="col-xl-3 col-md-6 col-sm-6">
         <label class="form-label">Brand :</label>
-        <select class="form-select" name="brand">
+        <select class="form-select" name="brand" id="brand">
           <option value="0">All</option>
           <?php
           //include '../db/db.php';
@@ -88,20 +90,21 @@ while ($r = mysqli_fetch_assoc($result)) {
       </div>
 
       <div class=" col-md-6 col-sm-6 m-auto   p-3 col-xl-2 text-center mt-3 ">
-        <button type="submit" name="filter" class="btn btn-outline-success px-4">Filter</button>
+        <!-- <a type="submit" name="filter" class="btn btn-outline-success px-4">Filter</a> -->
+        <button type="button" class="btn btn-outline-success px-4" onclick="fliterData()" >Filter</button>
       </div>
       <div class=" col-md-6 col-sm-12 p-3 col-xl-4 text-center mt-3">
 
         <div class="form-outline d-flex">
           <input type="text" id="searchKey" name="searchKey" class="form-control" placeholder="Search.." />
-          <button type="submit" name="btnSearch" class="btn btn-outline-success px-4">
+          <button type="button" name="btnSearch" onclick="searchData()" class="btn btn-outline-success px-4">
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
         </div>
       </div>
     </form>
   </div>
-</div> -->
+</div>
 <hr>
 <div class=" col-11 justify-content-center m-auto">
   <div class="slider ">
@@ -118,8 +121,12 @@ while ($r = mysqli_fetch_assoc($result)) {
           <div class="left col-xl-1">
             <a onclick="displaySlides(<?= $k - 1 ?>)">&#10094;</a>
           </div>
-          <div class="img col-xl-10">
-            <img src="<?= "img/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
+          <div class="img col-xl-10" style="cursor:pointer" onclick="window.location = 'upcoming.php?id=<?= $img_id[$i]?>'" >
+            <img src="<?= "./upload/upcoming/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
+            <div class="jumbotron mt-3">
+              <p class="lead text-center bg-light rounded py-2 text-bold">Upcoming Product</p>
+              
+            </div>
           </div>
           <div class="right col-xl-1">
             <a onclick="displaySlides(<?= $k + 1 ?>)">&#10095;</a>
@@ -420,6 +427,27 @@ include './bottom.php';
   btnFlip.addEventListener("click", () => {
     btnFlip.classList.toggle('flipped');
   })
+
+
+  //fliter
+  function fliterData() {
+    let category = document.getElementById('category').value
+    let brand = document.getElementById('brand').value
+    let searchKey = document.getElementById('searchKey').value
+
+
+    window.location = 'product_list.php?category='+category+'&brand='+brand+'&filter=&searchKey='+searchKey;
+
+  }
+  function searchData() {
+    let category = document.getElementById('category').value
+    let brand = document.getElementById('brand').value
+    let searchKey = document.getElementById('searchKey').value
+
+    
+    window.location = 'product_list.php?category='+category+'&brand='+brand+'&searchKey='+searchKey+'&btnSearch=#';
+
+  }
 </script>
 </body>
 

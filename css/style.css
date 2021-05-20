@@ -262,6 +262,15 @@ cursor: pointer;
   border: none;
 }
 
+@media screen and (max-width:720px) {
+  .fixedButton{
+    position: fixed;
+    bottom: 135px;
+    right: 0px; 
+    padding: 20px;
+  }
+}
+
 /* WA logo */
 /* .wa-logo{
   height: 50px;
@@ -304,3 +313,7 @@ cursor: pointer;
 }
 /* end of d-card */
 
+.label{
+  text-align: center;
+  width: 100%;
+}

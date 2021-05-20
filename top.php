@@ -40,12 +40,13 @@ if (isset($_SESSION['useremail'])) {
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <title><?= $app_name ?></title>
+  <meta name="description" content="We provide enlightening services.">
 </head>
 
 <body>
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid row justify-content-end  text-white text-end">  
-      <div class="col-md-2"><i class="fas fa-phone-alt px-2"></i>7228010920</div>
+      <div class="col-md-2"><i class="fas fa-phone-alt px-2"></i>+91 7228010920</div>
       <div class="col-md-3"><i class="fas fa-envelope px-1"></i> <a class="text-decoration-none text-white" href="mailto:poojaelectricals462@gmail.com">poojaelectricals462@gmail.com</a> </div>
     </div>
     <div class="container-fluid d-flex align-items-center">
@@ -56,10 +57,16 @@ if (isset($_SESSION['useremail'])) {
       <div>
         <ul class="nav text-light  justify-content-end">
           <li class="nav-item">
-            <a class="nav-link link-light " href="./index.php">All Products</a>
+            <a class="nav-link link-light " href="./index.php">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-light " href="./product_list.php">All Products</a>
           </li>
           <li class="nav-item">
             <a class="nav-link link-light " href="./gallery.php">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-light " href="./CSR.php">CSR</a>
           </li>
           <li class="nav-item">
             <a class="nav-link  link-light" href="./aboutUs.php">About Us</a>

@@ -102,10 +102,11 @@ if(isset($_POST['submit'])){
     $password = $_POST["password"];
     $wa_no = $_POST['wa_no'];
     $cpassword = $_POST["cpassword"];
-    $facebook =  $_POST["facebook_link"];
-    $insta =  $_POST["insta_link"];
-    $twitter =  $_POST["twitter_link"];
-    $youtube =  $_POST["youtube_link"];
+    $facebook = (strpos($_POST["facebook_link"], "https://") === 0) ?  $_POST["facebook_link"] : "https://" .  $_POST["facebook_link"];
+    $insta =  (strpos($_POST["insta_link"], "https://") === 0) ?  $_POST["insta_link"] : "https://" .  $_POST["insta_link"];
+    $twitter = (strpos($_POST["twitter_link"], "https://") === 0) ?  $_POST["twitter_link"] : "https://" .  $_POST["twitter_link"];
+    $youtube = (strpos($_POST["youtube_link"], "https://") === 0) ?  $_POST["youtube_link"] : "https://" .  $_POST["youtube_link"];
+    
     
     if($password != $cpassword){
         $passwordErr ="Passwords does not match.";       

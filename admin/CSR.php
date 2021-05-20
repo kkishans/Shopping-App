@@ -5,15 +5,22 @@ if (!isset($_SESSION['aname'])) {
     header("Location: login.php");
 }
 
-include "./gallery.code.php";
+include "./CSR.code.php";
 ?>
 
 
 
 
 
-<div class="container-fluid row">
-    <div class="col-md-6 col-sm-11">
+<div class="container-fluid">
+    <div class="my-3 text-center">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" id="btnCategory" onclick="displayCategoryBlock()" class="btn btn-outline-secondary px-5    ">Category</button>
+            <button type="button" id="btnCSR" onclick="displayCSRBlock()" class="btn btn-outline-secondary px-5 active">CSR</button>
+        </div>
+    </div>
+
+    <div id="category-block" class=" d-none  col-md-7 col-sm-11 mx-auto mt-4">
         <div>
             <h1 class="text-center my-3"><?= $label ?> Title</h1>
         </div>
@@ -43,7 +50,7 @@ include "./gallery.code.php";
                     <tbody>
                         <?php
                         include '../db/db.php';
-                        $query = "SELECT * from gallery_categories";
+                        $query = "SELECT * from csr_categories";
 
                         $title_result = mysqli_query($conn, $query);
 
@@ -53,13 +60,12 @@ include "./gallery.code.php";
                         ?>
                                 <tr>
                                     <th><?= $r['title'] ?></th>
-                                    <th><a href="./gallery.php?update=<?= $r['id'] ?>" class="btn btn-outline-success"> Update</a></th>
+                                    <th><a href="./CSR.php?update=<?= $r['id'] ?>" class="btn btn-outline-success"> Update</a></th>
                                     <th><a href="./delete.php?deleteTitle=<?= $r['id'] ?>" class="btn btn-outline-danger">X</a></th>
                                 </tr>
                         <?php
 
                             }
-                            
                         } else {
                             echo "
                     <tr><p' align='center'> No Data Found.</p></tr>
@@ -72,9 +78,9 @@ include "./gallery.code.php";
         </div>
     </div>
     <!-- Gallery  -->
-    <div class="col-md-6 col-sm-11">
+    <div id="CSR-block" class=" col-md-8 col-sm-11 mx-auto mt-4">
         <div>
-            <h1 class="text-center my-3"><?= $glabel ?> Gallery</h1>
+            <h1 class="text-center my-3"><?= $glabel ?> CSR</h1>
         </div>
 
         <div class=" d-flex align-items-center m-auto card border-0 my-3">
@@ -86,17 +92,17 @@ include "./gallery.code.php";
                     <div class="col-xl-4 col-sm-12  m-auto my-3 ">
                         <select name="title" id="" class="form-control">
                             <?php
-                                if (mysqli_num_rows($title_result) > 0) {
-                                    mysqli_data_seek($title_result,0);
-                                    while ($r = mysqli_fetch_assoc($title_result)) {
-                                        echo $r;
+                            if (mysqli_num_rows($title_result) > 0) {
+                                mysqli_data_seek($title_result, 0);
+                                while ($r = mysqli_fetch_assoc($title_result)) {
+                                    echo $r;
                             ?>
-                                <option value="<?= $r['id']?>" <?= ($gtitle == $r['id'])? 'selected':"" ?>>
-                                    <?= $r['title']?>
-                                </option>
+                                    <option value="<?= $r['id'] ?>" <?= ($gtitle == $r['id']) ? 'selected' : "" ?>>
+                                        <?= $r['title'] ?>
+                                    </option>
                             <?php
-                                    }
                                 }
+                            }
                             ?>
 
                         </select>
@@ -120,9 +126,11 @@ include "./gallery.code.php";
                     <?php
                     }
                     ?>
+
                     <div class="col-xl-12 col-sm-12  m-auto my-3 ">
                         <input type="text" class="form-control" name="desc" placeholder="description" value="<?= $desc ?>" required>
                     </div>
+
                     <div class="col-xl-4 col-sm-12  m-auto my-3 text-center">
                         <input class="btn btn-outline-primary px-5" type="submit" name="addGallery" value="<?= $glabel ?>">
                     </div>
@@ -137,6 +145,7 @@ include "./gallery.code.php";
                             <th>Image</th>
                             <th>Caption</th>
                             <th>Category</th>
+                            <th>Description</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -144,7 +153,7 @@ include "./gallery.code.php";
                     <tbody>
                         <?php
                         include '../db/db.php';
-                        $query = "SELECT * from gallery_categories as c, gallery as g where g.category_id = c.id";
+                        $query = "SELECT * from csr_categories as c, csr as g where g.category_id = c.id";
 
                         $result = mysqli_query($conn, $query);
 
@@ -155,15 +164,16 @@ include "./gallery.code.php";
                                 <tr>
                                     <td>
                                         <?php if ($r['image'] != "") { ?>
-                                            <img src="<?= "../upload/gallery/" . $r['image']  ?>" width="50p" height="40px" alt="No gallery Image">
+                                            <img src="<?= "../upload/csr/" . $r['image']  ?>" width="50p" height="40px" alt="No gallery Image">
                                         <?php } else { ?>
                                             No gallery Image
                                         <?php } ?>
                                     </td>
                                     <td><?= $r['caption'] ?></td>
                                     <td><?= $r['title'] ?></td>
-                                    <td><a href="./gallery.php?gupdate=<?= $r['id'] ?>" class="btn btn-outline-success"> Update</a></td>
-                                    <td><a href="./delete.php?deleteGallery=<?= $r['id'] ?>" class="btn btn-outline-danger">X</a></td>
+                                    <td><?= $r['desc'] ?></td>
+                                    <td><a href="./CSR.php?gupdate=<?= $r['id'] ?>" class="btn btn-outline-success"> Update</a></td>
+                                    <td><a href="./delete.php?deleteCSR=<?= $r['id'] ?>" class="btn btn-outline-danger">X</a></td>
                                 </tr>
                         <?php
 
@@ -184,5 +194,23 @@ include "./gallery.code.php";
 
 <script>
     document.getElementById('title').focus();
+
+    function displayCategoryBlock() {
+        document.getElementById('category-block').classList.remove('d-none');
+        document.getElementById('CSR-block').classList.add('d-none');
+
+        document.getElementById('btnCategory').classList.add('active');
+        document.getElementById('btnCSR').classList.remove('active');
+
+    }
+
+    function displayCSRBlock(){
+        document.getElementById('category-block').classList.add('d-none');
+        document.getElementById('CSR-block').classList.remove('d-none');
+
+        document.getElementById('btnCategory').classList.remove('active');
+        document.getElementById('btnCSR').classList.add('active');
+    }
+
 </script>
 <?php include '../bottom.php' ?>

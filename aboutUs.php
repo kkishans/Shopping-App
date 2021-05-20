@@ -38,7 +38,7 @@ include './top.php';
     </div>
     <div class="b-card col-4">
         <div class="b-data">
-            <p><?= ($r['users'] == 1 ) ? "1" : ($r['users'] - 1) ?>+</p>
+            <p><?= ($r['users'] == 0 ) ? "0" : ($r['users']) ?>+</p>
         </div>
         <div class="b-title">
             <p>Clients</p>

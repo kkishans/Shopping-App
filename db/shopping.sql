@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2021 at 06:14 AM
+-- Generation Time: May 20, 2021 at 08:03 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -35,7 +35,6 @@ CREATE TABLE `admin_details` (
   `wa_no` varchar(15) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin_photo` varchar(255) NOT NULL,
-  `wa_no` varchar(20) not null,
   `facebook_link` varchar(255) DEFAULT NULL,
   `insta_link` varchar(255) DEFAULT NULL,
   `twitter_link` varchar(255) DEFAULT NULL,
@@ -47,7 +46,7 @@ CREATE TABLE `admin_details` (
 --
 
 INSERT INTO `admin_details` (`aid`, `fname`, `lname`, `email`, `wa_no`, `password`, `admin_photo`, `facebook_link`, `insta_link`, `twitter_link`, `youtube_link`) VALUES
-(2, 'Pooja', 'Electricals', 'poojaelectricals462@gmail.com', '7041555399', 'a6346bcbfe7a5bf487243dba7705c16b', 'user-dummy-pic.png', '', '', '', '');
+(2, 'Pooja', 'Electricals', 'poojaelectricals462@gmail.com', '7041555399', 'a6346bcbfe7a5bf487243dba7705c16b', 'user-dummy-pic.png', '', 'https://instagram.com/ayusshrivastav', '', '');
 
 -- --------------------------------------------------------
 
@@ -121,6 +120,45 @@ CREATE TABLE `contact_us` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `csr`
+--
+
+CREATE TABLE `csr` (
+  `id` int(11) NOT NULL,
+  `caption` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `csr`
+--
+
+INSERT INTO `csr` (`id`, `caption`, `image`, `desc`, `category_id`) VALUES
+(2, 'Pooja Electricals', 'Apple_logo.png', 'We provide enlightening services!', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `csr_categories`
+--
+
+CREATE TABLE `csr_categories` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `csr_categories`
+--
+
+INSERT INTO `csr_categories` (`id`, `title`) VALUES
+(1, 'Office');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `gallery`
 --
 
@@ -128,6 +166,7 @@ CREATE TABLE `gallery` (
   `id` int(11) NOT NULL,
   `caption` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
+  `desc` varchar(1000) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -135,10 +174,10 @@ CREATE TABLE `gallery` (
 -- Dumping data for table `gallery`
 --
 
-INSERT INTO `gallery` (`id`, `caption`, `image`, `category_id`) VALUES
-(1, 'Office', '60732eda9addb8.20762103.png', 1),
-(5, 'Pooja Electricals', '6074494521e779.25449001.png', 1),
-(7, 'Pooja ', '6074494521e779.25449001.png', 4);
+INSERT INTO `gallery` (`id`, `caption`, `image`, `desc`, `category_id`) VALUES
+(5, 'Pooja Electricals', '6074494521e779.25449001.png', 'Pooja Electricals', 1),
+(7, 'Pooja ', '6074494521e779.25449001.png', 'Pooja', 4),
+(8, 'Raj Electricals', 'wire.jpg', 'hello', 4);
 
 -- --------------------------------------------------------
 
@@ -246,6 +285,27 @@ INSERT INTO `product_details` (`p_id`, `p_name`, `description`, `p_img`, `price`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `upcoming_products`
+--
+
+CREATE TABLE `upcoming_products` (
+  `id` int(10) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `desc` varchar(1000) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `upcoming_products`
+--
+
+INSERT INTO `upcoming_products` (`id`, `title`, `desc`, `image`) VALUES
+(2, 'Wire-1', 'Long lasting wire', 'wire.jpg'),
+(3, 'Motor', 'We provide enlightening services!', 'ac-electric-motor-500x500.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -296,6 +356,19 @@ ALTER TABLE `contact_us`
   ADD PRIMARY KEY (`contact_id`);
 
 --
+-- Indexes for table `csr`
+--
+ALTER TABLE `csr`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `csr_categories`
+--
+ALTER TABLE `csr_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `gallery`
 --
 ALTER TABLE `gallery`
@@ -335,6 +408,12 @@ ALTER TABLE `product_details`
   ADD PRIMARY KEY (`p_id`),
   ADD KEY `b_id` (`b_id`),
   ADD KEY `c_id` (`c_id`);
+
+--
+-- Indexes for table `upcoming_products`
+--
+ALTER TABLE `upcoming_products`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -377,10 +456,16 @@ ALTER TABLE `contact_us`
   MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `csr`
+--
+ALTER TABLE `csr`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `gallery_categories`
@@ -407,6 +492,12 @@ ALTER TABLE `product_details`
   MODIFY `p_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `upcoming_products`
+--
+ALTER TABLE `upcoming_products`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -422,6 +513,12 @@ ALTER TABLE `users`
 ALTER TABLE `cart_details`
   ADD CONSTRAINT `cart_details_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`),
   ADD CONSTRAINT `cart_details_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `product_details` (`p_id`);
+
+--
+-- Constraints for table `csr`
+--
+ALTER TABLE `csr`
+  ADD CONSTRAINT `csr_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `csr_categories` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ordered_products`
