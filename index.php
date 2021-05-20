@@ -23,21 +23,21 @@ $total_rows = mysqli_fetch_array($result)[0];
 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
 
-$query = "SELECT * FROM upcoming_products ORDER BY id desc";
-$result = mysqli_query($conn, $query);
+// $query = "SELECT * FROM upcoming_products ORDER BY id desc";
+// $result = mysqli_query($conn, $query);
 
-$img = array();
-$img_id = array();
-while ($r = mysqli_fetch_assoc($result)) {
-  array_push($img_id,$r['id']);
-  array_push($img, $r['image']);
-}
-// $img = array(
-//   'carousal-img-1.jpg',
-//   'carousal-img-2.jpg',
-//   'carousal-img-3.jpg',
-//   'carousal-img-4.jpg',
-// );
+// $img = array();
+// $img_id = array();
+// while ($r = mysqli_fetch_assoc($result)) {
+//   array_push($img_id,$r['id']);
+//   array_push($img, $r['image']);
+// }
+$img = array(
+  'carousal-img-1.jpg',
+  'carousal-img-2.jpg',
+  'carousal-img-3.jpg',
+  'carousal-img-4.jpg',
+);
 ?>
 
 
@@ -121,8 +121,10 @@ while ($r = mysqli_fetch_assoc($result)) {
           <div class="left col-xl-1">
             <a onclick="displaySlides(<?= $k - 1 ?>)">&#10094;</a>
           </div>
-          <div class="img col-xl-10" style="cursor:pointer" onclick="window.location = 'upcoming.php?id=<?= $img_id[$i]?>'" >
-            <img src="<?= "./upload/upcoming/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
+          <div class="img col-xl-10">
+          <!-- <div class="img col-xl-10" style="cursor:pointer" onclick="window.location = 'upcoming.php?id=<?= $img_id[$i]?>'" > -->
+            <!-- <img src="<?= "./upload/upcoming/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>"> -->
+            <img src="<?= "./img/carousel/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
             <div class="jumbotron mt-3">
               <p class="lead text-center bg-light rounded py-2 text-bold">Upcoming Product</p>
               

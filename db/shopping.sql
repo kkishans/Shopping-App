@@ -461,6 +461,9 @@ ALTER TABLE `contact_us`
 ALTER TABLE `csr`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
+ALTER TABLE `csr_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `gallery`
 --

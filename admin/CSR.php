@@ -15,12 +15,12 @@ include "./CSR.code.php";
 <div class="container-fluid">
     <div class="my-3 text-center">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" id="btnCategory" onclick="displayCategoryBlock()" class="btn btn-outline-secondary px-5    ">Category</button>
-            <button type="button" id="btnCSR" onclick="displayCSRBlock()" class="btn btn-outline-secondary px-5 active">CSR</button>
+            <button type="button" id="btnCategory" onclick="displayCategoryBlock()" class="btn btn-outline-secondary px-5    <?= isset($_GET['update']) ? 'active' : '' ?>">Category</button>
+            <button type="button" id="btnCSR" onclick="displayCSRBlock()" class="btn btn-outline-secondary px-5 <?= isset($_GET['update']) ? '' : 'active' ?>">CSR</button>
         </div>
     </div>
 
-    <div id="category-block" class=" d-none  col-md-7 col-sm-11 mx-auto mt-4">
+    <div id="category-block" class="<?= isset($_GET['update']) ? '' : 'd-none' ?>   col-md-7 col-sm-11 mx-auto mt-4">
         <div>
             <h1 class="text-center my-3"><?= $label ?> Title</h1>
         </div>
@@ -61,7 +61,7 @@ include "./CSR.code.php";
                                 <tr>
                                     <th><?= $r['title'] ?></th>
                                     <th><a href="./CSR.php?update=<?= $r['id'] ?>" class="btn btn-outline-success"> Update</a></th>
-                                    <th><a href="./delete.php?deleteTitle=<?= $r['id'] ?>" class="btn btn-outline-danger">X</a></th>
+                                    <th><a href="./delete.php?deleteCSRTitle=<?= $r['id'] ?>" class="btn btn-outline-danger">X</a></th>
                                 </tr>
                         <?php
 
@@ -78,7 +78,7 @@ include "./CSR.code.php";
         </div>
     </div>
     <!-- Gallery  -->
-    <div id="CSR-block" class=" col-md-8 col-sm-11 mx-auto mt-4">
+    <div id="CSR-block" class="<?= isset($_GET['update']) ? 'd-none' : '' ?> col-md-8 col-sm-11 mx-auto mt-4">
         <div>
             <h1 class="text-center my-3"><?= $glabel ?> CSR</h1>
         </div>

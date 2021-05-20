@@ -23,7 +23,7 @@ if (mysqli_num_rows($result) > 0) {
 
             <div class="col-3 m-2" style="width: 15rem;" onclick="previewImg('<?= $row['caption']?>','<?= $row['image'] ?>','<?= $row['desc'] ?>')">
               <div class="card rounded-lg">
-                <img src="./upload/gallery/<?= $row['image'] ?>" class="card-img-top rounded-top p-2" alt="...">
+                <img src="./upload/gallery/<?= $row['image'] ?>" class="card-img-top rounded-top p-2" style="height: 250px;object-fit: contain;" alt="...">
                 <div class="card-body bg-light">
                   <h5 class="card-title "><?= $row['caption'] ?></h5>
 
@@ -48,7 +48,7 @@ if (mysqli_num_rows($result) > 0) {
 
 <!-- Modal -->
 <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="wa-popup" aria-hidden="true" >
-  <div class="modal-dialog modal-dialog-centered w-25" role="document">
+  <div class="modal-dialog modal-dialog-centered " role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modal-title"></h5>

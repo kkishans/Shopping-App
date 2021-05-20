@@ -68,6 +68,20 @@ if(isset($_GET['deleteTitle'])){
 
 }
 
+
+if(isset($_GET['deleteCSRTitle'])){
+    $product_delete_query = "DELETE FROM csr_categories WHERE id = ".$_GET['deleteCSRTitle'];
+
+    if (mysqli_query($conn,$product_delete_query)) {
+        echo "<script>alert('Title Deleted.'); window.location = 'CSR.php'</script>";
+        // header("location:gallery.php");
+     }else{
+        echo "<script>alert('Can not delete this title.'); window.location = 'CSR.php'</script>";
+     }
+    //  header("location:category.php");
+
+}
+
 if(isset($_GET['deleteBrand'])){
     $product_delete_query = "DELETE FROM brands WHERE b_id = ".$_GET['deleteBrand'];
 

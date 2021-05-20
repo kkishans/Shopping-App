@@ -67,13 +67,16 @@ if (isset($_SESSION['useremail'])) {
             <a class="nav-link link-light " href="../gallery.php">Gallery</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-light " href="./CSR .php">CSR</a>
+            <a class="nav-link link-light " href="../CSR .php">CSR</a>
           </li>
           <li class="nav-item">
             <a class="nav-link  link-light" href="../aboutUs.php">About Us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link  link-light" href="../contactus.php">Contact Us</a>
+          </li>
+          <li class="nav-item l">
+            <a class="nav-link link-light " href="../upcoming_product_list.php">Upcoming</a>
           </li>
           <?php
           if (isset($_SESSION['useremail'])) {
