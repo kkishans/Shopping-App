@@ -36,7 +36,7 @@ $img =
             $k++;
           ?>
             <div class="showslide">
-              <img src="<?= "img/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
+              <img src="<?= "upload/products/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
               <div class="arrow-buttons">
                 <a class="left" onclick="displaySlides(<?= $k - 1 ?>)">&#10094;</a>
                 <a class="right" onclick="displaySlides(<?= $k + 1 ?>)">&#10095;</a>

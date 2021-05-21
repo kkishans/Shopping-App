@@ -137,15 +137,16 @@
             if($file_type != "image"){
                 echo "<script>alert('Only Image file allowed.')</script>";
                 return;
-            }else{                
-                if (!move_uploaded_file($file_tmp,"../upload/products/".$file_name)) {
+            }else{       
+                $new_name = time()."-".rand(1000, 9999)."-".$file_name;         
+                if (!move_uploaded_file($file_tmp,"../upload/products/".$new_name)) {
                     echo "<script>alert('Error while uploading file')</script>";
                 }
             } 
         }else{
-            $file_name = $u_file;
+            $new_name = $u_file;
         }
-        return $file_name;
+        return $new_name;
     }
 
 ?>

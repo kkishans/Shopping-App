@@ -28,7 +28,7 @@ if(isset($_GET['deleteProduct'])){
         if ($s== null || $s == '' || $s =="dummy.png") {
             $s = "t_e_m_p_1_2_3_4.tmp";
         }
-        $file_pointer = "../img/".$s;
+        $file_pointer = "../upload/products/".$s;
         echo $file_pointer ."<br>";
         if(file_exists($file_pointer)){
             if (!unlink($file_pointer)) {  
@@ -91,6 +91,18 @@ if(isset($_GET['deleteBrand'])){
     }else{
         echo "<script>alert('Can not delete this brand.'); window.location = 'brand.php'</script>";
      }
+
+    if(isset($_GET['img'])){
+        $file_pointer = "../upload/brand/".$_GET['img'];
+        if(file_exists($file_pointer)){
+            if (!unlink($file_pointer)) {  
+                echo ("$file_pointer cannot be deleted due to an error<br>");  
+            }
+            else {  
+                echo ("$file_pointer has been deleted<br>");  
+            }
+        }
+    }
 }
 
 if(isset($_GET['deleteGallery'])){
@@ -102,6 +114,18 @@ if(isset($_GET['deleteGallery'])){
     }else{
         echo "<script>alert('Can not delete this gallery.'); window.location = 'gallery.php'</script>";
      }
+
+     if(isset($_GET['img'])){
+        $file_pointer = "../upload/gallery/".$_GET['img'];
+        if(file_exists($file_pointer)){
+            if (!unlink($file_pointer)) {  
+                echo ("$file_pointer cannot be deleted due to an error<br>");  
+            }
+            else {  
+                echo ("$file_pointer has been deleted<br>");  
+            }
+        }
+    }
 }
 
 if(isset($_GET['deleteupcoming'])){
@@ -113,6 +137,17 @@ if(isset($_GET['deleteupcoming'])){
     }else{
         echo "<script>alert('Can not delete this Product.'); window.location = 'upcoming_product.php'</script>";
      }
+     if(isset($_GET['img'])){
+        $file_pointer = "../upload/upcoming/".$_GET['img'];
+        if(file_exists($file_pointer)){
+            if (!unlink($file_pointer)) {  
+                echo ("$file_pointer cannot be deleted due to an error<br>");  
+            }
+            else {  
+                echo ("$file_pointer has been deleted<br>");  
+            }
+        }
+    }
 }
 
 if(isset($_GET['deleteCSR'])){
@@ -124,6 +159,18 @@ if(isset($_GET['deleteCSR'])){
     }else{
         echo "<script>alert('Can not delete this CSR.'); window.location = 'CSR.php'</script>";
      }
+
+     if(isset($_GET['img'])){
+        $file_pointer = "../upload/csr/".$_GET['img'];
+        if(file_exists($file_pointer)){
+            if (!unlink($file_pointer)) {  
+                echo ("$file_pointer cannot be deleted due to an error<br>");  
+            }
+            else {  
+                echo ("$file_pointer has been deleted<br>");  
+            }
+        }
+    }
 }
 
 

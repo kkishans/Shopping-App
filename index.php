@@ -181,7 +181,7 @@ if (mysqli_num_rows($result) > 0) {
     <div class="container mt-4 mx-auto w-100">
       <div class="d-flex <?= ($i % 2 == 0) ? "flex-row-reverse" : "flex-row" ?>">
         <div class="col-md-6 ps-5">
-          <img src="./img/<?= $data['p_img'] ?>" class="w-50" alt="">
+          <img src="./upload/products/<?= $data['p_img'] ?>" class="w-50" alt="">
         </div>
         <div class="col-md-6 ps-5">
           <h1 class="py-3">

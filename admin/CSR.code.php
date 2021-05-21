@@ -107,12 +107,13 @@ function checkimage($file)
             echo "<script>alert('Only Image file allowed.')</script>";
             return;
         } else {
-            if (!move_uploaded_file($file_tmp, "../upload/csr/" . $file_name)) {
+            $new_name = time()."-".rand(1000, 9999)."-".$file_name;
+            if (!move_uploaded_file($file_tmp, "../upload/csr/" . $new_name)) {
                 echo "<script>alert('Error while uploading file')</script>";
             }
         }
     }
-    return $file_name;
+    return $new_name;
 }
 
 

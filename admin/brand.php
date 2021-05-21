@@ -81,14 +81,14 @@
             <tr>
             <td>
                 <?php if ($r['b_icon'] != "") {?>
-                    <img src="<?= "../upload/brand/". $r['b_icon']  ?>"  width="50p" height="40px" alt="No Brand Image">
+                    <img src="<?= "../upload/brand/". $r['b_icon']  ?>"  width="50p" height="40px" alt="<?= "../upload/brand/". $r['b_icon']  ?>">
                 <?php }else {?>
                     No Brand Image
                 <?php }?>
             </td>
                 <td><?= $r['b_name'] ?> ( <?= $r['count(p.b_id)']?> )</td>
                 <td><a href="./brand.php?update=<?= $r['b_id'] ?>" class="btn btn-outline-success"> Update</a></td>
-                <td><a href="./delete.php?deleteBrand=<?= $r['b_id'] ?>" class="btn btn-outline-danger">X</a></td>
+                <td><a href="./delete.php?deleteBrand=<?= $r['b_id'] ?>&img=<?= $r['b_icon'] ?>" class="btn btn-outline-danger">X</a></td>
             </tr>
             <?php 
 
@@ -113,6 +113,7 @@
                 $img = checkimage($_FILES['brandImage']);  
             }
         }
+
         include '../db/db.php';        
         $insert_query = "INSERT INTO brands(b_name,b_icon) values('$bname','$img')";
         
@@ -155,13 +156,15 @@ function checkimage($file)
             if($file_type != "image"){
                 echo "<script>alert('Only Image file allowed.')</script>";
                 return;
-            }else{                
-                if (!move_uploaded_file($file_tmp,"../upload/brand/".$file_name)) {
+            }else{       
+                $new_name = time()."-".rand(1000, 9999)."-".$file_name;
+               
+                if (!move_uploaded_file($file_tmp,"../upload/brand/".$new_name)) {
                     echo "<script>alert('Error while uploading file')</script>";
                 }
             } 
         }
-        return $file_name;
+        return $new_name;
     }
 
 ?>

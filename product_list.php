@@ -119,7 +119,7 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMI
             <a onclick="displaySlides(<?= $k - 1 ?>)">&#10094;</a>
           </div>
           <div class="img col-xl-10">
-            <img src="<?= "img/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
+            <img src="<?= "upload/products/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
           </div>
           <div class="right col-xl-1">
             <a onclick="displaySlides(<?= $k + 1 ?>)">&#10095;</a>
@@ -206,7 +206,7 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMI
 
         <div class="card p-1" style="min-height: 27rem;">
           <a href="./product.php?id=<?= $r['p_id']  ?>" class="card-l" style="text-decoration: none;color:black;">
-            <img src="<?= "img/" . $r['p_img']  ?>" class="card-img-top" alt="Product Image" style="max-height:15rem;height:15rem;object-fit: contain;">
+            <img src="<?= "upload/products/" . $r['p_img']  ?>" class="card-img-top" alt="Product Image" style="max-height:15rem;height:15rem;object-fit: contain;">
             <div class="card-body flex">
               <div class="row justify-content-between">
                 <div class="col-6">

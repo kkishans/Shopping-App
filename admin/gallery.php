@@ -163,7 +163,7 @@ include "./gallery.code.php";
                                     <td><?= $r['caption'] ?></td>
                                     <td><?= $r['title'] ?></td>
                                     <td><a href="./gallery.php?gupdate=<?= $r['id'] ?>" class="btn btn-outline-success"> Update</a></td>
-                                    <td><a href="./delete.php?deleteGallery=<?= $r['id'] ?>" class="btn btn-outline-danger">X</a></td>
+                                    <td><a href="./delete.php?deleteGallery=<?= $r['id'] ?>&img=<?=$r['image']  ?>" class="btn btn-outline-danger">X</a></td>
                                 </tr>
                         <?php
 

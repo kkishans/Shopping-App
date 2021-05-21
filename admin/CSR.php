@@ -173,7 +173,7 @@ include "./CSR.code.php";
                                     <td><?= $r['title'] ?></td>
                                     <td><?= $r['desc'] ?></td>
                                     <td><a href="./CSR.php?gupdate=<?= $r['id'] ?>" class="btn btn-outline-success"> Update</a></td>
-                                    <td><a href="./delete.php?deleteCSR=<?= $r['id'] ?>" class="btn btn-outline-danger">X</a></td>
+                                    <td><a href="./delete.php?deleteCSR=<?= $r['id'] ?>&img=<?= $r['image'] ?>" class="btn btn-outline-danger">X</a></td>
                                 </tr>
                         <?php
 
