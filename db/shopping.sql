@@ -512,7 +512,7 @@ ALTER TABLE `users`
 
 --
 -- Constraints for table `cart_details`
---
+--  
 ALTER TABLE `cart_details`
   ADD CONSTRAINT `cart_details_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`),
   ADD CONSTRAINT `cart_details_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `product_details` (`p_id`);

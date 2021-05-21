@@ -61,7 +61,7 @@
 
     
     $create_order_details = "CREATE TABLE IF NOT EXISTS `order_details` (
-        `o_id` varchar(255) primary key ,
+        `o_id` varchar(255) primary key AUTO_INCREMENT ,
         `u_id` int(8) NOT NULL,
         `total_amount` double NOT NULL,
         `shipping_address` varchar(300) NOT NULL,
@@ -134,7 +134,7 @@
     $res = mysqli_query($conn,$product_details);
 
     $create_gallery_categories = "CREATE TABLE `gallery_categories` (
-      `id` int(11) PRIMARY KEY,
+      `id` int(11) PRIMARY KEY AUTO_INCREMENT,
       `title` varchar(255) NOT NULL
     )";
 
@@ -142,7 +142,7 @@
     
 
     $create_gallery = "CREATE TABLE `gallery` (
-      `id` int(11) PRIMARY KEY,
+      `id` int(11) PRIMARY KEY AUTO_INCREMENT,
       `caption` varchar(255) NOT NULL,
       `image` varchar(255) NOT NULL,
       `desc` varchar(1000) not null,
@@ -153,7 +153,7 @@
     $res = mysqli_query($conn,$create_gallery);
 
     $create_csr_categories = "CREATE TABLE `csr_categories` (
-      `id` int(11) PRIMARY KEY,
+      `id` int(11) PRIMARY KEY AUTO_INCREMENT,
       `title` varchar(255) NOT NULL
     )";
 
@@ -161,10 +161,10 @@
     
 
     $create_csr = "CREATE TABLE `csr` (
-      `id` int(11) PRIMARY KEY,
+      `id` int(11) PRIMARY KEY AUTO_INCREMENT,
       `caption` varchar(255) NOT NULL,
       `image` varchar(255) NOT NULL,
-      `desc` varchar(1000) not null
+      `desc` varchar(1000) not null,
       `category_id` int(11) NOT NULL,
       FOREIGN KEY (`category_id`) REFERENCES `csr_categories`(`id`) ON DELETE CASCADE
     )";
@@ -172,7 +172,7 @@
     $res = mysqli_query($conn,$create_csr);
     
     $create_upcoming_products = "CREATE TABLE `upcoming_products` (
-      `id` int(10) primary key,
+      `id` int(10) primary key AUTO_INCREMENT,
       `title` varchar(255) NOT NULL,
       `desc` varchar(1000) NOT NULL,
       `image` varchar(255) NOT NULL
