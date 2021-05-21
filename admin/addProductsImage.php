@@ -138,7 +138,7 @@
                 echo "<script>alert('Only Image file allowed.')</script>";
                 return;
             }else{                
-                if (!move_uploaded_file($file_tmp,"../img/".$file_name)) {
+                if (!move_uploaded_file($file_tmp,"../upload/products/".$file_name)) {
                     echo "<script>alert('Error while uploading file')</script>";
                 }
             } 
