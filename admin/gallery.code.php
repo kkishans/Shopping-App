@@ -1,7 +1,7 @@
 <?php
 $label = "Add New";
 $title = "";
-$desc = "";
+// $desc = "";
 global $id;
 if (isset($_GET['update'])) {
     $label = "Update";
@@ -10,12 +10,12 @@ if (isset($_GET['update'])) {
     $result = mysqli_query($conn, $query);
     $r = mysqli_fetch_assoc($result);
     $title = $r['title'];
-    $desc = $r['desc'];
+    // $desc = $r['desc'];
 }
 
 if (isset($_POST['addCategory'])) {
     $title = $_POST['title'];
-    $desc = $_POST['desc'];
+    // $desc = $_POST['desc'];
     include '../db/db.php';
     $insert_query = "INSERT INTO gallery_categories(title) values('$title')";
 
@@ -43,6 +43,7 @@ if (isset($_POST['addCategory'])) {
 $glabel = "Add";
 $caption = "";
 $gtitle = "";
+$desc = "";;
 if (isset($_GET['gupdate'])) {
     $glabel = "Update";
     $id = $_GET['gupdate'];

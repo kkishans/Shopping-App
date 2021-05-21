@@ -88,10 +88,10 @@
                 echo "<script>alert('Only Image file allowed.')</script>";
                 return;
             }else{
-                if (file_exists("../img/carousel/".$name.".jpg")) {
-                    unlink("../img/carousel/".$name.".jpg");
+                if (file_exists("../upload/carousel/".$name.".jpg")) {
+                    unlink("../upload/carousel/".$name.".jpg");
                 } 
-                if (!move_uploaded_file($file_tmp,"../img/carousel/".$name.".jpg")) {
+                if (!move_uploaded_file($file_tmp,"../upload/carousel/".$name.".jpg")) {
                     echo "<script>alert('Error while uploading file')</script>";
                     echo error_get_last();
                 }

@@ -124,11 +124,11 @@ $img = array(
           <div class="img col-xl-10">
           <!-- <div class="img col-xl-10" style="cursor:pointer" onclick="window.location = 'upcoming.php?id=<?= $img_id[$i]?>'" > -->
             <!-- <img src="<?= "./upload/upcoming/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>"> -->
-            <img src="<?= "./img/carousel/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
-            <div class="jumbotron mt-3">
+            <img src="<?= "./upload/carousel/" . $img[$i]  ?>" class="card-img-top" height="400px" alt="Product Image" style="object-fit: contain;" id="img<?= $i + 1 ?>">
+            <!-- <div class="jumbotron mt-3">
               <p class="lead text-center bg-light rounded py-2 text-bold">Upcoming Product</p>
               
-            </div>
+            </div> -->
           </div>
           <div class="right col-xl-1">
             <a onclick="displaySlides(<?= $k + 1 ?>)">&#10095;</a>
