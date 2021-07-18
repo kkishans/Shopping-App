@@ -20,7 +20,12 @@ error_reporting(0);
         $result = mysqli_query($conn, $query);
         $r = mysqli_fetch_assoc($result);
         $pname = $r['p_name'];
-        $price = $r['price'];
+        if ($r['price'] == 0) {
+            $price = "N/A";
+        }
+        else{
+            $price = $r['price'];
+        }
         $stock = $r['stock'];
         $c_id = $r['c_id'];
         $b_id = $r['b_id'];
@@ -67,7 +72,7 @@ error_reporting(0);
             <div class="mb-3 row">
                <div class="col-6">
                     <label for="exampleFormControlInput1" class="form-label">Price</label>
-                    <input type="number" min="0" class="form-control" name="price" placeholder="ex. 65000" value ="<?= $price ?>" required>
+                    <input type="text" class="form-control" name="price" placeholder="ex. 65000" value ="<?= $price ?>" required>
                </div>
                <div class="col-6">
                 <label for="exampleFormControlInput1" class="form-label">Stock</label>
@@ -87,7 +92,13 @@ error_reporting(0);
     if (isset($_POST['add'])) {
     
         $pname = ucwords($_POST['pname']);
-        $price = $_POST['price'];
+
+        if ($_POST['price'] == "N/A" || $_POST['price'] == "n/a" || $_POST['price'] == 0) {
+            $price = 0;
+        }
+        else{
+            $price = $_POST['price'];
+        }
         $stock = $_POST['stock'];
         global $brand,$category;
         $desc = htmlspecialchars($_POST['description']);

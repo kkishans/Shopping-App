@@ -103,7 +103,7 @@
             <tr>
                 <td><img src="<?= "../upload/products/". $r['p_img']  ?>" alt="product image" width="50p" height="40px"></td>
                 <th style="max-width: 5rem;"><?= ucwords($r['p_name']) ?></th>
-                <th><?= $r['price'] ?></th>
+                <th class="<?= ($r['price'] == 0) ? "text-danger" : '' ?>"><?= ($r['price'] == 0) ? "N/A" : $r['price'] ?></th>
                 <th><?= $r['stock'] ?></th>
                 <th><a href="./product.php?update=<?= $r['p_id'] ?>" class="btn btn-outline-success"> <i class="fa fa-pencil" aria-hidden="true"></i></a></th>
                 <th><a href="./delete.php?deleteProduct=<?= $r['p_id'] ?>" class="btn btn-outline-danger"> <i class="fa fa-remove" aria-hidden="true"></i> </a></th>

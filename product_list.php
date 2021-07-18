@@ -213,7 +213,9 @@ $query = "SELECT p_img FROM product_details ORDER BY p_id DESC, rand(c_id)  LIMI
                   <h5 class="card-title"> <?= ucwords($r['p_name']) ?></h5>
                 </div>
                 <div class="col-6">
-                  <h5 style="text-align: right;">₹ <?= $s_price ?></h5>
+                  <h5 style="text-align: right;" class="<?= ($r['price'] == 0) ? "text-danger" : '' ?>">
+                    <?=  ($r['price'] == 0) ? "N/A" : "₹ " . $r['price'] ?>
+                </h5>
                 </div>
               </div>
               <div>
